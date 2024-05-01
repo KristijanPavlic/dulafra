@@ -46,26 +46,16 @@ const ContactForm = () => {
   };
 
   const clearInputFields = (): void => {
-    // Get references to the input fields
-    const nameInput = document.getElementById(
-      "name"
-    ) as HTMLInputElement | null;
-    const emailInput = document.getElementById(
-      "email"
-    ) as HTMLInputElement | null;
+    // Clear the name, email, and message fields
+    const nameInput = document.getElementById("name") as HTMLInputElement;
+    const emailInput = document.getElementById("email") as HTMLInputElement;
     const messageInput = document.getElementById(
       "message"
-    ) as HTMLTextAreaElement | null;
+    ) as HTMLTextAreaElement;
 
-    // Check if any of the elements are not found
-    if (nameInput && emailInput && messageInput) {
-      // Clear the input fields
-      nameInput.value = "";
-      emailInput.value = "";
-      messageInput.value = "";
-    } else {
-      console.error("One or more input fields not found");
-    }
+    nameInput.value = "";
+    emailInput.value = "";
+    messageInput.value = "";
   };
 
   return (
