@@ -68,6 +68,7 @@ const ContactForm = () => {
         type="text"
         placeholder="Ime i prezime"
         name="name"
+        id="name"
         required
         maxLength={60}
         onChange={(e) => setData({ ...data, name: e.target.value })}
@@ -77,6 +78,7 @@ const ContactForm = () => {
         type="email"
         placeholder="Vaš email"
         name="email"
+        id="email"
         required
         maxLength={320}
         onChange={(e) => setData({ ...data, email: e.target.value })}
@@ -84,6 +86,7 @@ const ContactForm = () => {
       <textarea
         className="bg-transparent p-5 focus:outline-none focus:bg-white border-b border-b-black"
         name="message"
+        id="message"
         cols={30}
         rows={5}
         maxLength={3000}
