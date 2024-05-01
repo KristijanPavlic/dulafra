@@ -29,7 +29,7 @@ const ContactForm = () => {
     if (response.status === 200) {
       setIsSubmitting(false);
       toast.success("Poruka uspješno poslana.");
-      clearInputFields;
+      clearInputFields();
       setData({
         name: "",
         email: "",
