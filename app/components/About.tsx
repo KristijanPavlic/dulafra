@@ -20,12 +20,12 @@ export default function About() {
             <h2 className="font-semibold text-[#001120] text-lg">12+</h2>
             <span className="text-[#333333]">godina iskustva</span>
           </div>
-          <div className="w-full h-[1px] md:w-[1px] md:h-[80px] bg-black"></div>
+          <div className="w-full h-[1px] md:w-[1px] md:h-[50px] bg-black"></div>
           <div className="text-center">
             <h2 className="font-semibold text-[#001120] text-lg">5+</h2>
             <span className="text-[#333333]">profesionalnih fotografa</span>
           </div>
-          <div className="w-full h-[1px] md:w-[1px] md:h-[80px] bg-black"></div>
+          <div className="w-full h-[1px] md:w-[1px] md:h-[50px] bg-black"></div>
           <div className="text-center">
             <h2 className="font-semibold text-[#001120] text-lg">40+</h2>
             <span className="text-[#333333]">odrađenih događanja</span>
