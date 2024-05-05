@@ -16,17 +16,17 @@ export default function About() {
       </div>
       <div className="mt-10">
         <div className="flex flex-col md:flex-row justify-center border border-black w-fit m-auto p-4 rounded-lg gap-8">
-          <div className="text-center">
+          <div className="text-center min-w-[192px]">
             <h2 className="font-semibold text-[#001120] text-lg">12+</h2>
             <span className="text-[#333333]">godina iskustva</span>
           </div>
           <div className="w-full h-[1px] md:w-[1px] md:h-[50px] bg-black"></div>
-          <div className="text-center">
+          <div className="text-center min-w-[192px]">
             <h2 className="font-semibold text-[#001120] text-lg">5+</h2>
             <span className="text-[#333333]">profesionalnih fotografa</span>
           </div>
           <div className="w-full h-[1px] md:w-[1px] md:h-[50px] bg-black"></div>
-          <div className="text-center">
+          <div className="text-center min-w-[192px]">
             <h2 className="font-semibold text-[#001120] text-lg">40+</h2>
             <span className="text-[#333333]">odrađenih događanja</span>
           </div>

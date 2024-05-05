@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <div className="container m-auto pt-5 pb-5 pl-5 pr-5">
-      <div className="flex justify-center gap-3 md:gap-6">
+      <div className="flex justify-center gap-3 md:gap-6 md:pl-12">
         <div className="flex flex-col gap-1 mt-3">
           <h3 className="text-sm md:text-base">Dulafra foto corner</h3>
           <Link
@@ -33,6 +33,10 @@ export default function Footer() {
           </a>
         </div>
       </div>
+      <h4 className="text-sm mt-6 text-center">
+        *Sve fotografije na stranici zaštićene su vodenim žigom te je svako
+        njihovo korištenje bez dozvole strogo zabranjeno.
+      </h4>
     </div>
   );
 }

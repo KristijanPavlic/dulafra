@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import { Suspense } from "react";
-import Loading from "./loading";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
+import { ClerkProvider } from "@clerk/nextjs";
+
 export const metadata: Metadata = {
   title: "Dulafra foto corner",
-  authors: { name: "Kristijan Pavlic Tumpa" },
   description: "Dulafra foto corner",
+  authors: { name: "Kristijan Pavlic Tumpa" },
 };
 
 export default function RootLayout({
@@ -18,10 +18,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="hr">
-      <body className={`${montserrat.className} bg-[#FFF6EE]`}>
-        <Suspense fallback={<Loading />}>{children}</Suspense>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="hr">
+        <body className={`${montserrat.className} bg-[#FFF6EE]`}>
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

@@ -3,7 +3,7 @@ import ContactForm from "./ContactForm";
 
 export default function Contact() {
   return (
-    <div className="container m-auto pt-20 pb-20 pl-5 pr-5">
+    <div className="container m-auto pt-20 pb-20 pl-5 pr-5" id="contact">
       <h1 className="text-center text-3xl uppercase font-bold text-[#001120] mb-5">
         Kontakt
       </h1>
