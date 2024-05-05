@@ -8,6 +8,9 @@ import Search from "./components/Search";
 export default function Page() {
   return (
     <main>
+      <div className="bg-orange-400 text-lg sticky top-0 p-1 font-bold text-center z-50">
+        <span>Stranica je trenutno u izradi!</span>
+      </div>
       <Hero />
       <Search />
       <div className="w-full h-[1px] bg-black"></div>
