@@ -14,19 +14,19 @@ export default function Hero() {
   return (
     <div className="relative min-h-max">
       <div>
-        {size.width <= 768 ? (
-          <Image
-            src={heroMobImg}
-            alt="Dulafra hero mobile image"
-            style={{ height: "100svh" }}
-            className="object-cover bg-center"
-          />
-        ) : (
+        {size.width >= 768 ? (
           <Image
             src={heroImg}
             alt="Dulafra hero image"
             style={{ width: "100%" }}
             className="min-h-[100svh] object-cover bg-center"
+          />
+        ) : (
+          <Image
+            src={heroMobImg}
+            alt="Dulafra hero mobile image"
+            style={{ width: "100%", height: "100svh" }}
+            className="object-cover bg-center"
           />
         )}
       </div>
@@ -34,20 +34,20 @@ export default function Hero() {
         <div className="bg-[#00112060] rounded-xl pt-6 pb-6 pl-8 pr-8 md:pl-16 md:pr-16">
           <div>
             <h1 className="text-xl md:text-3xl font-bold text-[#FFF6EE] text-center">
-              Profesionalno fotografiranje <br /> sportskih trenutaka
+              Profesionalno fotografiranje <br /> sportskih događaja
             </h1>
           </div>
           <div className="mt-7 lg:mt-14">
             <h3 className="text-[#FFF6EE] text-base text-center md:text-lg">
-              Naš tim profesionalnih fotografa pobrinuti će sa da svaki Vaš
-              sportski trenutak ostane zabilježen
+              Naš tim profesionalnih fotografa pobrinuti će se da svaki Vama
+              dragi sportski događaj ostane zabilježen
             </h3>
           </div>
           <div className="flex flex-col md:flex-row items-center justify-center gap-10 mt-10">
             <div>
               <Link
                 className="bg-[#FFF6EE] text-[#333333] pt-2 pb-2 pl-4 pr-4 rounded-lg transition-all hover:bg-[#333333] hover:text-[#FFF6EE]"
-                href="#albums"
+                href="#search"
               >
                 Pretraživanje slika
               </Link>

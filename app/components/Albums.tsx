@@ -3,13 +3,10 @@ import album1 from "@/public/album1.png";
 
 export default function Albums() {
   return (
-    <div className="container m-auto pt-20 pb-20 pl-5 pr-5" id="albums">
+    <div className="container m-auto pt-20 pb-20 pl-5 pr-5">
       <h1 className="text-center text-3xl uppercase font-bold text-[#001120] mb-5">
         Albumi
       </h1>
-      <div>
-        datum - vrijeme - teren - klub
-      </div>
       <div className="flex justify-center">
         <div className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 text-center">
           <div>
