@@ -1,7 +1,3 @@
-"use client";
-
-import React from "react";
-
 export default function Search() {
   return (
     <div className="container m-auto pt-20 pb-20 pl-5 pr-5" id="search">
@@ -19,7 +15,7 @@ export default function Search() {
         <form className="grid xl:grid-cols-5 xl:gap-6 md:grid-cols-3 md:gap-4 grid-cols-2 gap-3">
           <div className="flex flex-col gap-2">
             <label htmlFor="date" className="text-[#333333]">
-              Odaberite datum
+              Datum
             </label>
             <input
               type="date"
@@ -32,7 +28,7 @@ export default function Search() {
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="time" className="text-[#333333]">
-              Odaberite vrijeme
+              Vrijeme
             </label>
             <input
               type="time"
@@ -45,7 +41,7 @@ export default function Search() {
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="field" className="text-[#333333]">
-              Odaberite teren
+              Teren
             </label>
             <select
               name="field"
@@ -62,7 +58,7 @@ export default function Search() {
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="team" className="text-[#333333]">
-              Odaberite ekipu
+              Ekipa
             </label>
             <select
               name="team"
