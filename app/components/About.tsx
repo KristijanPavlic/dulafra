@@ -1,6 +1,39 @@
+"use client";
+
+import React, { useRef, useEffect, useState } from "react";
+
 export default function About() {
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const [isAnimated, setIsAnimated] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isAnimated) {
+          setIsAnimated(true);
+        }
+      },
+      { threshold: 0.5 } // Adjust threshold as needed
+    );
+
+    if (aboutRef.current) {
+      observer.observe(aboutRef.current);
+    }
+
+    return () => {
+      if (aboutRef.current) {
+        observer.unobserve(aboutRef.current);
+      }
+    };
+  }, [isAnimated]);
+
   return (
-    <div className="container m-auto pt-20 pb-20 pl-5 pr-5">
+    <div
+      ref={aboutRef}
+      className={`container m-auto pt-20 pb-20 pl-5 pr-5 transform transition-transform duration-2000 ease-in delay-100 ${
+        isAnimated ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0"
+      }`}
+    >
       <h1 className="text-center text-3xl uppercase font-bold text-[#001120] mb-5">
         O nama
       </h1>

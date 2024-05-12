@@ -1,6 +1,40 @@
+"use client";
+
+import React, { useRef, useEffect, useState } from "react";
+
 export default function Search() {
+  const searchRef = useRef<HTMLDivElement>(null);
+  const [isAnimated, setIsAnimated] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isAnimated) {
+          setIsAnimated(true);
+        }
+      },
+      { threshold: 0.5 } // Adjust threshold as needed
+    );
+
+    if (searchRef.current) {
+      observer.observe(searchRef.current);
+    }
+
+    return () => {
+      if (searchRef.current) {
+        observer.unobserve(searchRef.current);
+      }
+    };
+  }, [isAnimated]);
+
   return (
-    <div className="container m-auto pt-20 pb-20 pl-5 pr-5" id="search">
+    <div
+      ref={searchRef}
+      className={`container m-auto pt-20 pb-20 pl-5 pr-5 transform transition-transform duration-2000 ease-in delay-100 ${
+        isAnimated ? "translate-y-0 opacity-100" : "translate-y-24 opacity-0"
+      }`}
+      id="search"
+    >
       <h1 className="text-center text-3xl uppercase font-bold text-[#001120] mb-5">
         Pretraživanje slika
       </h1>

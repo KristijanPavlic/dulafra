@@ -1,8 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useWindowSize } from "../hooks/useWindowSize";
-
 import Image from "next/image";
 import heroImg from "@/public/hero_img.jpg";
 import heroMobImg from "@/public/hero_mobile_img.jpg";
@@ -10,30 +9,60 @@ import Link from "next/link";
 
 export default function Hero() {
   const size = useWindowSize();
+  const heroRef = useRef<HTMLDivElement>(null);
+  const [isAnimated, setIsAnimated] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isAnimated) {
+          setIsAnimated(true);
+        }
+      },
+      { threshold: 0.5 } // Adjust threshold as needed
+    );
+
+    if (heroRef.current) {
+      observer.observe(heroRef.current);
+    }
+
+    return () => {
+      if (heroRef.current) {
+        observer.unobserve(heroRef.current);
+      }
+    };
+  }, [isAnimated]);
 
   return (
-    <div className="relative min-h-max">
+    <div
+      ref={heroRef}
+      className={`relative min-h-max duration-1000 ${isAnimated ? "opacity-100" : "opacity-0"}`}
+    >
       <div>
         {size.width >= 768 ? (
           <Image
             src={heroImg}
             alt="Dulafra hero image"
             style={{ width: "100%" }}
-            className="min-h-[100svh] object-cover bg-center"
+            className="min-h-[100svh] object-cover bg-center transition-opacity"
           />
         ) : (
           <Image
             src={heroMobImg}
             alt="Dulafra hero mobile image"
             style={{ width: "100%", height: "100svh" }}
-            className="object-cover bg-center"
+            className="object-cover bg-center transition-opacity"
           />
         )}
       </div>
-      <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-[80%] xl:min-w-[50%]">
+      <div
+        className={`absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-[80%] xl:min-w-[50%]`}
+      >
         <div className="bg-[#00112060] rounded-xl pt-6 pb-6 pl-8 pr-8 md:pl-16 md:pr-16">
           <div>
-            <h1 className="text-xl md:text-3xl font-bold text-[#FFF6EE] text-center">
+            <h1
+              className={`text-xl md:text-3xl font-bold text-[#FFF6EE] text-center`}
+            >
               Profesionalno fotografiranje <br /> sportskih događaja
             </h1>
           </div>
