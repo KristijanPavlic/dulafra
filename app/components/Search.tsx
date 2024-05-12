@@ -13,7 +13,7 @@ export default function Search() {
           setIsAnimated(true);
         }
       },
-      { threshold: 0.5 } // Adjust threshold as needed
+      { threshold: 0.2 } // Adjust threshold as needed
     );
 
     if (searchRef.current) {

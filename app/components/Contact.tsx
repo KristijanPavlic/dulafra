@@ -14,7 +14,7 @@ export default function Contact() {
           setIsAnimated(true);
         }
       },
-      { threshold: 0.5 } // Adjust threshold as needed
+      { threshold: 0.2 } // Adjust threshold as needed
     );
 
     if (contactRef.current) {

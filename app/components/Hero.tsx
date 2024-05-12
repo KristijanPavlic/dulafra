@@ -19,7 +19,7 @@ export default function Hero() {
           setIsAnimated(true);
         }
       },
-      { threshold: 0.5 } // Adjust threshold as needed
+      { threshold: 0 } // Adjust threshold as needed
     );
 
     if (heroRef.current) {
