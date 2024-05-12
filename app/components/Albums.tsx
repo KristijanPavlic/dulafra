@@ -1,43 +1,12 @@
-"use client";
-
 import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import album1 from "@/public/album1.png";
 
 export default function Albums() {
-  const albumsRef = useRef<HTMLDivElement>(null);
-  const [isAnimated, setIsAnimated] = useState(false);
-
   const test = [1, 2, 3, 4, 5, 6];
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !isAnimated) {
-          setIsAnimated(true);
-        }
-      },
-      { threshold: 0.5 } // Adjust threshold as needed
-    );
-
-    if (albumsRef.current) {
-      observer.observe(albumsRef.current);
-    }
-
-    return () => {
-      if (albumsRef.current) {
-        observer.unobserve(albumsRef.current);
-      }
-    };
-  }, [isAnimated]);
-
   return (
-    <div
-      ref={albumsRef}
-      className={`container m-auto pt-20 pb-20 pl-5 pr-5 transform transition-transform duration-2000 ease-in ${
-        isAnimated ? "translate-y-0 opacity-100" : "translate-y-36 opacity-0"
-      }`}
-    >
+    <div className="container m-auto pt-20 pb-20 pl-5 pr-5 transform transition-transform duration-2000 ease-in">
       <h1 className="text-center text-3xl uppercase font-bold text-[#001120] mb-5">
         Albumi
       </h1>
