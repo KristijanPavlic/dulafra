@@ -1,10 +1,24 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
+import SearchedAlbum from "./SearchedAlbum";
+
+interface ImageData {
+  url: string;
+  folder?: string;
+}
 
 export default function Search() {
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [field, setField] = useState("");
+  const [team, setTeam] = useState("");
+  const [isSearched, setIsSearched] = useState(false);
+
   const searchRef = useRef<HTMLDivElement>(null);
   const [isAnimated, setIsAnimated] = useState(false);
+
+  const [images, setImages] = useState<ImageData[]>([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -27,6 +41,33 @@ export default function Search() {
     };
   }, [isAnimated]);
 
+  const fetchImages = async () => {
+    const response = await fetch(`/api/cloudinary?t=${Date.now()}`, {
+      cache: "reload",
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      setImages(data);
+      console.log("data from Search.tsx: ", data);
+    } else {
+      console.error("Error fetching images:", response.status);
+    }
+  };
+
+  useEffect(() => {
+    fetchImages();
+  }, []);
+
+  useEffect(() => {
+    fetchImages();
+  }, []);
+
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSearched(true);
+  };
+
   return (
     <div
       ref={searchRef}
@@ -46,32 +87,49 @@ export default function Search() {
         </p>
       </div>
       <div className="flex justify-center">
-        <form className="grid xl:grid-cols-5 xl:gap-6 md:grid-cols-3 md:gap-4 grid-cols-2 gap-3">
+        <form
+          className="grid xl:grid-cols-5 xl:gap-6 md:grid-cols-3 md:gap-4 grid-cols-2 gap-3"
+          onSubmit={handleSearch}
+        >
           <div className="flex flex-col gap-2">
             <label htmlFor="date" className="text-[#333333]">
               Datum
             </label>
-            <input
-              type="date"
+            <select
               id="date"
               name="date"
               title="Odaberite datum"
               required
               className="p-3 rounded-lg outline-[#001120]"
-            />
+              onChange={(e) => setDate(e.target.value)}
+            >
+              <option>Odaberite</option>
+              {images.map((image, index) => (
+                <option key={index} value={image.folder?.split("_")[0]}>
+                  {image.folder?.split("_")[0]}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="time" className="text-[#333333]">
               Vrijeme
             </label>
-            <input
-              type="time"
+            <select
               id="time"
               name="time"
               title="Odaberite vrijeme"
               required
               className="p-3 rounded-lg outline-[#001120]"
-            />
+              onChange={(e) => setTime(e.target.value)}
+            >
+              <option>Odaberite</option>
+              {images.map((image, index) => (
+                <option key={index} value={image.folder?.split("_")[1]}>
+                  {image.folder?.split("_")[1]}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="field" className="text-[#333333]">
@@ -83,11 +141,14 @@ export default function Search() {
               title="Odaberite teren"
               required
               className="p-3 rounded-lg outline-[#001120]"
+              onChange={(e) => setField(e.target.value)}
             >
-              <option>5A</option>
-              <option>7B</option>
-              <option>4A</option>
-              <option>6A</option>
+              <option>Odaberite</option>
+              {images.map((image, index) => (
+                <option key={index} value={image.folder?.split("_")[2]}>
+                  {image.folder?.split("_")[2]}
+                </option>
+              ))}
             </select>
           </div>
           <div className="flex flex-col gap-2">
@@ -100,9 +161,14 @@ export default function Search() {
               title="Odaberite ekipu"
               required
               className="p-3 rounded-lg outline-[#001120]"
+              onChange={(e) => setTeam(e.target.value)}
             >
-              <option>nk Lokomotiva</option>
-              <option>nk Rudeš</option>
+              <option>Odaberite</option>
+              {images.map((image, index) => (
+                <option key={index} value={image.folder?.split("_")[3]}>
+                  {image.folder?.split("_")[3]}
+                </option>
+              ))}
             </select>
           </div>
           <button
@@ -113,6 +179,11 @@ export default function Search() {
           </button>
         </form>
       </div>
+      {isSearched && (
+        <div className="mt-8">
+          <SearchedAlbum date={date} time={time} field={field} team={team} />
+        </div>
+      )}
     </div>
   );
 }

@@ -1,9 +1,37 @@
-import React, { useRef, useEffect, useState } from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import album1 from "@/public/album1.png";
+
+interface ImageData {
+  url: string;
+  folder?: string;
+}
 
 export default function Albums() {
-  const test = [1, 2, 3, 4, 5, 6];
+  const [images, setImages] = useState<ImageData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchImages = async () => {
+    const response = await fetch(`/api/cloudinary?t=${Date.now()}`, {
+      cache: "reload",
+    });
+    setIsLoading(true);
+
+    if (response.ok) {
+      const data = await response.json();
+      setImages(data);
+      setIsLoading(false);
+    } else {
+      console.error("Error fetching images:", response.status);
+    }
+  };
+
+  useEffect(() => {
+    fetchImages();
+  }, []);
+
+  /* const filteredImages = images.filter((image) => image.folder === folderProp); */
 
   return (
     <div className="container m-auto pt-20 pb-20 pl-5 pr-5 transform transition-transform duration-2000 ease-in">
@@ -12,17 +40,27 @@ export default function Albums() {
       </h1>
       <div className="flex justify-center">
         <div className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 text-center">
-          {test.map((test) => (
-            <div key={test}>
-              <Image
-                className="shadow-[8px_8px_0px_-2px_rgba(0,17,32,1)] rounded-lg hover:shadow-none transition-all hover:cursor-pointer"
-                src={album1}
-                placeholder="blur"
-                alt="album1"
-              />
-              <h3 className="mt-4">nk Lokomotiva - u13</h3>
+          {isLoading ? (
+            <div className="col-span-full flex h-64 items-center justify-center ">
+              <div className="h-16 w-16 animate-spin rounded-full border-4 border-[#001120] border-t-transparent"></div>
             </div>
-          ))}
+          ) : (
+            images?.map((image) => (
+              <div key={image.url}>
+                <Image
+                  src={image.url}
+                  width={400}
+                  height={500}
+                  style={{ width: "100%" }}
+                  placeholder="blur"
+                  blurDataURL={image.url}
+                  alt="This image has been deleted"
+                  className="shadow-[8px_8px_0px_-2px_rgba(0,17,32,1)] rounded-lg hover:shadow-none transition-all hover:cursor-pointer"
+                />
+                <h3 className="mt-4">{image.folder?.split("_")[3]}</h3>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>

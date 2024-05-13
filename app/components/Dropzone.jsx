@@ -18,7 +18,7 @@ const Dropzone = ({ className }) => {
   const [time, setTime] = useState("");
   const [field, setField] = useState("");
   const [team, setTeam] = useState("");
-  let matchId = date + time + field + team;
+  let folderId = `${date}_${time}_${field}_${team}`;
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (acceptedFiles?.length) {
@@ -51,7 +51,7 @@ const Dropzone = ({ className }) => {
   }, [files]);
 
   const removeFile = (name) => {
-    setFiles((files) => files.filter((file) => file.name !== name));
+    setFiles((files) => files.filter((file) => file.name !== folderId));
   };
 
   const removeAll = () => {
@@ -60,7 +60,7 @@ const Dropzone = ({ className }) => {
   };
 
   const removeRejected = (name) => {
-    setRejected((files) => files.filter(({ file }) => file.name !== name));
+    setRejected((files) => files.filter(({ file }) => file.name !== folderId));
   };
 
   async function action() {
@@ -69,7 +69,7 @@ const Dropzone = ({ className }) => {
 
     for (const file of files) {
       // get a signature using server action
-      const { timestamp, signature } = await getSignature(team);
+      const { timestamp, signature } = await getSignature(folderId);
 
       // upload to cloudinary using the signature
       const formData = new FormData();
@@ -78,7 +78,7 @@ const Dropzone = ({ className }) => {
       formData.append("api_key", process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY);
       formData.append("signature", signature);
       formData.append("timestamp", timestamp);
-      formData.append("folder", team);
+      formData.append("folder", folderId);
 
       const endpoint = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL;
 
@@ -99,11 +99,7 @@ const Dropzone = ({ className }) => {
           });
 
           toast.success("Dodavanje slika uspješno"); // Report each file's status
-          console.log("date", date);
-          console.log("time", time);
-          console.log("field", field);
-          console.log("team", team);
-          console.log(matchId);
+          console.log(folderId);
         } else {
           toast.error("Greška pri dodavanju slika");
         }
