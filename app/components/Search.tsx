@@ -118,7 +118,7 @@ export default function Search() {
               className="p-3 rounded-lg outline-[#001120]"
               onChange={(e) => setDate(e.target.value)}
             >
-              <option>{date}</option>
+              <option>Odaberite datum</option>
               {uniqueOptions(0).map((option, index) => (
                 <option key={index} value={option}>
                   {option}
@@ -138,7 +138,7 @@ export default function Search() {
               className="p-3 rounded-lg outline-[#001120]"
               onChange={(e) => setTime(e.target.value)}
             >
-              <option>{time}</option>
+              <option>Odaberite vrijeme</option>
               {uniqueOptions(1).map((option, index) => (
                 <option key={index} value={option}>
                   {option}
@@ -158,7 +158,7 @@ export default function Search() {
               className="p-3 rounded-lg outline-[#001120]"
               onChange={(e) => setField(e.target.value)}
             >
-              <option>{field}</option>
+              <option>Odaberite teren</option>
               {uniqueOptions(2).map((option, index) => (
                 <option key={index} value={option}>
                   {option}
@@ -178,7 +178,7 @@ export default function Search() {
               className="p-3 rounded-lg outline-[#001120]"
               onChange={(e) => setTeam(e.target.value)}
             >
-              <option>{team}</option>
+              <option>Odabertie ekipu</option>
               {uniqueOptions(3).map((option, index) => (
                 <option key={index} value={option}>
                   {option}
