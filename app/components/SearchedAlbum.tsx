@@ -22,7 +22,6 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
   team,
 }) => {
   const searchId = `${date}_${time}_${field}_${team}`;
-  console.log(searchId);
 
   const [images, setImages] = useState<ImageData[]>([]);
   const [isLoading, setIsLoading] = useState(true);

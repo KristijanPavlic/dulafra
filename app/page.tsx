@@ -13,8 +13,8 @@ export default function Page() {
       </div>
       <Hero />
       <Search />
-      <div className="w-full h-[1px] bg-black"></div>
-      <Albums />
+      {/* <div className="w-full h-[1px] bg-black"></div>
+      <Albums /> */}
       <div className="w-full h-[1px] bg-black"></div>
       <About />
       <div className="w-full h-[1px] bg-black"></div>

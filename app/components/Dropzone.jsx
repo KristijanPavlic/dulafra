@@ -99,7 +99,6 @@ const Dropzone = ({ className }) => {
           });
 
           toast.success("Dodavanje slika uspješno"); // Report each file's status
-          console.log(folderId);
         } else {
           toast.error("Greška pri dodavanju slika");
         }

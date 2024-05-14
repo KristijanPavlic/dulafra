@@ -9,11 +9,12 @@ interface ImageData {
 }
 
 export default function Search() {
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
-  const [field, setField] = useState("");
-  const [team, setTeam] = useState("");
+  const [date, setDate] = useState("Odaberite");
+  const [time, setTime] = useState("Odaberite");
+  const [field, setField] = useState("Odaberite");
+  const [team, setTeam] = useState("Odaberite");
   const [isSearched, setIsSearched] = useState(false);
+  const [infoText, setInfoText] = useState("");
 
   const searchRef = useRef<HTMLDivElement>(null);
   const [isAnimated, setIsAnimated] = useState(false);
@@ -49,7 +50,6 @@ export default function Search() {
     if (response.ok) {
       const data = await response.json();
       setImages(data);
-      console.log("data from Search.tsx: ", data);
     } else {
       console.error("Error fetching images:", response.status);
     }
@@ -59,13 +59,28 @@ export default function Search() {
     fetchImages();
   }, []);
 
-  useEffect(() => {
-    fetchImages();
-  }, []);
+  const uniqueOptions = (folderIdIndex: number) => {
+    const values = images.map(
+      (image) => image.folder?.split("_")[folderIdIndex]
+    );
+    return values.filter((value, index) => values.indexOf(value) === index);
+  };
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSearched(true);
+    if (
+      date === "Odaberite" ||
+      time === "Odaberite" ||
+      field === "Odaberite" ||
+      team === "Odaberite"
+    ) {
+      setIsSearched(false);
+      // Notify the user if not all options are selected
+      setInfoText("Potrebno je odaberati sva polja za pretraživanje slika.");
+    } else {
+      setIsSearched(true);
+      setInfoText("");
+    }
   };
 
   return (
@@ -103,10 +118,10 @@ export default function Search() {
               className="p-3 rounded-lg outline-[#001120]"
               onChange={(e) => setDate(e.target.value)}
             >
-              <option>Odaberite</option>
-              {images.map((image, index) => (
-                <option key={index} value={image.folder?.split("_")[0]}>
-                  {image.folder?.split("_")[0]}
+              <option>{date}</option>
+              {uniqueOptions(0).map((option, index) => (
+                <option key={index} value={option}>
+                  {option}
                 </option>
               ))}
             </select>
@@ -123,10 +138,10 @@ export default function Search() {
               className="p-3 rounded-lg outline-[#001120]"
               onChange={(e) => setTime(e.target.value)}
             >
-              <option>Odaberite</option>
-              {images.map((image, index) => (
-                <option key={index} value={image.folder?.split("_")[1]}>
-                  {image.folder?.split("_")[1]}
+              <option>{time}</option>
+              {uniqueOptions(1).map((option, index) => (
+                <option key={index} value={option}>
+                  {option}
                 </option>
               ))}
             </select>
@@ -143,10 +158,10 @@ export default function Search() {
               className="p-3 rounded-lg outline-[#001120]"
               onChange={(e) => setField(e.target.value)}
             >
-              <option>Odaberite</option>
-              {images.map((image, index) => (
-                <option key={index} value={image.folder?.split("_")[2]}>
-                  {image.folder?.split("_")[2]}
+              <option>{field}</option>
+              {uniqueOptions(2).map((option, index) => (
+                <option key={index} value={option}>
+                  {option}
                 </option>
               ))}
             </select>
@@ -163,10 +178,10 @@ export default function Search() {
               className="p-3 rounded-lg outline-[#001120]"
               onChange={(e) => setTeam(e.target.value)}
             >
-              <option>Odaberite</option>
-              {images.map((image, index) => (
-                <option key={index} value={image.folder?.split("_")[3]}>
-                  {image.folder?.split("_")[3]}
+              <option>{team}</option>
+              {uniqueOptions(3).map((option, index) => (
+                <option key={index} value={option}>
+                  {option}
                 </option>
               ))}
             </select>
@@ -184,6 +199,9 @@ export default function Search() {
           <SearchedAlbum date={date} time={time} field={field} team={team} />
         </div>
       )}
+      <h4 id="infoSearch" className="mt-4 text-center">
+        {infoText}
+      </h4>
     </div>
   );
 }
