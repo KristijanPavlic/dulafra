@@ -16,7 +16,7 @@ export default async function Dashboard() {
           Dobro došli, {user?.firstName}
         </h2>
         <div className="mt-5 lg:mt-10">
-          <UserButton afterSignOutUrl="/" />
+          <UserButton afterSignOutUrl="/"/>
         </div>
         <div className="mt-6">
           <Link href="/" className="hover:text-[#001120] transition-all">

@@ -14,7 +14,13 @@ export default function Footer() {
             target="_blank"
           >
             Posjetite nas na{" "}
-            <Image src={facebookIcon} width={20} alt="Facebook page" />
+            <Image
+              src={facebookIcon}
+              width={20}
+              height={20}
+              alt="Facebook page"
+              style={{ width: "auto", height: "auto" }}
+            />
           </Link>
         </div>
         <div className="w-[2px] h-50px bg-black"></div>

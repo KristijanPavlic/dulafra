@@ -9,17 +9,18 @@ interface ImageData {
 }
 
 export default function Search() {
-  const [date, setDate] = useState("Odaberite");
-  const [time, setTime] = useState("Odaberite");
-  const [field, setField] = useState("Odaberite");
-  const [team, setTeam] = useState("Odaberite");
+  const [date, setDate] = useState("Odaberite datum");
+  const [timeOptions, setTimeOptions] = useState<string[]>([]);
+  const [fieldOptions, setFieldOptions] = useState<string[]>([]);
+  const [teamOptions, setTeamOptions] = useState<string[]>([]);
+  const [time, setTime] = useState("Odaberite vrijeme");
+  const [field, setField] = useState("Odaberite teren");
+  const [team, setTeam] = useState("Odaberite ekipu");
   const [isSearched, setIsSearched] = useState(false);
   const [infoText, setInfoText] = useState("");
-
+  const [images, setImages] = useState<ImageData[]>([]);
   const searchRef = useRef<HTMLDivElement>(null);
   const [isAnimated, setIsAnimated] = useState(false);
-
-  const [images, setImages] = useState<ImageData[]>([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -28,7 +29,7 @@ export default function Search() {
           setIsAnimated(true);
         }
       },
-      { threshold: 0.2 } // Adjust threshold as needed
+      { threshold: 0.2 }
     );
 
     if (searchRef.current) {
@@ -59,23 +60,41 @@ export default function Search() {
     fetchImages();
   }, []);
 
-  const uniqueOptions = (folderIdIndex: number) => {
-    const values = images.map(
-      (image) => image.folder?.split("_")[folderIdIndex]
-    );
-    return values.filter((value, index) => values.indexOf(value) === index);
-  };
+  useEffect(() => {
+    if (date !== "Odaberite datum") {
+      const timeOptions = images
+        .filter((image) => image.folder?.includes(date))
+        .map((image) => image.folder?.split("_")[1])
+        .filter((option): option is string => option !== undefined);
+      setTimeOptions(Array.from(new Set(timeOptions)));
+
+      const fieldOptions = images
+        .filter((image) => image.folder?.includes(date))
+        .map((image) => image.folder?.split("_")[2])
+        .filter((option): option is string => option !== undefined);
+      setFieldOptions(Array.from(new Set(fieldOptions)));
+
+      const teamOptions = images
+        .filter((image) => image.folder?.includes(date))
+        .map((image) => image.folder?.split("_")[3])
+        .filter((option): option is string => option !== undefined);
+      setTeamOptions(Array.from(new Set(teamOptions)));
+    } else {
+      setTimeOptions([]);
+      setFieldOptions([]);
+      setTeamOptions([]);
+    }
+  }, [date, images]);
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (
-      date === "Odaberite" ||
-      time === "Odaberite" ||
-      field === "Odaberite" ||
-      team === "Odaberite"
+      date === "Odaberite datum" ||
+      time === "Odaberite vrijeme" ||
+      field === "Odaberite teren" ||
+      team === "Odaberite ekipu"
     ) {
       setIsSearched(false);
-      // Notify the user if not all options are selected
       setInfoText("Potrebno je odabrati sva polja za pretraživanje slika.");
     } else {
       setIsSearched(true);
@@ -115,12 +134,20 @@ export default function Search() {
               title="Odaberite datum"
               required
               className="p-3 rounded-lg outline-[#001120]"
-              onChange={(e) => setDate(e.target.value)}
+              onChange={(e) => {
+                setDate(e.target.value);
+                setTime("Odaberite vrijeme");
+                setField("Odaberite teren");
+                setTeam("Odaberite ekipu");
+              }}
+              value={date}
             >
               <option>Odaberite datum</option>
-              {uniqueOptions(0).map((option, index) => (
-                <option key={index} value={option}>
-                  {option}
+              {Array.from(
+                new Set(images.map((image) => image.folder?.split("_")[0]))
+              ).map((uniqueDate, index) => (
+                <option key={index} value={uniqueDate}>
+                  {uniqueDate}
                 </option>
               ))}
             </select>
@@ -136,9 +163,10 @@ export default function Search() {
               required
               className="p-3 rounded-lg outline-[#001120]"
               onChange={(e) => setTime(e.target.value)}
+              value={time}
             >
               <option>Odaberite vrijeme</option>
-              {uniqueOptions(1).map((option, index) => (
+              {timeOptions.map((option, index) => (
                 <option key={index} value={option}>
                   {option}
                 </option>
@@ -156,9 +184,10 @@ export default function Search() {
               required
               className="p-3 rounded-lg outline-[#001120]"
               onChange={(e) => setField(e.target.value)}
+              value={field}
             >
               <option>Odaberite teren</option>
-              {uniqueOptions(2).map((option, index) => (
+              {fieldOptions.map((option, index) => (
                 <option key={index} value={option}>
                   {option}
                 </option>
@@ -176,9 +205,10 @@ export default function Search() {
               required
               className="p-3 rounded-lg outline-[#001120]"
               onChange={(e) => setTeam(e.target.value)}
+              value={team}
             >
               <option>Odabertie ekipu</option>
-              {uniqueOptions(3).map((option, index) => (
+              {teamOptions.map((option, index) => (
                 <option key={index} value={option}>
                   {option}
                 </option>

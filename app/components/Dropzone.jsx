@@ -12,6 +12,7 @@ const Dropzone = ({ className }) => {
   const [files, setFiles] = useState([]);
   const [rejected, setRejected] = useState([]);
   const [alertMessage, setAlertMessage] = useState(null);
+  const [addingImages, setAddingImages] = useState(false);
 
   // folder selection
   const [date, setDate] = useState("");
@@ -51,7 +52,7 @@ const Dropzone = ({ className }) => {
   }, [files]);
 
   const removeFile = (name) => {
-    setFiles((files) => files.filter((file) => file.name !== folderId));
+    setFiles((files) => files.filter((file) => file.name !== name));
   };
 
   const removeAll = () => {
@@ -60,7 +61,9 @@ const Dropzone = ({ className }) => {
   };
 
   const removeRejected = (name) => {
-    setRejected((files) => files.filter(({ file }) => file.name !== folderId));
+    setRejected((rejected) =>
+      rejected.filter(({ file }) => file.name !== name)
+    );
   };
 
   async function action() {
@@ -83,6 +86,7 @@ const Dropzone = ({ className }) => {
       const endpoint = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL;
 
       try {
+        setAddingImages(true);
         const response = await fetch(endpoint, {
           method: "POST",
           body: formData,
@@ -90,6 +94,7 @@ const Dropzone = ({ className }) => {
 
         if (response.ok) {
           const data = await response.json();
+          setAddingImages(false);
 
           // Write to database using server actions
           await saveToDatabase({
@@ -98,15 +103,20 @@ const Dropzone = ({ className }) => {
             public_id: data?.public_id,
           });
 
-          toast.success("Dodavanje slika uspješno"); // Report each file's status
+          toast.success("Dodavanje slike uspješno"); // Report each file's status
         } else {
-          toast.error("Greška pri dodavanju slika");
+          toast.error("Greška pri dodavanju slike");
         }
       } catch (error) {
-        console.error("Greška pri dodavanju slika:", error);
-        toast.error("Dogodila se greška pri dodavanju slika");
+        console.error("Greška pri dodavanju slike:", error);
+        toast.error("Dogodila se greška pri dodavanju slike");
       }
     }
+
+    setDate("");
+    setTime("");
+    setField("");
+    setTeam("");
 
     setFiles([]); // Clear the files array after successful uploads
   }
@@ -223,8 +233,9 @@ const Dropzone = ({ className }) => {
           <button
             type="submit"
             className="ml-auto mt-1 rounded-md border border-[#001120] px-3 text-[12px] font-bold uppercase tracking-wider text-[#333333] transition-colors hover:bg-[#001120] hover:text-white"
+            disabled={addingImages}
           >
-            Dodaj slike
+            {addingImages ? "Dodavanje slika..." : "Dodaj slike"}
           </button>
         </div>
 
