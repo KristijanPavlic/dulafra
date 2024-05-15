@@ -71,6 +71,10 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
     }
   };
 
+  console.log(user?.id);
+  console.log(process.env.NEXT_PUBLIC_ADMIN_KEY);
+  console.log(user?.id === process.env.NEXT_PUBLIC_ADMIN_KEY);
+
   return (
     <div className="container m-auto pt-10 pl-5 pr-5 transform transition-transform duration-2000 ease-in">
       <div className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 text-center">

@@ -76,7 +76,7 @@ export default function Search() {
     ) {
       setIsSearched(false);
       // Notify the user if not all options are selected
-      setInfoText("Potrebno je odaberati sva polja za pretraživanje slika.");
+      setInfoText("Potrebno je odabrati sva polja za pretraživanje slika.");
     } else {
       setIsSearched(true);
       setInfoText("");
@@ -95,10 +95,9 @@ export default function Search() {
         Pretraživanje slika
       </h1>
       <div>
-        <p className="text-center text-[#333333] text-lg mb-5 max-w-[70%] m-auto">
-          Ovdje imate opciju pregledati odabrane fotografije. Potrebno je samo
-          da uneste tražene podatke te ako iste postoje prikazti će Vam se
-          odabrene fotografije.
+        <p className="text-center text-[#333333] text-lg mb-5 md:max-w-[50%] max-w-full m-auto">
+          Ovdje imate mogućnost pretraživanja slika. Potrebno je odabrati
+          tražene podatke kako bi mogli pregledati slike.
         </p>
       </div>
       <div className="flex justify-center">
@@ -190,7 +189,7 @@ export default function Search() {
             type="submit"
             className="bg-[#333333] text-[#FFF6EE] p-3 mt-8 w-fit h-fit rounded-lg transition-all hover:bg-[#001120] hover:text-[#FFF6EE]"
           >
-            Pretraži fotografije
+            Pretraži slike
           </button>
         </form>
       </div>

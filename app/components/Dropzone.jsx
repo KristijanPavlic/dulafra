@@ -46,7 +46,7 @@ const Dropzone = ({ className }) => {
   });
 
   useEffect(() => {
-    // Revoke the data uris to avoid memory leaks
+    // Revoke the data URIs to avoid memory leaks
     return () => files.forEach((file) => URL.revokeObjectURL(file.preview));
   }, [files]);
 

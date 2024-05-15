@@ -36,6 +36,9 @@ export default function Footer() {
       <h4 className="text-sm mt-6 text-center">
         *Sve fotografije na stranici zaštićene su vodenim žigom te je svako
         njihovo korištenje bez dozvole strogo zabranjeno.
+        <div>
+          <Link href="/dashboard">Admin Login</Link>
+        </div>
       </h4>
     </div>
   );
