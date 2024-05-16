@@ -121,7 +121,7 @@ export default function Search() {
       </div>
       <div className="flex justify-center">
         <form
-          className="grid xl:grid-cols-5 xl:gap-6 md:grid-cols-3 md:gap-4 grid-cols-2 gap-3"
+          className="grid xl:grid-cols-5 xl:gap-6 md:grid-cols-3 md:gap-4 grid-cols-2 gap-3 text-[#333333]"
           onSubmit={handleSearch}
         >
           <div className="flex flex-col gap-2">

@@ -7,8 +7,9 @@ export default async function Dashboard() {
   const { userId }: { userId: string | null } = auth();
   const user = await currentUser();
   const adminId = process.env.NEXT_PRIVATE_ADMIN_KEY;
+  const brankoId = process.env.NEXT_PRIVATE_BRANKO_KEY;
 
-  if (userId === adminId) {
+  if (userId === adminId || userId === brankoId) {
     return (
       <div className="container flex flex-col justify-center pl-8 pr-8">
         <h1 className="text-xl font-bold lg:text-3xl">Upravljačka ploča</h1>
@@ -16,7 +17,7 @@ export default async function Dashboard() {
           Dobro došli, {user?.firstName}
         </h2>
         <div className="mt-5 lg:mt-10">
-          <UserButton afterSignOutUrl="/"/>
+          <UserButton afterSignOutUrl="/" />
         </div>
         <div className="mt-6">
           <Link href="/" className="hover:text-[#001120] transition-all">

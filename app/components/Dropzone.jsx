@@ -232,8 +232,9 @@ const Dropzone = ({ className }) => {
           </button>
           <button
             type="submit"
-            className="ml-auto mt-1 rounded-md border border-[#001120] px-3 text-[12px] font-bold uppercase tracking-wider text-[#333333] transition-colors hover:bg-[#001120] hover:text-white"
-            disabled={addingImages}
+            className="ml-auto mt-1 rounded-md border border-[#001120] px-3 text-[12px] font-bold uppercase tracking-wider text-[#333333] transition-colors hover:bg-[#001120] hover:text-white disabled:bg-gray-400 disabled:cursor-not-allowed"
+            /* disabled={addingImages} */
+            disabled={!date || !time || !field || !team}
           >
             {addingImages ? "Dodavanje slika..." : "Dodaj slike"}
           </button>

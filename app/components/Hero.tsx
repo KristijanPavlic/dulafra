@@ -61,15 +61,15 @@ export default function Hero() {
         <div className="bg-[#00112060] rounded-xl pt-6 pb-6 pl-8 pr-8 md:pl-16 md:pr-16">
           <div>
             <h1
-              className={`text-xl md:text-3xl font-bold text-[#FFF6EE] text-center`}
+              className={`text-2xl md:text-5xl font-bold text-[#FFF6EE] text-center`}
             >
-              Profesionalno fotografiranje <br /> sportskih događaja
+              Fotografiranje sportskih događaja
             </h1>
           </div>
           <div className="mt-7 lg:mt-14">
             <h3 className="text-[#FFF6EE] text-base text-center md:text-lg">
-              Naš tim profesionalnih fotografa pobrinuti će se da svaki Vama
-              dragi sportski događaj ostane zabilježen
+              Naš tim fotografa pobrinuti će se da svaki Vama dragi sportski
+              događaj ostane zabilježen
             </h3>
           </div>
           <div className="flex flex-col md:flex-row items-center justify-center gap-10 mt-10">

@@ -19,7 +19,6 @@ export default function Footer() {
               width={20}
               height={20}
               alt="Facebook page"
-              style={{ width: "auto", height: "auto" }}
             />
           </Link>
         </div>

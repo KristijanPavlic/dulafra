@@ -2,7 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { CldImage } from "next-cloudinary";
 import { useUser } from "@clerk/nextjs";
+
+import watermark from "@/public/watermark.png";
 
 interface ImageData {
   url: string;
@@ -73,7 +76,7 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
 
   return (
     <div className="container m-auto pt-10 pl-5 pr-5 transform transition-transform duration-2000 ease-in">
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 text-center">
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 gap-y-16 text-center">
         {isLoading ? (
           <div className="col-span-full flex h-64 items-center justify-center ">
             <div className="h-16 w-16 animate-spin rounded-full border-4 border-[#001120] border-t-transparent"></div>
@@ -81,30 +84,34 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
         ) : (
           filteredImages?.map((image) => (
             <div key={image.url} className="relative">
-              <Image
+              <CldImage
                 src={image.url}
                 width={400}
                 height={300}
                 style={{ width: "100%", height: "100%" }}
                 placeholder="blur"
                 blurDataURL={image.url}
-                alt="This image has been deleted"
-                className="shadow-[8px_8px_0px_-2px_rgba(0,17,32,1)] rounded-lg hover:shadow-none transition-all hover:cursor-pointer bg-cover"
+                alt="There is a problem with loading this image"
+                className="shadow-[8px_8px_0px_-2px_rgba(0,17,32,1)] rounded-lg hover:shadow-none transition-all hover:cursor-pointer bg-cover mb-3"
               />
-              {user?.id === process.env.NEXT_PUBLIC_ADMIN_KEY && (
-                <div
-                  className="absolute left-0 top-0 flex h-full w-full items-center 
+              <h4 className="text-[#333333]">
+                {image.url.split("/")[8].split(".")[0]}
+              </h4>
+              {user?.id === process.env.NEXT_PUBLIC_ADMIN_KEY ||
+                (user?.id === process.env.NEXT_PUBLIC_BRANKO_KEY && (
+                  <div
+                    className="absolute left-0 top-0 flex h-full w-full items-center 
                   justify-center bg-black/50 opacity-0 transition-opacity 
                   duration-300 ease-in-out hover:opacity-100 rounded-lg"
-                >
-                  <button
-                    onClick={() => deleteImage(image.url)}
-                    className="rounded bg-red-500 px-4 py-2 text-white"
                   >
-                    Delete
-                  </button>
-                </div>
-              )}
+                    <button
+                      onClick={() => deleteImage(image.url)}
+                      className="rounded bg-red-500 px-4 py-2 text-white"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                ))}
             </div>
           ))
         )}
