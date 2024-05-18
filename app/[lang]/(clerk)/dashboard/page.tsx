@@ -41,7 +41,7 @@ export default async function Dashboard() {
           Nemate dozvolu za pristup ovoj stranici. Pokušajte se prijaviti s
           drugim računom.
         </span>
-        <UserButton afterSignOutUrl="/sign-in" />
+        <UserButton afterSignOutUrl="hr/sign-in" />
         <div className="mt-6">
           <Link
             href="/"

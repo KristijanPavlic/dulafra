@@ -7,11 +7,17 @@ import heroImg from "@/public/hero_img.jpg";
 import heroMobImg from "@/public/hero_mobile_img.jpg";
 import Link from "next/link";
 
-export default function Hero() {
+interface HeroProps {
+  title: string
+  description: string
+  btnSearch: string
+  btnContact: string
+}
+
+const Hero: React.FC<HeroProps> = ({title, description, btnSearch, btnContact}) => {
   const size = useWindowSize();
   const heroRef = useRef<HTMLDivElement>(null);
   const [isAnimated, setIsAnimated] = useState(false);
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -63,13 +69,12 @@ export default function Hero() {
             <h1
               className={`text-2xl md:text-5xl font-bold text-[#FFF6EE] text-center`}
             >
-              Fotografiranje sportskih događaja
+              {title}
             </h1>
           </div>
           <div className="mt-7 lg:mt-14">
             <h3 className="text-[#FFF6EE] text-base text-center md:text-lg">
-              Naš tim fotografa pobrinuti će se da svaki Vama dragi sportski
-              događaj ostane zabilježen
+              {description}
             </h3>
           </div>
           <div className="flex flex-col md:flex-row items-center justify-center gap-10 mt-10">
@@ -78,7 +83,7 @@ export default function Hero() {
                 className="bg-[#FFF6EE] text-[#333333] pt-2 pb-2 pl-4 pr-4 rounded-lg transition-all hover:bg-[#333333] hover:text-[#FFF6EE]"
                 href="#search"
               >
-                Pretraživanje slika
+                {btnSearch}
               </Link>
             </div>
             <div>
@@ -86,7 +91,7 @@ export default function Hero() {
                 className="bg-[#FFF6EE] text-[#333333] pt-2 pb-2 pl-4 pr-4 rounded-lg transition-all hover:bg-[#333333] hover:text-[#FFF6EE]"
                 href="#contact"
               >
-                Kontaktirajte nas
+                {btnContact}
               </Link>
             </div>
           </div>
@@ -95,3 +100,5 @@ export default function Hero() {
     </div>
   );
 }
+
+export default Hero

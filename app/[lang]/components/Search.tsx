@@ -8,14 +8,29 @@ interface ImageData {
   folder?: string;
 }
 
-export default function Search() {
-  const [date, setDate] = useState("Odaberite datum");
+interface SearchProps {
+  title: string
+  description: string
+  labelDate: string
+  chooseDate: string
+  labelTime: string
+  chooseTime: string
+  labelField: string
+  chooseField: string
+  labelTeam: string
+  chooseTeam: string
+  btnSearchImages: string
+  warning: string
+}
+
+const Search:React.FC<SearchProps> = ({title, description, labelDate, chooseDate, labelTime, chooseTime, labelField, chooseField, labelTeam, chooseTeam, btnSearchImages, warning}) => {
+  const [date, setDate] = useState(chooseDate);
+  const [time, setTime] = useState(chooseTime);
+  const [field, setField] = useState(chooseField);
+  const [team, setTeam] = useState(chooseTeam);
   const [timeOptions, setTimeOptions] = useState<string[]>([]);
   const [fieldOptions, setFieldOptions] = useState<string[]>([]);
   const [teamOptions, setTeamOptions] = useState<string[]>([]);
-  const [time, setTime] = useState("Odaberite vrijeme");
-  const [field, setField] = useState("Odaberite teren");
-  const [team, setTeam] = useState("Odaberite ekipu");
   const [isSearched, setIsSearched] = useState(false);
   const [infoText, setInfoText] = useState("");
   const [images, setImages] = useState<ImageData[]>([]);
@@ -61,7 +76,7 @@ export default function Search() {
   }, []);
 
   useEffect(() => {
-    if (date !== "Odaberite datum") {
+    if (date !== chooseDate) {
       const timeOptions = images
         .filter((image) => image.folder?.includes(date))
         .map((image) => image.folder?.split("_")[1])
@@ -84,18 +99,18 @@ export default function Search() {
       setFieldOptions([]);
       setTeamOptions([]);
     }
-  }, [date, images]);
+  }, [date, chooseDate, images]);
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (
-      date === "Odaberite datum" ||
-      time === "Odaberite vrijeme" ||
-      field === "Odaberite teren" ||
-      team === "Odaberite ekipu"
+      date === chooseDate ||
+      time === chooseTime ||
+      field === chooseField ||
+      team === chooseTeam
     ) {
       setIsSearched(false);
-      setInfoText("Potrebno je odabrati sva polja za pretraživanje slika.");
+      setInfoText(warning);
     } else {
       setIsSearched(true);
       setInfoText("");
@@ -111,12 +126,11 @@ export default function Search() {
       id="search"
     >
       <h1 className="text-center text-3xl uppercase font-bold text-[#001120] mb-5">
-        Pretraživanje slika
+        {title}
       </h1>
       <div>
         <p className="text-center text-[#333333] text-lg mb-5 md:max-w-[50%] max-w-full m-auto">
-          Ovdje imate mogućnost pretraživanja slika. Potrebno je odabrati
-          tražene podatke kako bi mogli pregledati slike.
+          {description}
         </p>
       </div>
       <div className="flex justify-center">
@@ -126,23 +140,23 @@ export default function Search() {
         >
           <div className="flex flex-col gap-2">
             <label htmlFor="date" className="text-[#333333]">
-              Datum
+              {labelDate}
             </label>
             <select
               id="date"
               name="date"
-              title="Odaberite datum"
+              title={chooseDate}
               required
               className="p-3 rounded-lg outline-[#001120]"
               onChange={(e) => {
                 setDate(e.target.value);
-                setTime("Odaberite vrijeme");
-                setField("Odaberite teren");
-                setTeam("Odaberite ekipu");
+                setTime(chooseDate);
+                setField(chooseField);
+                setTeam(chooseTeam);
               }}
               value={date}
             >
-              <option>Odaberite datum</option>
+              <option>{chooseDate}</option>
               {Array.from(
                 new Set(images.map((image) => image.folder?.split("_")[0]))
               ).map((uniqueDate, index) => (
@@ -154,18 +168,18 @@ export default function Search() {
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="time" className="text-[#333333]">
-              Vrijeme
+              {labelTime}
             </label>
             <select
               id="time"
               name="time"
-              title="Odaberite vrijeme"
+              title={chooseTime}
               required
               className="p-3 rounded-lg outline-[#001120]"
               onChange={(e) => setTime(e.target.value)}
               value={time}
             >
-              <option>Odaberite vrijeme</option>
+              <option>{chooseTime}</option>
               {timeOptions.map((option, index) => (
                 <option key={index} value={option}>
                   {option}
@@ -175,18 +189,18 @@ export default function Search() {
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="field" className="text-[#333333]">
-              Teren
+              {labelField}
             </label>
             <select
               name="field"
               id="field"
-              title="Odaberite teren"
+              title={chooseField}
               required
               className="p-3 rounded-lg outline-[#001120]"
               onChange={(e) => setField(e.target.value)}
               value={field}
             >
-              <option>Odaberite teren</option>
+              <option>{chooseField}</option>
               {fieldOptions.map((option, index) => (
                 <option key={index} value={option}>
                   {option}
@@ -196,18 +210,18 @@ export default function Search() {
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="team" className="text-[#333333]">
-              Ekipa
+              {labelTeam}
             </label>
             <select
               name="team"
               id="team"
-              title="Odaberite ekipu"
+              title={chooseTeam}
               required
               className="p-3 rounded-lg outline-[#001120]"
               onChange={(e) => setTeam(e.target.value)}
               value={team}
             >
-              <option>Odabertie ekipu</option>
+              <option>{chooseTeam}</option>
               {teamOptions.map((option, index) => (
                 <option key={index} value={option}>
                   {option}
@@ -219,7 +233,7 @@ export default function Search() {
             type="submit"
             className="bg-[#333333] text-[#FFF6EE] p-3 mt-8 w-fit h-fit rounded-lg transition-all hover:bg-[#001120] hover:text-[#FFF6EE]"
           >
-            Pretraži slike
+            {btnSearchImages}
           </button>
         </form>
       </div>
@@ -234,3 +248,5 @@ export default function Search() {
     </div>
   );
 }
+
+export default Search

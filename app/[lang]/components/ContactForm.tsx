@@ -2,7 +2,17 @@
 
 import { useState } from "react";
 
-const ContactForm = () => {
+interface ContactFormProps {
+  labelName: string; 
+  labelEmail: string;
+  labelMessage: string;
+  btnSend: string;
+  btnSending: string;
+  success: string;
+  error: string;
+}
+
+const ContactForm:React.FC<ContactFormProps> = ({labelName, labelEmail, labelMessage, btnSend, btnSending, success, error}) => {
   const [infoText, setInfoText] = useState("");
 
   const [data, setData] = useState({
@@ -27,7 +37,7 @@ const ContactForm = () => {
 
     if (response.status === 200) {
       setIsSubmitting(false);
-      setInfoText("Poruka uspješno poslana.");
+      setInfoText(success);
       clearInputFields();
       setData({
         name: "",
@@ -38,9 +48,7 @@ const ContactForm = () => {
 
     if (response.status !== 200) {
       setIsSubmitting(false);
-      setInfoText(
-        "Došlo je do greške pri slanju poruke. Molimo pokušajte ponovno."
-      );
+      setInfoText(error);
     }
   };
 
@@ -66,7 +74,7 @@ const ContactForm = () => {
         <input
           className="bg-transparent p-5 focus:outline-none focus:bg-white border-b border-b-black rounded-t-lg"
           type="text"
-          placeholder="Ime i prezime"
+          placeholder={labelName}
           name="name"
           id="name"
           required
@@ -76,7 +84,7 @@ const ContactForm = () => {
         <input
           className="bg-transparent p-5 focus:outline-none focus:bg-white border-b border-b-black"
           type="email"
-          placeholder="Vaš email"
+          placeholder={labelEmail}
           name="email"
           id="email"
           required
@@ -90,7 +98,7 @@ const ContactForm = () => {
           cols={30}
           rows={5}
           maxLength={3000}
-          placeholder="Ovdje napišite svoju poruku"
+          placeholder={labelMessage}
           onChange={(e) => setData({ ...data, message: e.target.value })}
         />
         <button
@@ -98,7 +106,7 @@ const ContactForm = () => {
           type="submit"
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Poruka se šalje..." : "Pošalji poruku"}
+          {isSubmitting ? btnSending : btnSend}
         </button>
       </form>
       <h4 id="infoContact" className="mt-4 text-center">{infoText}</h4>

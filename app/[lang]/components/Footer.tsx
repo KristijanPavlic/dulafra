@@ -2,7 +2,13 @@ import Image from "next/image";
 import facebookIcon from "@/public/facebook.svg";
 import Link from "next/link";
 
-export default function Footer() {
+interface FooterProps {
+  facebook: string;
+  copyrigth: string;
+  rights: string;
+}
+
+const Footer:React.FC<FooterProps> = ({facebook, copyrigth, rights}) => {
   return (
     <div className="container m-auto pt-5 pb-5 pl-5 pr-5">
       <div className="flex justify-center gap-3 md:gap-6 md:pl-12">
@@ -13,7 +19,7 @@ export default function Footer() {
             href="https://www.facebook.com/profile.php?id=100095683080263"
             target="_blank"
           >
-            Posjetite nas na{" "}
+            {facebook}{" "}
             <Image
               src={facebookIcon}
               width={20}
@@ -39,12 +45,13 @@ export default function Footer() {
         </div>
       </div>
       <h4 className="text-sm mt-6 text-center">
-        *Sve fotografije na stranici zaštićene su vodenim žigom te je svako
-        njihovo korištenje bez dozvole strogo zabranjeno.
+        {copyrigth} &copy; {new Date().getFullYear()}. {rights}
         <div>
-          <Link href="/dashboard">Admin Login</Link>
+          <Link href="hr/dashboard">Admin Login</Link>
         </div>
       </h4>
     </div>
   );
 }
+
+export default Footer;

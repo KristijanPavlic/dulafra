@@ -1,0 +1,48 @@
+{
+    "page": {
+        "infoMessage": "The page is currently under construction!",
+        "hero": {
+            "title": "Photography of sports events",
+            "description": "Our team of photographers will make sure that every sporting event you love remains recorded",
+            "btnSearch": "Image search",
+            "btnContact": "Contact us"
+        },
+        "search": {
+            "title": "Image search",
+            "description": "Here you can search for images. It is necessary to select the required fields in order to be able to view the images.",
+            "labelDate": "Date",
+            "chooseDate": "Choose date",
+            "labelTime": "Time",
+            "chooseTime": "Choose time",
+            "labelField": "Field",
+            "chooseField": "Choose field",
+            "labelTeam": "Team",
+            "chooseTeam": "Choose team",
+            "btnSearchImages": "Search images",
+            "warning": "Please select all fields!"
+        },
+        "about": {
+            "title": "About us",
+            "description": "We are a team of photographers who love sports. We are always there to capture the most beautiful moments of your favorite sports events.",
+            "years": "years of experience",
+            "professional": "professional photographers",
+            "events": "events recorded"
+        },
+        "contact": {
+            "title": "Contact us",
+            "description": "If you have any questions, feel free to contact us. We will be happy to help you.",
+            "labelName": "Name",
+            "labelEmail": "Email",
+            "labelMessage": "Message",
+            "btnSend": "Send message",
+            "btnSending": "Sending message...",
+            "success": "The message has been sent successfully!",
+            "error": "An error occurred while sending the message!"
+        },
+        "footer": {
+            "facebook": "Visit us on",
+            "copyrigth": "*All photos on the page are protected by a watermark, and any use of them without permission is strictly prohibited.",
+            "rights": "All rights reserved."
+        }
+    }
+}

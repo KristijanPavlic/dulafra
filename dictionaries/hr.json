@@ -1,0 +1,48 @@
+{
+    "page": {
+        "infoMessage": "Stranica je trenutno u izradi!",
+        "hero": {
+            "title": "Fotografiranje sportskih događaja",
+            "description": "Naš tim fotografa pobrinuti će se da svaki Vama dragi sportski događaj ostane zabilježen",
+            "btnSearch": "Pretraživanje slika",
+            "btnContact": "Kontaktirajte nas"
+        },
+        "search": {
+            "title": "Pretraživanje slika",
+            "description": "Ovdje imate mogućnost pretraživanja slika. Potrebno je odabrati tražene podatke kako bi mogli pregledati slike.",
+            "labelDate": "Datum",
+            "chooseDate": "Odaberite datum",
+            "labelTime": "Vrijeme",
+            "chooseTime": "Odaberite vrijeme",
+            "labelField": "Teren",
+            "chooseField": "Odaberite teren",
+            "labelTeam": "Ekipa",
+            "chooseTeam": "Odaberite ekipu",
+            "btnSearchImages": "Pretraži slike",
+            "warning": "Potrebno je odabrati sva polja za pretraživanje slika!"
+        },
+        "about": {
+            "title": "O nama",
+            "description": "Naš tim fotografa već dugi niz godina bavi se fotografiranjem sportskih događaja. Naša misija je zabilježiti svaki Vaš dragi trenutak na terenu.",
+            "years": "godina iskustva",
+            "professional": "profesionalnih fotografa",
+            "events": "odrađenih događaja"
+        },
+        "contact": {
+            "title": "Kontakt",
+            "description": "Za sve informacije ili pitanja slobodno nas kontaktirajte putem kontakt forme.",
+            "labelName": "Ime i prezime",
+            "labelEmail": "Vaš email",
+            "labelMessage": "Ovdje upišite Vašu poruku",
+            "btnSend": "Pošalji poruku",
+            "btnSending": "Slanje poruke...",
+            "success": "Vaša poruka je uspješno poslana!",
+            "error": "Došlo je do pogreške prilikom slanja poruke. Molimo pokušajte ponovno!"
+        },
+        "footer": {
+            "facebook": "Posjetite nas na",
+            "copyrigth": "*Sve fotografije na stranici zaštićene su vodenim žigom te je svako njihovo korištenje bez dozvole strogo zabranjeno.",
+            "rights": "Sva prava pridržana."
+        }
+    }
+}

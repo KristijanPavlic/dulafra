@@ -3,7 +3,19 @@
 import React, { useRef, useEffect, useState } from "react";
 import ContactForm from "./ContactForm";
 
-export default function Contact() {
+interface ContactProps {
+  title: string;
+  description: string;
+  labelName: string;
+  labelEmail: string;
+  labelMessage: string;
+  btnSend: string;
+  btnSending: string;
+  success: string;
+  error: string;
+}
+
+const Contact:React.FC<ContactProps>= ({title, description, labelName, labelEmail, labelMessage, btnSend, btnSending, success, error}) => {
   const contactRef = useRef<HTMLDivElement>(null);
   const [isAnimated, setIsAnimated] = useState(false);
 
@@ -37,16 +49,18 @@ export default function Contact() {
       id="contact"
     >
       <h1 className="text-center text-3xl uppercase font-bold text-[#001120] mb-5">
-        Kontakt
+        {title}
       </h1>
       <div>
         <p className="text-center text-[#333333] text-lg">
-          Imate pitanje? Slobodno nas kontaktirajte.
+          {description}
         </p>
       </div>
       <div className="mt-10 max-w-5xl m-auto">
-        <ContactForm />
+        <ContactForm labelName={labelName} labelEmail={labelEmail} labelMessage={labelMessage} btnSend={btnSend} btnSending={btnSending} success={success} error={error} />
       </div>
     </div>
   );
 }
+
+export default Contact;
