@@ -7,6 +7,7 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import Search from "./components/Search";
+import LocaleSwitcher from './components/LocaleSwitcher';
 
 export default async function Page({
   params: { lang }
@@ -21,6 +22,7 @@ export default async function Page({
       <div className="bg-orange-400 text-lg sticky top-0 p-1 font-bold text-center z-50">
         <span>{page.infoMessage}</span>
       </div>
+      <LocaleSwitcher />
       <Hero title={page.hero.title} description={page.hero.description} btnSearch={page.hero.btnSearch} btnContact={page.hero.btnContact} />
       <Search title={page.search.title} description={page.search.description} labelDate={page.search.labelDate} chooseDate={page.search.chooseDate} labelTime={page.search.labelTime} chooseTime={page.search.chooseTime} labelField={page.search.labelField} chooseField={page.search.chooseField} labelTeam={page.search.labelTeam} chooseTeam={page.search.chooseTeam} btnSearchImages={page.search.btnSearchImages} warning={page.search.warning}/>
       {/* <div className="w-full h-[1px] bg-black"></div>

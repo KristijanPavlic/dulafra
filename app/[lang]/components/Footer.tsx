@@ -46,8 +46,8 @@ const Footer:React.FC<FooterProps> = ({facebook, copyrigth, rights}) => {
       </div>
       <h4 className="text-sm mt-6 text-center">
         {copyrigth} &copy; {new Date().getFullYear()}. {rights}
-        <div>
-          <Link href="hr/dashboard">Admin Login</Link>
+        <div className="mt-4">
+          <Link href="hr/sign-in">Admin Login</Link>
         </div>
       </h4>
     </div>

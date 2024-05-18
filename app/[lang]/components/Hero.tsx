@@ -80,7 +80,7 @@ const Hero: React.FC<HeroProps> = ({title, description, btnSearch, btnContact}) 
           <div className="flex flex-col md:flex-row items-center justify-center gap-10 mt-10">
             <div>
               <Link
-                className="bg-[#FFF6EE] text-[#333333] pt-2 pb-2 pl-4 pr-4 rounded-lg transition-all hover:bg-[#333333] hover:text-[#FFF6EE]"
+                className="bg-[#FFF6EE] text-[#333333] flex justify-center align-middle min-w-36 pt-2 pb-2 pl-4 pr-4 rounded-lg transition-all hover:bg-[#333333] hover:text-[#FFF6EE]"
                 href="#search"
               >
                 {btnSearch}
@@ -88,7 +88,7 @@ const Hero: React.FC<HeroProps> = ({title, description, btnSearch, btnContact}) 
             </div>
             <div>
               <Link
-                className="bg-[#FFF6EE] text-[#333333] pt-2 pb-2 pl-4 pr-4 rounded-lg transition-all hover:bg-[#333333] hover:text-[#FFF6EE]"
+                className="bg-[#FFF6EE] text-[#333333] flex justify-center align-middle min-w-36 pt-2 pb-2 pl-4 pr-4 rounded-lg transition-all hover:bg-[#333333] hover:text-[#FFF6EE]"
                 href="#contact"
               >
                 {btnContact}
