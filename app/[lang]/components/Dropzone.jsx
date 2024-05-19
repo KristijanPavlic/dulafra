@@ -84,6 +84,11 @@ const Dropzone = ({ className }) => {
       formData.append("timestamp", timestamp);
       formData.append("folder", folderId);
 
+      // Add watermark overlay parameters
+      formData.append("overlay", "Test turnir~2024-05-19~10:02~7A~nk Lokomotiva - nk Rudeš/watermark_wbj3er");
+      formData.append("gravity", "south_east");
+      formData.append("width", "200");
+
       const endpoint = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL;
 
       try {

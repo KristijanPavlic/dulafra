@@ -87,21 +87,23 @@ const Search:React.FC<SearchProps> = ({title, description, labelEvent, chooseEve
         .map((image) => image.folder?.split("~")[1])
         .filter((option): option is string => option !== undefined);
       setDateOptions(Array.from(new Set(dateOptions)));
+      console.log(dateOptions);
+      
 
       const timeOptions = filteredImages
-        .filter((image) => image.folder?.includes(date))
+        .filter((image) => image.folder?.includes(event) && image.folder?.includes(date))
         .map((image) => image.folder?.split("~")[2])
         .filter((option): option is string => option !== undefined);
       setTimeOptions(Array.from(new Set(timeOptions)));
 
       const fieldOptions = filteredImages
-        .filter((image) => image.folder?.includes(date))
+        .filter((image) => image.folder?.includes(event) && image.folder?.includes(date) && image.folder?.includes(time))
         .map((image) => image.folder?.split("~")[3])
         .filter((option): option is string => option !== undefined);
       setFieldOptions(Array.from(new Set(fieldOptions)));
 
       const teamOptions = filteredImages
-        .filter((image) => image.folder?.includes(date))
+        .filter((image) => image.folder?.includes(event) && image.folder?.includes(date) && image.folder?.includes(time) && image.folder?.includes(field))
         .map((image) => image.folder?.split("~")[4])
         .filter((option): option is string => option !== undefined);
       setTeamOptions(Array.from(new Set(teamOptions)));
@@ -111,7 +113,7 @@ const Search:React.FC<SearchProps> = ({title, description, labelEvent, chooseEve
       setFieldOptions([]);
       setTeamOptions([]);
     }
-  }, [event, date, images, chooseEvent]);
+  }, [event, date, time, field, images, chooseEvent]);
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -199,11 +201,9 @@ const Search:React.FC<SearchProps> = ({title, description, labelEvent, chooseEve
               value={date}
             >
               <option>{chooseDate}</option>
-              {Array.from(
-                new Set(images.map((image) => image.folder?.split("~")[1]))
-              ).map((uniqueDate, index) => (
-                <option key={index} value={uniqueDate}>
-                  {uniqueDate}
+              {dateOptions.map((option, index) => (
+                <option key={index} value={option}>
+                  {option}
                 </option>
               ))}
             </select>

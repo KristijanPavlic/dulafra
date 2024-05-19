@@ -10,8 +10,8 @@
         "search": {
             "title": "Pretraživanje slika",
             "description": "Ovdje imate mogućnost pretraživanja slika. Potrebno je odabrati tražene podatke kako bi mogli pregledati slike.",
-            "labelEvent": "Event",
-            "chooseEvent": "Odaberite event",
+            "labelEvent": "Događanje",
+            "chooseEvent": "Odaberite događanje",
             "labelDate": "Datum",
             "chooseDate": "Odaberite datum",
             "labelTime": "Vrijeme",
