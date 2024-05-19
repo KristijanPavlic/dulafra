@@ -32,12 +32,12 @@ export async function GET() {
 
     const data = await response.json();
 
-    const imageData = data.resources.map(
-      (resource: CloudinaryImageResource) => ({
+    const imageData = data.resources
+      .filter((resource: CloudinaryImageResource) => resource.folder)
+      .map((resource: CloudinaryImageResource) => ({
         url: resource.secure_url,
         folder: resource.folder,
-      })
-    );
+      }));
 
     return new Response(JSON.stringify(imageData), { status: 200 });
   } catch (error: any) {

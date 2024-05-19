@@ -21,6 +21,10 @@
             "labelTeam": "Ekipa",
             "chooseTeam": "Odaberite ekipu",
             "btnSearchImages": "Pretraži slike",
+            "btnDelete": "Obriši sliku",
+            "btnDeletion": "Brisanje slike...",
+            "btnDeleteAll": "Obriši sve slike",
+            "btnDeletionAll": "Brisanje svih slika...",
             "warning": "Potrebno je odabrati sva polja za pretraživanje slika!"
         },
         "about": {

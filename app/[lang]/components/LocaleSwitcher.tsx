@@ -17,7 +17,7 @@ export default function LocaleSwitcher() {
 
   return (
     <div className='sticky top-0 z-50'>
-      <ul className='absolute right-0 p-3 rounded-bl-lg bg-white w-fit'>
+      <ul className='absolute right-0 p-3 rounded-bl-lg bg-white w-fit border-[#001120] border-l border-b'>
         {i18n.locales.map(locale => (
           <li key={locale} className='transition-all hover:text-[#001120]'>
             {pathName.includes('/dashboard') || pathName.includes(locale) ? (

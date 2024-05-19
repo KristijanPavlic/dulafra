@@ -24,7 +24,7 @@ export default async function Page({
       </div>
       <LocaleSwitcher />
       <Hero title={page.hero.title} description={page.hero.description} btnSearch={page.hero.btnSearch} btnContact={page.hero.btnContact} />
-      <Search title={page.search.title} description={page.search.description} labelEvent={page.search.labelEvent} chooseEvent={page.search.chooseEvent} labelDate={page.search.labelDate} chooseDate={page.search.chooseDate} labelTime={page.search.labelTime} chooseTime={page.search.chooseTime} labelField={page.search.labelField} chooseField={page.search.chooseField} labelTeam={page.search.labelTeam} chooseTeam={page.search.chooseTeam} btnSearchImages={page.search.btnSearchImages} warning={page.search.warning}/>
+      <Search title={page.search.title} description={page.search.description} labelEvent={page.search.labelEvent} chooseEvent={page.search.chooseEvent} labelDate={page.search.labelDate} chooseDate={page.search.chooseDate} labelTime={page.search.labelTime} chooseTime={page.search.chooseTime} labelField={page.search.labelField} chooseField={page.search.chooseField} labelTeam={page.search.labelTeam} chooseTeam={page.search.chooseTeam} btnSearchImages={page.search.btnSearchImages} btnDelete={page.search.btnDelete} btnDeletion={page.search.btnDeletion} btnDeleteAll={page.search.btnDeleteAll} btnDeletionAll={page.search.btnDeletionAll} warning={page.search.warning}/>
       {/* <div className="w-full h-[1px] bg-black"></div>
       <Albums /> */}
       <div className="w-full h-[1px] bg-black"></div>
