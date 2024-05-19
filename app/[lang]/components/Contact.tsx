@@ -56,7 +56,7 @@ const Contact:React.FC<ContactProps>= ({title, description, labelName, labelEmai
           {description}
         </p>
       </div>
-      <div className="mt-10 max-w-5xl m-auto">
+      <div className="mt-10 max-w-4xl m-auto">
         <ContactForm labelName={labelName} labelEmail={labelEmail} labelMessage={labelMessage} btnSend={btnSend} btnSending={btnSending} success={success} error={error} />
       </div>
     </div>

@@ -11,6 +11,8 @@ interface ImageData {
 interface SearchProps {
   title: string
   description: string
+  labelEvent: string
+  chooseEvent: string
   labelDate: string
   chooseDate: string
   labelTime: string
@@ -23,11 +25,13 @@ interface SearchProps {
   warning: string
 }
 
-const Search:React.FC<SearchProps> = ({title, description, labelDate, chooseDate, labelTime, chooseTime, labelField, chooseField, labelTeam, chooseTeam, btnSearchImages, warning}) => {
+const Search:React.FC<SearchProps> = ({title, description, labelEvent, chooseEvent, labelDate, chooseDate, labelTime, chooseTime, labelField, chooseField, labelTeam, chooseTeam, btnSearchImages, warning}) => {
+  const [event, setEvent] = useState(chooseEvent);
   const [date, setDate] = useState(chooseDate);
   const [time, setTime] = useState(chooseTime);
   const [field, setField] = useState(chooseField);
   const [team, setTeam] = useState(chooseTeam);
+  const [dateOptions, setDateOptions] = useState<string[]>([]);
   const [timeOptions, setTimeOptions] = useState<string[]>([]);
   const [fieldOptions, setFieldOptions] = useState<string[]>([]);
   const [teamOptions, setTeamOptions] = useState<string[]>([]);
@@ -76,34 +80,43 @@ const Search:React.FC<SearchProps> = ({title, description, labelDate, chooseDate
   }, []);
 
   useEffect(() => {
-    if (date !== chooseDate) {
-      const timeOptions = images
+    if (event !== chooseEvent) {
+      const filteredImages = images.filter((image) => image.folder?.includes(event));
+      
+      const dateOptions = filteredImages
+        .map((image) => image.folder?.split("~")[1])
+        .filter((option): option is string => option !== undefined);
+      setDateOptions(Array.from(new Set(dateOptions)));
+
+      const timeOptions = filteredImages
         .filter((image) => image.folder?.includes(date))
-        .map((image) => image.folder?.split("_")[1])
+        .map((image) => image.folder?.split("~")[2])
         .filter((option): option is string => option !== undefined);
       setTimeOptions(Array.from(new Set(timeOptions)));
 
-      const fieldOptions = images
+      const fieldOptions = filteredImages
         .filter((image) => image.folder?.includes(date))
-        .map((image) => image.folder?.split("_")[2])
+        .map((image) => image.folder?.split("~")[3])
         .filter((option): option is string => option !== undefined);
       setFieldOptions(Array.from(new Set(fieldOptions)));
 
-      const teamOptions = images
+      const teamOptions = filteredImages
         .filter((image) => image.folder?.includes(date))
-        .map((image) => image.folder?.split("_")[3])
+        .map((image) => image.folder?.split("~")[4])
         .filter((option): option is string => option !== undefined);
       setTeamOptions(Array.from(new Set(teamOptions)));
     } else {
+      setDateOptions([]);
       setTimeOptions([]);
       setFieldOptions([]);
       setTeamOptions([]);
     }
-  }, [date, chooseDate, images]);
+  }, [event, date, images, chooseEvent]);
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (
+      event === chooseEvent ||
       date === chooseDate ||
       time === chooseTime ||
       field === chooseField ||
@@ -135,9 +148,38 @@ const Search:React.FC<SearchProps> = ({title, description, labelDate, chooseDate
       </div>
       <div className="flex justify-center">
         <form
-          className="grid xl:grid-cols-5 xl:gap-6 md:grid-cols-3 md:gap-4 grid-cols-2 gap-3 text-[#333333]"
+          className="grid xl:grid-cols-6 xl:gap-6 md:grid-cols-3 md:gap-4 grid-cols-2 gap-3 text-[#333333]"
           onSubmit={handleSearch}
         >
+          <div className="flex flex-col gap-2">
+            <label htmlFor="event" className="text-[#333333]">
+              {labelEvent}
+            </label>
+            <select
+              id="event"
+              name="event"
+              title={chooseEvent}
+              required
+              className="p-3 rounded-lg outline-[#001120]"
+              onChange={(e) => {
+                setEvent(e.target.value);
+                setDate(chooseDate);
+                setTime(chooseTime);
+                setField(chooseField);
+                setTeam(chooseTeam);
+              }}
+              value={event}
+            >
+              <option>{chooseEvent}</option>
+              {Array.from(
+                new Set(images.map((image) => image.folder?.split("~")[0]))
+              ).map((uniqueEvent, index) => (
+                <option key={index} value={uniqueEvent}>
+                  {uniqueEvent}
+                </option>
+              ))}
+            </select>
+          </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="date" className="text-[#333333]">
               {labelDate}
@@ -158,7 +200,7 @@ const Search:React.FC<SearchProps> = ({title, description, labelDate, chooseDate
             >
               <option>{chooseDate}</option>
               {Array.from(
-                new Set(images.map((image) => image.folder?.split("_")[0]))
+                new Set(images.map((image) => image.folder?.split("~")[1]))
               ).map((uniqueDate, index) => (
                 <option key={index} value={uniqueDate}>
                   {uniqueDate}
@@ -231,7 +273,7 @@ const Search:React.FC<SearchProps> = ({title, description, labelDate, chooseDate
           </div>
           <button
             type="submit"
-            className="bg-[#333333] text-[#FFF6EE] p-3 mt-8 w-fit h-fit rounded-lg transition-all hover:bg-[#001120] hover:text-[#FFF6EE]"
+            className="bg-[#333333] text-[#FFF6EE] p-3 mt-7 rounded-lg transition-all hover:bg-[#001120] hover:text-[#FFF6EE]"
           >
             {btnSearchImages}
           </button>
@@ -239,7 +281,7 @@ const Search:React.FC<SearchProps> = ({title, description, labelDate, chooseDate
       </div>
       {isSearched && (
         <div className="mt-8">
-          <SearchedAlbum date={date} time={time} field={field} team={team} />
+          <SearchedAlbum event={event} date={date} time={time} field={field} team={team} />
         </div>
       )}
       <h4 id="infoSearch" className="mt-4 text-center">

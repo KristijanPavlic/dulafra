@@ -1,11 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import { CldImage } from "next-cloudinary";
 import { useUser } from "@clerk/nextjs";
-
-import watermark from "@/public/watermark.png";
 
 interface ImageData {
   url: string;
@@ -13,6 +10,7 @@ interface ImageData {
 }
 
 interface SearchedAlbumProps {
+  event: string;
   date: string;
   time: string;
   field: string;
@@ -20,6 +18,7 @@ interface SearchedAlbumProps {
 }
 
 const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
+  event,
   date,
   time,
   field,
@@ -27,7 +26,7 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
 }) => {
   const { user } = useUser();
 
-  const searchId = `${date}_${time}_${field}_${team}`;
+  const searchId = `${event}~${date}~${time}~${field}~${team}`;
 
   const [images, setImages] = useState<ImageData[]>([]);
   const [isLoading, setIsLoading] = useState(true);

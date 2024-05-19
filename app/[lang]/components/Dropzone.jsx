@@ -15,11 +15,12 @@ const Dropzone = ({ className }) => {
   const [addingImages, setAddingImages] = useState(false);
 
   // folder selection
+  const [event, setEvent] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [field, setField] = useState("");
   const [team, setTeam] = useState("");
-  let folderId = `${date}_${time}_${field}_${team}`;
+  let folderId = `${event}~${date}~${time}~${field}~${team}`;
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (acceptedFiles?.length) {
@@ -113,6 +114,7 @@ const Dropzone = ({ className }) => {
       }
     }
 
+    setEvent("");
     setDate("");
     setTime("");
     setField("");
@@ -158,6 +160,22 @@ const Dropzone = ({ className }) => {
           </h2>
           <div className="mb-10 mt-5">
             <div className="grid xl:grid-cols-5 xl:gap-6 md:grid-cols-3 md:gap-4 grid-cols-2 gap-3">
+              <div className="flex flex-col gap-2">
+                <label htmlFor="event" className="text-[#333333]">
+                  Event
+                </label>
+                <input
+                  type="text"
+                  id="event"
+                  name="event"
+                  title="Event"
+                  placeholder="Open football tournament Medulin"
+                  required
+                  value={event}
+                  onChange={(e) => setEvent(e.target.value)}
+                  className="p-3 rounded-lg outline-[#001120]"
+                />
+              </div>
               <div className="flex flex-col gap-2">
                 <label htmlFor="date" className="text-[#333333]">
                   Datum

@@ -10,6 +10,8 @@
         "search": {
             "title": "Image search",
             "description": "Here you can search for images. It is necessary to select the required fields in order to be able to view the images.",
+            "labelEvent": "Event",
+            "chooseEvent": "Choose event",
             "labelDate": "Date",
             "chooseDate": "Choose date",
             "labelTime": "Time",
