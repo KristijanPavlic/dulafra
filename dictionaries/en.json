@@ -1,11 +1,20 @@
 {
     "page": {
-        "infoMessage": "The page is currently under construction!",
+        "infoMessage": "The page is under development!",
         "hero": {
             "title": "Photography of sports events",
             "description": "Our team of photographers will make sure that every sporting event you love remains recorded",
             "btnSearch": "Image search",
+            "btnProducts": "Our products",
             "btnContact": "Contact us"
+        },
+        "products": {
+            "title": "Our products",
+            "photo": "Photo €4 - in digital format, high resolution",
+            "poster": "Poster €60 - set of up to three photos, which are combined and processed with effects, printed on forex (material similar and light as Styrofoam, but much denser structure, 3mm thick, easy to mount on the wall, etc.",
+            "fifaCard": "Fifa card €40 - personalized card of young footballers with their choice of grades, made on forex 3mm",
+            "mug": "Mug €9 - possibility to transfer photos to mugs",
+            "info": "Payment in advance with consultation with the customer and presentation of a demo version of the poster or Fifa card."
         },
         "search": {
             "title": "Image search",

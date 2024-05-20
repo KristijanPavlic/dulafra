@@ -11,10 +11,11 @@ interface HeroProps {
   title: string
   description: string
   btnSearch: string
+  btnProducts: string
   btnContact: string
 }
 
-const Hero: React.FC<HeroProps> = ({title, description, btnSearch, btnContact}) => {
+const Hero: React.FC<HeroProps> = ({title, description, btnSearch, btnProducts, btnContact}) => {
   const size = useWindowSize();
   const heroRef = useRef<HTMLDivElement>(null);
   const [isAnimated, setIsAnimated] = useState(false);
@@ -84,6 +85,14 @@ const Hero: React.FC<HeroProps> = ({title, description, btnSearch, btnContact}) 
                 href="#search"
               >
                 {btnSearch}
+              </Link>
+            </div>
+            <div>
+              <Link
+                className="bg-[#FFF6EE] text-[#333333] flex justify-center align-middle min-w-36 pt-2 pb-2 pl-4 pr-4 rounded-lg transition-all hover:bg-[#333333] hover:text-[#FFF6EE]"
+                href="#products"
+              >
+                {btnProducts}
               </Link>
             </div>
             <div>

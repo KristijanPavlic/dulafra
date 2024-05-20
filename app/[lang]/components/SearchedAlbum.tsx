@@ -163,7 +163,7 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
                 }]}
                 width={400}
                 height={300}
-                style={{ width: "100%", height: "100%" }}
+                style={{ width: "100%"}}
                 placeholder="blur"
                 blurDataURL={image.url}
                 alt="There is a problem with loading this image"

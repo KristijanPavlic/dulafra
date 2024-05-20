@@ -2,12 +2,12 @@ import { Locale } from '@/i18n.config'
 import { getDictionary } from '@/lib/dictionary'
 
 import About from "./components/About";
-import Albums from "./components/Albums";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import Search from "./components/Search";
 import LocaleSwitcher from './components/LocaleSwitcher';
+import Products from './components/Products';
 
 export default async function Page({
   params: { lang }
@@ -23,10 +23,10 @@ export default async function Page({
         <span>{page.infoMessage}</span>
       </div>
       <LocaleSwitcher />
-      <Hero title={page.hero.title} description={page.hero.description} btnSearch={page.hero.btnSearch} btnContact={page.hero.btnContact} />
+      <Hero title={page.hero.title} description={page.hero.description} btnSearch={page.hero.btnSearch} btnProducts={page.hero.btnProducts} btnContact={page.hero.btnContact} />
       <Search title={page.search.title} description={page.search.description} labelEvent={page.search.labelEvent} chooseEvent={page.search.chooseEvent} labelDate={page.search.labelDate} chooseDate={page.search.chooseDate} labelTime={page.search.labelTime} chooseTime={page.search.chooseTime} labelField={page.search.labelField} chooseField={page.search.chooseField} labelTeam={page.search.labelTeam} chooseTeam={page.search.chooseTeam} btnSearchImages={page.search.btnSearchImages} btnDelete={page.search.btnDelete} btnDeletion={page.search.btnDeletion} btnDeleteAll={page.search.btnDeleteAll} btnDeletionAll={page.search.btnDeletionAll} warning={page.search.warning}/>
-      {/* <div className="w-full h-[1px] bg-black"></div>
-      <Albums /> */}
+      <div className="w-full h-[1px] bg-black"></div>
+      <Products title={page.products.title} photo={page.products.photo} poster={page.products.poster}  fifaCard={page.products. fifaCard} mug={page.products.mug} info={page.products.info} />
       <div className="w-full h-[1px] bg-black"></div>
       <About title={page.about.title} description={page.about.description} years={page.about.years} professional={page.about.professional} events={page.about.events}/>
       <div className="w-full h-[1px] bg-black"></div>

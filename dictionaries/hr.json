@@ -1,10 +1,11 @@
 {
     "page": {
-        "infoMessage": "Stranica je trenutno u izradi!",
+        "infoMessage": "Stranica je u izradi!",
         "hero": {
             "title": "Fotografiranje sportskih događaja",
             "description": "Naš tim fotografa pobrinuti će se da svaki Vama dragi sportski događaj ostane zabilježen",
             "btnSearch": "Pretraživanje slika",
+            "btnProducts": "Naši proizvodi",
             "btnContact": "Kontaktirajte nas"
         },
         "search": {
@@ -26,6 +27,14 @@
             "btnDeleteAll": "Obriši sve slike",
             "btnDeletionAll": "Brisanje svih slika...",
             "warning": "Potrebno je odabrati sva polja za pretraživanje slika!"
+        },
+        "products": {
+            "title": "Proizvodi koje nudimo",
+            "photo": "Fotografija 4€ - u digitalnom formatu, visoke rezolucije",
+            "poster": "Poster 60€ -  skup od najviše tri fotografije, koje se slažu i obrađuju uz efekte, printano na forex-u ( materijal sličan i lagan kao stiropor, ali puno gušće strukture, debljine 3mm, jednostavan za postavljanje na zid itd.",
+            "fifaCard": "Fifa card 40€ personalizirana kartica mladih nogometaša s njihovim odabirom ocjena, izrađeno na forex-u 3mm",
+            "mug": "Šalica 9€ - mogućnost prijenosa fotografija na šalice",
+            "info": "Plaćanje unaprijed uz konzultacije sa naručiteljom i prikazom demo verzije postera ili Fifa card."
         },
         "about": {
             "title": "O nama",
