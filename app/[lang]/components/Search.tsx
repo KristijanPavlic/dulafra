@@ -52,7 +52,7 @@ const Search:React.FC<SearchProps> = ({title, description, labelEvent, chooseEve
           setIsAnimated(true);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 }
     );
 
     if (searchRef.current) {
@@ -137,7 +137,7 @@ const Search:React.FC<SearchProps> = ({title, description, labelEvent, chooseEve
   return (
     <div
       ref={searchRef}
-      className={`container m-auto pt-20 pb-20 pl-5 pr-5 transform transition-transform duration-2000 ease-in delay-100 ${
+      className={`container m-auto pt-20 pb-20 pl-5 pr-5 transform transition-transform duration-2500 ease-in ${
         isAnimated ? "translate-y-0 opacity-100" : "translate-y-24 opacity-0"
       }`}
       id="search"

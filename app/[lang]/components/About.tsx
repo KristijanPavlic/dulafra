@@ -21,7 +21,7 @@ const About:React.FC<AboutProps> = ({title, description, years, professional, ev
           setIsAnimated(true);
         }
       },
-      { threshold: 0.2 } // Adjust threshold as needed
+      { threshold: 0.1 } // Adjust threshold as needed
     );
 
     if (aboutRef.current) {
@@ -38,7 +38,7 @@ const About:React.FC<AboutProps> = ({title, description, years, professional, ev
   return (
     <div
       ref={aboutRef}
-      className={`container m-auto pt-20 pb-20 pl-5 pr-5 transform transition-transform duration-2000 ease-in delay-100 ${
+      className={`container m-auto pt-20 pb-20 pl-5 pr-5 transform transition-transform duration-2500 ease-in ${
         isAnimated ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0"
       }`}
     >

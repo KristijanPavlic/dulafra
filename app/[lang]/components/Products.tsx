@@ -27,7 +27,7 @@ const Products:React.FC<ProductsProps>= ({title, photo, poster, fifaCard, mug, i
           setIsAnimated(true);
         }
       },
-      { threshold: 0.2 } // Adjust threshold as needed
+      { threshold: 0.1 } // Adjust threshold as needed
     );
 
     if (productsRef.current) {
@@ -44,7 +44,7 @@ const Products:React.FC<ProductsProps>= ({title, photo, poster, fifaCard, mug, i
   return (
     <div
       ref={productsRef}
-      className={`container m-auto pt-20 pb-20 pl-5 pr-5 transform transition-transform duration-2000 ease-in delay-100 ${
+      className={`container m-auto pt-20 pb-20 pl-5 pr-5 transform transition-transform duration-2500 ease-in ${
         isAnimated ? "translate-y-0 opacity-100" : "translate-y-24 opacity-0"
       }`}
       id="products"
