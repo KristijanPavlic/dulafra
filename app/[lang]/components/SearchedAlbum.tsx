@@ -134,7 +134,7 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
               <CldImage
                 src={image.url}
                 overlays={[{
-                  publicId: 'watermark',
+                  publicId: 'watermark_new',
                   position: {
                     x: 0,
                     y: 0
@@ -159,7 +159,7 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
                 }]}
                 width={400}
                 height={300}
-                style={{ width: "100%"}}
+                style={{ width: "100%", height: "100%"}}
                 placeholder="blur"
                 blurDataURL={image.url}
                 alt="There is a problem with loading this image"
