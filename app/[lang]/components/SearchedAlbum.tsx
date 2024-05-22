@@ -17,8 +17,6 @@ interface SearchedAlbumProps {
   team: string;
   btnDelete: string;
   btnDeletion: string;
-  btnDeleteAll: string;
-  btnDeletionAll: string;
 }
 
 const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
@@ -28,9 +26,7 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
   field,
   team,
   btnDelete,
-  btnDeletion,
-  btnDeleteAll,
-  btnDeletionAll,
+  btnDeletion
 }) => {
   const { user } = useUser();
 
@@ -148,7 +144,7 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
                       multiply: true,
                     },
                     {
-                      opacity: 60,
+                      opacity: 100,
                     },
                     {
                       quality: 100,
@@ -157,7 +153,7 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
                       width: 3000,
                     },
                     {
-                      height: 1200,
+                      height: 1000,
                     }
                   ]
                 }]}

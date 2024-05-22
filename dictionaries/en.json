@@ -8,6 +8,10 @@
             "btnProducts": "Our products",
             "btnContact": "Contact us"
         },
+        "upcomingEvents": {
+            "titleEvents": "Upcoming events",
+            "noEvents": "No upcoming events"
+        },
         "products": {
             "title": "Our products",
             "photo": "Photo €4 - in digital format, high resolution",
@@ -32,8 +36,6 @@
             "btnSearchImages": "Search images",
             "btnDelete": "Delete image",
             "btnDeletion": "Deleting image...",
-            "btnDeleteAll": "Delete all images",
-            "btnDeletionAll": "Deleting all images...",
             "warning": "Please select all fields!"
         },
         "about": {

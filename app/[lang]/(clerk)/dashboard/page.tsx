@@ -1,6 +1,7 @@
 import { UserButton } from "@clerk/nextjs";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import Dropzone from "../../components/Dropzone";
+import DropzoneEvents from "../../components/DropzoneEvents";
 import Link from "next/link";
 
 export default async function Dashboard() {
@@ -28,6 +29,10 @@ export default async function Dashboard() {
           <div className="container">
             <h1 className="text-3xl font-bold">Dodavanje slika</h1>
             <Dropzone className="mt-10 border border-black rounded-lg p-16" />
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold mt-20">Dodavanje nadolazećih događaja</h1>
+            <DropzoneEvents className="mt-10 border border-black rounded-lg p-16"/>
           </div>
         </section>
       </div>

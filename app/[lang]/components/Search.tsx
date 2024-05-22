@@ -24,12 +24,10 @@ interface SearchProps {
   btnSearchImages: string
   btnDelete: string
   btnDeletion: string
-  btnDeleteAll: string
-  btnDeletionAll: string
   warning: string
 }
 
-const Search:React.FC<SearchProps> = ({title, description, labelEvent, chooseEvent, labelDate, chooseDate, labelTime, chooseTime, labelField, chooseField, labelTeam, chooseTeam, btnSearchImages, warning, btnDelete, btnDeletion, btnDeleteAll, btnDeletionAll}) => {
+const Search:React.FC<SearchProps> = ({title, description, labelEvent, chooseEvent, labelDate, chooseDate, labelTime, chooseTime, labelField, chooseField, labelTeam, chooseTeam, btnSearchImages, warning, btnDelete, btnDeletion}) => {
   const [event, setEvent] = useState(chooseEvent);
   const [date, setDate] = useState(chooseDate);
   const [time, setTime] = useState(chooseTime);
@@ -283,7 +281,7 @@ const Search:React.FC<SearchProps> = ({title, description, labelEvent, chooseEve
       </div>
       {isSearched && (
         <div className="mt-8">
-          <SearchedAlbum event={event} date={date} time={time} field={field} team={team} btnDelete={btnDelete} btnDeletion={btnDeletion} btnDeleteAll={btnDeleteAll} btnDeletionAll={btnDeletionAll} />
+          <SearchedAlbum event={event} date={date} time={time} field={field} team={team} btnDelete={btnDelete} btnDeletion={btnDeletion} />
         </div>
       )}
       <h4 id="infoSearch" className="mt-4 text-center">

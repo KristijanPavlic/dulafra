@@ -6,6 +6,7 @@ import Image from "next/image";
 import heroImg from "@/public/hero_img.jpg";
 import heroMobImg from "@/public/hero_mobile_img.jpg";
 import Link from "next/link";
+import UpcomingEvents from "./UpcomingEvents";
 
 interface HeroProps {
   title: string
@@ -13,9 +14,10 @@ interface HeroProps {
   btnSearch: string
   btnProducts: string
   btnContact: string
+  titleEvents: string
 }
 
-const Hero: React.FC<HeroProps> = ({title, description, btnSearch, btnProducts, btnContact}) => {
+const Hero: React.FC<HeroProps> = ({title, description, btnSearch, btnProducts, btnContact, titleEvents}) => {
   const size = useWindowSize();
   const heroRef = useRef<HTMLDivElement>(null);
   const [isAnimated, setIsAnimated] = useState(false);
@@ -63,7 +65,7 @@ const Hero: React.FC<HeroProps> = ({title, description, btnSearch, btnProducts, 
         )}
       </div>
       <div
-        className={`absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-[80%] xl:min-w-[50%]`}
+        className={`absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 max-w-[80%] xl:min-w-[50%]`}
       >
         <div className="bg-[#00112060] rounded-xl pt-6 pb-6 pl-8 pr-8 md:pl-16 md:pr-16">
           <div>
@@ -78,8 +80,8 @@ const Hero: React.FC<HeroProps> = ({title, description, btnSearch, btnProducts, 
               {description}
             </h3>
           </div>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-10 mt-10 max-w-44 m-auto">
-            <div className="min-w-full">
+          <div className="flex flex-col md:flex-row flex-wrap items-center justify-center gap-6 mt-10 w-full m-auto">
+            <div className="w-[200px]">
               <Link
                 className="bg-[#FFF6EE] text-[#333333] flex justify-center align-middle pt-2 pb-2 pl-4 pr-4 rounded-lg transition-all hover:bg-[#333333] hover:text-[#FFF6EE]"
                 href="#search"
@@ -87,7 +89,7 @@ const Hero: React.FC<HeroProps> = ({title, description, btnSearch, btnProducts, 
                 {btnSearch}
               </Link>
             </div>
-            <div className="min-w-full">
+            <div className="w-[200px]">
               <Link
                 className="bg-[#FFF6EE] text-[#333333] flex justify-center align-middle pt-2 pb-2 pl-4 pr-4 rounded-lg transition-all hover:bg-[#333333] hover:text-[#FFF6EE]"
                 href="#products"
@@ -95,7 +97,15 @@ const Hero: React.FC<HeroProps> = ({title, description, btnSearch, btnProducts, 
                 {btnProducts}
               </Link>
             </div>
-            <div className="min-w-full">
+            <div className="w-[200px]">
+              <Link
+                className="bg-[#FFF6EE] text-[#333333] flex justify-center align-middle pt-2 pb-2 pl-4 pr-4 rounded-lg transition-all hover:bg-[#333333] hover:text-[#FFF6EE]"
+                href="#upcomingEvents"
+              >
+                {titleEvents}
+              </Link>
+            </div>
+            <div className="w-[200px]">
               <Link
                 className="bg-[#FFF6EE] text-[#333333] flex justify-center align-middle pt-2 pb-2 pl-4 pr-4 rounded-lg transition-all hover:bg-[#333333] hover:text-[#FFF6EE]"
                 href="#contact"

@@ -8,6 +8,10 @@
             "btnProducts": "Naši proizvodi",
             "btnContact": "Kontaktirajte nas"
         },
+        "upcomingEvents": {
+            "titleEvents": "Nadolazeći događaji",
+            "noEvents": "Trenutno nema nadolazećih događaja!"
+        },
         "search": {
             "title": "Pretraživanje slika",
             "description": "Ovdje imate mogućnost pretraživanja slika. Potrebno je odabrati tražene podatke kako bi mogli pregledati slike.",
@@ -24,8 +28,6 @@
             "btnSearchImages": "Pretraži slike",
             "btnDelete": "Obriši sliku",
             "btnDeletion": "Brisanje slike...",
-            "btnDeleteAll": "Obriši sve slike",
-            "btnDeletionAll": "Brisanje svih slika...",
             "warning": "Potrebno je odabrati sva polja za pretraživanje slika!"
         },
         "products": {
