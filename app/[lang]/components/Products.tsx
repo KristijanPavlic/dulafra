@@ -59,7 +59,7 @@ const Products:React.FC<ProductsProps>= ({title, photo, poster, fifaCard, mug, i
       </div>
       <div className="mt-4">
         <div className="grid xl:grid-cols-4 xl:gap-6 md:grid-cols-2 md:gap-4 grid-cols-1 gap-5">
-            <div className="group shadow-xl rounded-lg pb-6 text-center h-fit overflow-hidden transition duration-300 hover:bg-white hover:cursor-pointer hover:shadow-none">
+            <div className="group shadow-xl rounded-lg pb-6 text-center h-fit overflow-hidden transition duration-300 hover:bg-white hover:shadow-none">
                 <Image 
                     src={productPhoto} 
                     alt="photo" 
@@ -73,8 +73,7 @@ const Products:React.FC<ProductsProps>= ({title, photo, poster, fifaCard, mug, i
                 </h2>
                 <h5 className="mt-3 pl-2 pr-2">{photo}</h5>
             </div>
-
-            <div className="group shadow-xl rounded-lg pb-6 text-center h-fit overflow-hidden transition duration-300 hover:bg-white hover:cursor-pointer hover:shadow-none">
+            <div className="group shadow-xl rounded-lg pb-6 text-center h-fit overflow-hidden transition duration-300 hover:bg-white hover:shadow-none">
                 <Image 
                     src={productPhoto} 
                     alt="photo" 
@@ -88,8 +87,7 @@ const Products:React.FC<ProductsProps>= ({title, photo, poster, fifaCard, mug, i
                 </h2>
                 <h5 className="mt-3 pl-2 pr-2">{mug}</h5>
             </div>
-
-            <div className="group shadow-xl rounded-lg pb-6 text-center h-fit overflow-hidden transition duration-300 hover:bg-white hover:cursor-pointer hover:shadow-none">
+            <div className="group shadow-xl rounded-lg pb-6 text-center h-fit overflow-hidden transition duration-300 hover:bg-white hover:shadow-none">
                 <Image 
                     src={productPoster} 
                     alt="photo" 
@@ -103,8 +101,7 @@ const Products:React.FC<ProductsProps>= ({title, photo, poster, fifaCard, mug, i
                 </h2>
                 <h5 className="mt-3 pl-2 pr-2">{poster}</h5>
             </div>
-
-            <div className="group shadow-xl rounded-lg pb-6 text-center h-fit overflow-hidden transition duration-300 hover:bg-white hover:cursor-pointer hover:shadow-none">
+            <div className="group shadow-xl rounded-lg pb-6 text-center h-fit overflow-hidden transition duration-300 hover:bg-white hover:shadow-none">
                 <Image 
                     src={productFifaCard} 
                     alt="photo" 
@@ -119,8 +116,8 @@ const Products:React.FC<ProductsProps>= ({title, photo, poster, fifaCard, mug, i
                 <h5 className="mt-3 pl-2 pr-2">{fifaCard}</h5>
             </div>
         </div>
-        </div>
       </div>
+    </div>
   );
 }
 

@@ -32,11 +32,20 @@
         },
         "products": {
             "title": "Proizvodi koje nudimo",
+            "info": "Plaćanje unaprijed uz konzultacije sa naručiteljom i prikazom demo verzije postera ili Fifa card.",
             "photo": "Fotografija 4€ - u digitalnom formatu, visoke rezolucije",
             "poster": "Poster 60€ -  skup od najviše tri fotografije, koje se slažu i obrađuju uz efekte, printano na forex-u ( materijal sličan i lagan kao stiropor, ali puno gušće strukture, debljine 3mm, jednostavan za postavljanje na zid itd.",
             "fifaCard": "Fifa card 40€ personalizirana kartica mladih nogometaša s njihovim odabirom ocjena, izrađeno na forex-u 3mm",
             "mug": "Šalica 9€ - mogućnost prijenosa fotografija na šalice",
-            "info": "Plaćanje unaprijed uz konzultacije sa naručiteljom i prikazom demo verzije postera ili Fifa card."
+            "order": "Naruči proizvode",
+            "addProduct": "Dodaj u košaricu",
+            "removeProduct": "Izbriši iz košarice",
+            "labelProduct": "Proizvod",
+            "chooseProduct": "Odaberite proizvod",
+            "labelImage": "Slika",
+            "chooseImage": "Odaberite sliku",
+            "addedItemsLabel": "Dodani proizvodi",
+            "btnOrder": "Naruči"
         },
         "about": {
             "title": "O nama",

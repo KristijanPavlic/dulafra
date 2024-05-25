@@ -138,7 +138,7 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ titleEvents, noEvents, 
                 placeholder="blur"
                 blurDataURL={image.url}
                 alt="There is a problem with loading this image"
-                className="shadow-[8px_8px_0px_-2px_rgba(0,17,32,1)] rounded-lg hover:shadow-none transition-all hover:cursor-pointer bg-cover mb-3"
+                className="shadow-[8px_8px_0px_-2px_rgba(0,17,32,1)] rounded-lg hover:shadow-none transition-all bg-cover mb-3"
               />
               {(isAdmin || isBranko) && (
                 <div
