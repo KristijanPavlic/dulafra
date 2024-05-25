@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
+import { ReactNode } from 'react';
 
 const montserrat = Montserrat({ subsets: ["latin"] });
-
-import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: "Dulafra foto corner",
@@ -14,11 +14,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  lang,
+  params,
 }: {
-  children: React.ReactNode;
-  lang: string;
+  children: ReactNode;
+  params: { lang: string };
 }) {
+  const lang = params.lang;
+
   return (
     <ClerkProvider>
       <html lang={lang}>
