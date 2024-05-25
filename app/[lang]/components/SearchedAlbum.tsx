@@ -46,9 +46,7 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
       if (response.ok) {
         const data = await response.json();
         
-        // Filter out images from the "upcoming_events" folder
         const filteredData = data.filter((image: ImageData) => image.folder !== "upcoming_events");
-        console.log(filteredData);
 
         setImages(filteredData);
         setIsLoading(false);
@@ -67,7 +65,6 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
   const filteredImages = images.filter((image) => image.folder === searchId);
 
   useEffect(() => {
-    // Set visibility of delete all button based on whether there are images in the filteredImages array
     setShowDeleteAllBtn(filteredImages.length > 0 && user?.id === process.env.NEXT_PUBLIC_ADMIN_KEY);
   }, [filteredImages, user]);
 
@@ -90,7 +87,6 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
         setImages(newImages);
         setDeleteBtnText(false);
 
-        // If the folder is empty after deletion, delete the folder
         if (newImages.filter((image) => image.folder === searchId).length === 0) {
           await deleteFolder(folder);
         }
@@ -159,7 +155,7 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
                 placeholder="blur"
                 blurDataURL={image.url}
                 alt="There is a problem with loading this image"
-                className="shadow-[8px_8px_0px_-2px_rgba(0,17,32,1)] rounded-lg hover:shadow-none transition-all hover:cursor-pointer bg-cover mb-3"
+                className="shadow-[8px_8px_0px_-2px_rgba(0,17,32,1)] rounded-lg hover:shadow-none transition-all bg-cover mb-3"
                 onLoad={(e) => {
                   const target = e.target as HTMLImageElement;
                   const aspectRatio = target.naturalWidth / target.naturalHeight;
