@@ -215,7 +215,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
   };
 
   return (
-    <div className="pb-20">
+    <div className="container m-auto pt-20 pb-20 pl-5 pr-5">
       <h2 className="text-2xl text-center uppercase font-bold text-[#001120]">
         {title}
       </h2>
