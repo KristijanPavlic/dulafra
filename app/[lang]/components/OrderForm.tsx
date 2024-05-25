@@ -1,27 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-interface ContactFormProps {
+interface OrderFormProps {
   labelName: string; 
   labelEmail: string;
   labelMessage: string;
-  btnSend: string;
-  btnSending: string;
+  btnOrder: string;
+  btnOrdering: string;
   success: string;
   error: string;
+  addedItems: { item: string; quantity: number }[];
 }
 
-const ContactForm:React.FC<ContactFormProps> = ({labelName, labelEmail, labelMessage, btnSend, btnSending, success, error}) => {
+const OrderForm:React.FC<OrderFormProps> = ({labelName, labelEmail, labelMessage, btnOrder, btnOrdering, success, error, addedItems}) => {
   const [infoText, setInfoText] = useState("");
-
   const [data, setData] = useState({
     name: "",
     email: "",
     message: "",
   });
-
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    const message = addedItems.map(({ item, quantity }) => `${item} - Quantity: ${quantity}`).join("\n");
+    setData((prevData) => ({ ...prevData, message }));
+  }, [addedItems]);
 
   const sendEmail = async (e: any) => {
     e.preventDefault();
@@ -38,7 +42,6 @@ const ContactForm:React.FC<ContactFormProps> = ({labelName, labelEmail, labelMes
     if (response.status === 200) {
       setIsSubmitting(false);
       setInfoText(success);
-      clearInputFields();
       setData({
         name: "",
         email: "",
@@ -88,24 +91,16 @@ const ContactForm:React.FC<ContactFormProps> = ({labelName, labelEmail, labelMes
           id="email"
           required
           maxLength={320}
+          value={data.email}
           onChange={(e) => setData({ ...data, email: e.target.value })}
         />
-        <textarea
-          className="bg-transparent p-5 focus:outline-none focus:bg-white border-b border-b-black"
-          name="message"
-          id="message"
-          cols={30}
-          rows={5}
-          maxLength={3000}
-          placeholder={labelMessage}
-          onChange={(e) => setData({ ...data, message: e.target.value })}
-        />
+        <input type="hidden" name="message" value={data.message} />
         <button
           className="p-4 bg-[#001120] text-[#FFF6EE] hover:bg-[#FFF6EE] hover:text-[#001120] transition-all rounded-b-lg"
           type="submit"
           disabled={isSubmitting}
         >
-          {isSubmitting ? btnSending : btnSend}
+          {isSubmitting ? btnOrdering : btnOrder}
         </button>
       </form>
       <h4 id="infoContact" className="mt-4 text-center">{infoText}</h4>
@@ -113,4 +108,4 @@ const ContactForm:React.FC<ContactFormProps> = ({labelName, labelEmail, labelMes
   );
 };
 
-export default ContactForm;
+export default OrderForm;

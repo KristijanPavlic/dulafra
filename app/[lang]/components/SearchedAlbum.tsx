@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
 import { CldImage } from "next-cloudinary";
 import { useUser } from "@clerk/nextjs";
@@ -35,7 +33,6 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
   const [deleteBtnText, setDeleteBtnText] = useState(false);
   const [deleteAllBtnText, setDeleteAllBtnText] = useState(false);
   const [showDeleteAllBtn, setShowDeleteAllBtn] = useState(false);
-  
   const [images, setImages] = useState<ImageData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -62,8 +59,6 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
       console.error("Error fetching images:", error);
     }
   };
-
-  
 
   useEffect(() => {
     fetchImages();
@@ -155,22 +150,25 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
                     },
                     {
                       quality: 100,
-                    },
-                    {
-                      width: 3000,
-                    },
-                    {
-                      height: 1000,
                     }
                   ]
                 }]}
-                width={400}
-                height={300}
-                style={{ width: "100%", height: "100%"}}
+                width="600"
+                height="450"
+                style={{ maxWidth: "100%", maxHeight: "100%" }}
                 placeholder="blur"
                 blurDataURL={image.url}
                 alt="There is a problem with loading this image"
                 className="shadow-[8px_8px_0px_-2px_rgba(0,17,32,1)] rounded-lg hover:shadow-none transition-all hover:cursor-pointer bg-cover mb-3"
+                onLoad={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  const aspectRatio = target.naturalWidth / target.naturalHeight;
+                  if (aspectRatio > 1) {
+                    target.style.width = "100%";
+                  } else {
+                    target.style.height = "100%";
+                  }
+                }}
               />
               <h4 className="text-[#333333]">
                 {image.url.split("/").pop()?.split(".")[0]}
@@ -194,7 +192,6 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
         )}
       </div>
     </div>
-    
   );
 };
 

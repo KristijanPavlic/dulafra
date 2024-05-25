@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import OrderForm from "./OrderForm";
 
 interface ImageData {
   url: string;
@@ -16,6 +17,7 @@ interface ProductsOrderProps {
   chooseImage: string;
   labelImage: string;
   btnOrder: string;
+  btnOrdering: string;
   labelEvent: string;
   chooseEvent: string;
   labelDate: string;
@@ -32,6 +34,11 @@ interface ProductsOrderProps {
   fifaCard: string;
   mug: string;
   addedItemsLabel: string;
+  labelName: string;
+  labelEmail: string;
+  labelMessage: string;
+  success: string;
+  error: string;
 }
 
 const ProductsOrder: React.FC<ProductsOrderProps> = ({
@@ -43,6 +50,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
   chooseImage,
   labelImage,
   btnOrder,
+  btnOrdering,
   labelEvent,
   chooseEvent,
   labelDate,
@@ -58,7 +66,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
   mug,
   poster,
   fifaCard,
-  addedItemsLabel
+  addedItemsLabel,labelName, labelEmail, labelMessage, success, error
 }) => {
   const [event, setEvent] = useState(chooseEvent);
   const [date, setDate] = useState(chooseDate);
@@ -204,12 +212,6 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
   const handleRemoveItem = (index: number) => {
     const updatedItems = addedItems.filter((_, idx) => idx !== index);
     setAddedItems(updatedItems);
-  };
-
-  const handleOrder = () => {
-    // Send email with added items
-    const emailBody = addedItems.map(({ item, quantity }) => `${item} - Quantity: ${quantity}`).join("\n");
-    window.location.href = `mailto:talkvinijas@gmail.com?subject=Order&body=${encodeURIComponent(emailBody)}`;
   };
 
   return (
@@ -396,10 +398,9 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
       <h4 id="infoSearch" className="mt-4 text-center">
         {infoText}
       </h4>
-      {true  && (
+      {addedItems.length > 0 && (
       <div className="mt-6 text-center">
         <h3 className="text-xl font-bold mb-3">{addedItemsLabel}</h3>
-        {/* List of added items */}
         <ul>
           {addedItems.map((item, index) => (
             <li key={index} className="flex justify-center items-center gap-2 mb-3">
@@ -426,21 +427,9 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
             </li>
           ))}
         </ul>
-        {/* Email input */}
-          <input
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="p-3 mt-4 rounded-lg outline-[#001120]"
-          />
-          {/* Order button */}
-          <button
-            onClick={handleOrder}
-            className="bg-[#333333] text-[#FFF6EE] p-3 mt-4 rounded-lg transition-all hover:bg-[#001120] hover:text-[#FFF6EE]"
-          >
-            {btnOrder}
-          </button>
+        <div className="mt-10 max-w-2xl m-auto">
+            <OrderForm labelName={labelName} labelEmail={labelEmail} labelMessage={labelMessage} btnOrder={btnOrder} btnOrdering={btnOrdering} success={success} error={error} addedItems={addedItems} />
+        </div>
       </div>
     )}
     </div>

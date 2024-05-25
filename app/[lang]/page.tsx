@@ -79,7 +79,6 @@ export default async function Page({
         removeProduct={page.products.removeProduct}
         chooseImage={page.products.chooseImage}
         labelImage={page.products.labelImage}
-        btnOrder={page.products.btnOrder}
         labelEvent={page.search.labelEvent} 
         chooseEvent={page.search.chooseEvent} 
         labelDate={page.search.labelDate} 
@@ -95,7 +94,14 @@ export default async function Page({
         poster={page.products.poster}  
         fifaCard={page.products.fifaCard}
         addedItemsLabel={page.products.addedItemsLabel}
-        mug={page.products.mug}  />
+        mug={page.products.mug}
+        labelName={page.contact.labelName} 
+        labelEmail={page.contact.labelEmail} 
+        labelMessage={page.contact.labelMessage} 
+        btnOrder={page.products.btnOrder} 
+        btnOrdering={page.products.btnOrdering} 
+        success={page.contact.success} 
+        error={page.contact.error} />
       <div className="w-full h-[1px] bg-black"></div>
       <UpcomingEvents 
         titleEvents={page.upcomingEvents.titleEvents} 

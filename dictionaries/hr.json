@@ -31,7 +31,7 @@
             "warning": "Potrebno je odabrati sva polja za pretraživanje slika!"
         },
         "products": {
-            "title": "Proizvodi koje nudimo",
+            "title": "Proizvodi",
             "info": "Plaćanje unaprijed uz konzultacije sa naručiteljom i prikazom demo verzije postera ili Fifa card.",
             "photo": "Fotografija 4€ - u digitalnom formatu, visoke rezolucije",
             "poster": "Poster 60€ -  skup od najviše tri fotografije, koje se slažu i obrađuju uz efekte, printano na forex-u ( materijal sličan i lagan kao stiropor, ali puno gušće strukture, debljine 3mm, jednostavan za postavljanje na zid itd.",
@@ -45,7 +45,8 @@
             "labelImage": "Slika",
             "chooseImage": "Odaberite sliku",
             "addedItemsLabel": "Dodani proizvodi",
-            "btnOrder": "Naruči"
+            "btnOrder": "Pošalji narudžbu",
+            "btnOrdering": "Slanje narudžbe..."
         },
         "about": {
             "title": "O nama",

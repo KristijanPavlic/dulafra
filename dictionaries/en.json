@@ -12,23 +12,6 @@
             "titleEvents": "Upcoming events",
             "noEvents": "No upcoming events"
         },
-        "products": {
-            "title": "Our products",
-            "info": "Payment in advance with consultation with the customer and presentation of a demo version of the poster or Fifa card.",
-            "photo": "Photo €4 - in digital format, high resolution",
-            "poster": "Poster €60 - set of up to three photos, which are combined and processed with effects, printed on forex (material similar and light as Styrofoam, but much denser structure, 3mm thick, easy to mount on the wall, etc.",
-            "fifaCard": "Fifa card €40 - personalized card of young footballers with their choice of grades, made on forex 3mm",
-            "mug": "Mug €9 - possibility to transfer photos to mugs",
-            "order": "Order now",
-            "addProduct": "Add to cart",
-            "removeProduct": "Remove from cart",
-            "labelProduct": "Product",
-            "chooseProduct": "Choose product",
-            "labelImage": "Image",
-            "chooseImage": "Choose image",
-            "addedItemsLabel": "Added items",
-            "btnOrder": "Order"
-        },
         "search": {
             "title": "Image search",
             "description": "Here you can search for images. It is necessary to select the required fields in order to be able to view the images.",
@@ -46,6 +29,24 @@
             "btnDelete": "Delete image",
             "btnDeletion": "Deleting image...",
             "warning": "Please select all fields!"
+        },
+        "products": {
+            "title": "Our products",
+            "info": "Payment in advance with consultation with the customer and presentation of a demo version of the poster or Fifa card.",
+            "photo": "Photo €4 - in digital format, high resolution",
+            "poster": "Poster €60 - set of up to three photos, which are combined and processed with effects, printed on forex (material similar and light as Styrofoam, but much denser structure, 3mm thick, easy to mount on the wall, etc.",
+            "fifaCard": "Fifa card €40 - personalized card of young footballers with their choice of grades, made on forex 3mm",
+            "mug": "Mug €9 - possibility to transfer photos to mugs",
+            "order": "Order now",
+            "addProduct": "Add to cart",
+            "removeProduct": "Remove from cart",
+            "labelProduct": "Product",
+            "chooseProduct": "Choose product",
+            "labelImage": "Image",
+            "chooseImage": "Choose image",
+            "addedItemsLabel": "Added items",
+            "btnOrder": "Send order",
+            "btnOrdering": "Sending order..."
         },
         "about": {
             "title": "About us",
