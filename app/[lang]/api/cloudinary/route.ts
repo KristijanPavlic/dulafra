@@ -38,7 +38,7 @@ export async function GET() {
         url: resource.secure_url,
         folder: resource.folder,
       }));
-
+      
     return new Response(JSON.stringify(imageData), { status: 200 });
   } catch (error: any) {
     console.error("Error fetching Cloudinary images:", error);

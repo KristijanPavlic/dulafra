@@ -14,12 +14,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+  lang,
+}: {
   children: React.ReactNode;
-}>) {
+  lang: string;
+}) {
   return (
     <ClerkProvider>
-      <html lang="hr">
+      <html lang={lang}>
         <body className={`${montserrat.className} bg-[#FFF6EE]`}>
           {children}
         </body>

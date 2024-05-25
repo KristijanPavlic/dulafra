@@ -154,6 +154,7 @@ const DropzoneEvents = ({ className }) => {
           <button
             type="submit"
             className="ml-auto mt-1 rounded-md border border-[#001120] px-3 text-[12px] font-bold uppercase tracking-wider text-[#333333] transition-colors hover:bg-[#001120] hover:text-white disabled:bg-gray-400 disabled:cursor-not-allowed"
+            disabled={files.length === 0 || addingImages}
           >
             {addingImages ? "Dodavanje slika..." : "Dodaj slike"}
           </button>

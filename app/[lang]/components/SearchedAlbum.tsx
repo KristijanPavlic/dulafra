@@ -48,7 +48,12 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
 
       if (response.ok) {
         const data = await response.json();
-        setImages(data);
+        
+        // Filter out images from the "upcoming_events" folder
+        const filteredData = data.filter((image: ImageData) => image.folder !== "upcoming_events");
+        console.log(filteredData);
+
+        setImages(filteredData);
         setIsLoading(false);
       } else {
         console.error("Error fetching images:", response.status);
@@ -57,6 +62,8 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
       console.error("Error fetching images:", error);
     }
   };
+
+  
 
   useEffect(() => {
     fetchImages();
