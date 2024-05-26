@@ -14,7 +14,6 @@ const Dropzone = ({ className }) => {
   const [alertMessage, setAlertMessage] = useState(null);
   const [addingImages, setAddingImages] = useState(false);
 
-  // folder selection
   const [event, setEvent] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");

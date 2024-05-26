@@ -98,9 +98,10 @@ const Gallery: React.FC<GalleryProps> = ({
 
       if (response.ok) {
         const newMedia = media.filter(item => item.url !== url)
-
         setMedia(newMedia)
         setDeleteBtnText(false)
+        // Refetch data after successful deletion
+        await fetchMedia()
       } else {
         console.error('Error deleting media:', response.status)
       }

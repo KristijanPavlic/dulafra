@@ -9,7 +9,6 @@ cloudinary.v2.config({
 
 export async function POST(req: NextRequest) {
   const { publicId, folder } = await req.json()
-  console.log(publicId, folder)
 
   try {
     await cloudinary.v2.uploader.destroy(`${folder}/${publicId}`, {
