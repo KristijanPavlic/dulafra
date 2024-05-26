@@ -48,6 +48,12 @@
             "btnOrder": "Pošalji narudžbu",
             "btnOrdering": "Slanje narudžbe..."
         },
+        "gallery": {
+            "title": "Galerija",
+            "noVideos": "Trenutno nema videa za prikaz!",
+            "btnDelete": "Obriši video",
+            "btnDeletion": "Brisanje videa..."
+        },
         "about": {
             "title": "O nama",
             "description": "Naš tim fotografa već dugi niz godina bavi se fotografiranjem sportskih događaja. Naša misija je zabilježiti svaki Vaš dragi trenutak na terenu.",

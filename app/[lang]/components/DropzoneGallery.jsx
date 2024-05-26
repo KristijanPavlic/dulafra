@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { ArrowUpTrayIcon, XMarkIcon } from '@heroicons/react/24/solid'
@@ -8,19 +7,17 @@ import { getSignature, saveToDatabase } from '../_action'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-const DropzoneEvents = ({ className }) => {
+const DropzoneGallery = ({ className }) => {
   const [files, setFiles] = useState([])
   const [rejected, setRejected] = useState([])
   const [alertMessage, setAlertMessage] = useState(null)
-  const [addingImages, setAddingImages] = useState(false)
+  const [addingFiles, setAddingFiles] = useState(false)
 
-  const folderId = 'upcoming_events'
+  const folderId = 'gallery'
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (acceptedFiles?.length) {
       setFiles(previousFiles => [
-        // If allowing multiple files
-        // ...previousFiles,
         ...acceptedFiles.map(file =>
           Object.assign(file, { preview: URL.createObjectURL(file) })
         )
@@ -34,10 +31,10 @@ const DropzoneEvents = ({ className }) => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: {
-      'image/*': []
+      'video/*': []
     },
-    maxSize: 1024 * 1024 * 12, // 12MB
-    maxFiles: 100,
+    maxSize: 1024 * 1024 * 100, // 100MB
+    maxFiles: 10,
     onDrop
   })
 
@@ -60,14 +57,11 @@ const DropzoneEvents = ({ className }) => {
   }
 
   async function action() {
-    // Only proceed if there are actually files to upload
     if (files.length === 0) return
 
     for (const file of files) {
-      // get a signature using server action
       const { timestamp, signature } = await getSignature(folderId)
 
-      // upload to cloudinary using the signature
       const formData = new FormData()
 
       formData.append('file', file)
@@ -75,11 +69,12 @@ const DropzoneEvents = ({ className }) => {
       formData.append('signature', signature)
       formData.append('timestamp', timestamp)
       formData.append('folder', folderId)
+      formData.append('resource_type', 'video')
 
-      const endpoint = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL
+      const endpoint = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload`
 
       try {
-        setAddingImages(true)
+        setAddingFiles(true)
         const response = await fetch(endpoint, {
           method: 'POST',
           body: formData
@@ -87,22 +82,21 @@ const DropzoneEvents = ({ className }) => {
 
         if (response.ok) {
           const data = await response.json()
-          setAddingImages(false)
+          setAddingFiles(false)
 
-          // Write to database using server actions
           await saveToDatabase({
-            version: data?.version,
-            signature: data?.signature,
-            public_id: data?.public_id
+            version: data.version,
+            signature: data.signature,
+            public_id: data.public_id
           })
 
-          toast.success('Dodavanje slike uspješno') // Report each file's status
+          toast.success('Dodavanje videa uspješno')
         } else {
-          toast.error('Greška pri dodavanju slike')
+          toast.error('Greška pri dodavanju videa')
         }
       } catch (error) {
-        console.error('Greška pri dodavanju slike:', error)
-        toast.error('Dogodila se greška pri dodavanju slike')
+        console.error('Greška pri dodavanju videa:', error)
+        toast.error('Dogodila se greška pri dodavanju videa')
       }
     }
 
@@ -120,16 +114,15 @@ const DropzoneEvents = ({ className }) => {
         <div className='flex flex-col items-center justify-center gap-4'>
           <ArrowUpTrayIcon className='h-5 w-5 fill-current' />
           {isDragActive ? (
-            <p>Ovdje ispustite slike ...</p>
+            <p>Ovdje ispustite videe ...</p>
           ) : (
             <p>
-              Ovdje privucite i ispustite slike ili kliknite za odabir slika
+              Ovdje privucite i ispustite videe ili kliknite za odabir videa
             </p>
           )}
         </div>
       </div>
 
-      {/* Alert Message */}
       {alertMessage && (
         <div
           className={`mt-4 p-2 text-center ${alertMessage.includes('failed') ? 'text-red-500' : 'text-green-500'}`}
@@ -138,7 +131,6 @@ const DropzoneEvents = ({ className }) => {
         </div>
       )}
 
-      {/* Preview */}
       <section className='mt-10'>
         <div className='flex gap-4'>
           <h2 className='title text-3xl font-semibold'>Pregled</h2>
@@ -147,32 +139,29 @@ const DropzoneEvents = ({ className }) => {
             onClick={removeAll}
             className='mt-1 rounded-md border border-rose-400 px-3 text-[12px] font-bold uppercase tracking-wider text-[#333333] transition-colors hover:bg-rose-400 hover:text-white'
           >
-            Ukloni sve dodate slike
+            Ukloni sve dodate videe
           </button>
           <button
             type='submit'
             className='ml-auto mt-1 rounded-md border border-[#001120] px-3 text-[12px] font-bold uppercase tracking-wider text-[#333333] transition-colors hover:bg-[#001120] hover:text-white disabled:cursor-not-allowed disabled:bg-gray-400'
-            disabled={files.length === 0 || addingImages}
+            disabled={files.length === 0 || addingFiles}
           >
-            {addingImages ? 'Dodavanje slika...' : 'Dodaj slike'}
+            {addingFiles ? 'Dodavanje videa...' : 'Dodaj videe'}
           </button>
         </div>
 
-        {/* Accepted images */}
         <h3 className='title mt-10 border-b border-black pb-3 text-lg font-semibold text-[#333333]'>
-          Prihvaćene slike
+          Prihvaćeni videi
         </h3>
         <ul className='mt-6 grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6'>
           {files.map(file => (
             <li key={file.name} className='relative h-32 rounded-md shadow-lg'>
-              <Image
+              <video
                 src={file.preview}
                 alt={file.name}
                 width={100}
                 height={100}
-                onLoad={() => {
-                  URL.revokeObjectURL(file.preview)
-                }}
+                controls
                 className='h-full w-full rounded-md object-cover'
               />
               <button
@@ -189,9 +178,8 @@ const DropzoneEvents = ({ className }) => {
           ))}
         </ul>
 
-        {/* Rejected Images */}
         <h3 className='title mt-24 border-b border-black pb-3 text-lg font-semibold text-stone-600'>
-          Neprihvaćene slike
+          Neprihvaćeni videi
         </h3>
         <ul className='mt-6 flex flex-col'>
           {rejected.map(({ file, errors }) => (
@@ -233,4 +221,4 @@ const DropzoneEvents = ({ className }) => {
   )
 }
 
-export default DropzoneEvents
+export default DropzoneGallery

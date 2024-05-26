@@ -11,7 +11,7 @@ export async function GET() {
     const apiSecret = process.env.CLOUDINARY_API_SECRET
 
     const authString = btoa(`${apiKey}:${apiSecret}`)
-    const url = `https://api.cloudinary.com/v1_1/${cloudName}/resources/image?max_results=500`
+    const url = `https://api.cloudinary.com/v1_1/${cloudName}/resources/video?max_results=500`
 
     const response = await fetch(url, {
       method: 'GET',
@@ -27,7 +27,7 @@ export async function GET() {
     })
 
     if (!response.ok) {
-      throw new Error(`Error fetching images: ${response.status}`)
+      throw new Error(`Error fetching videos: ${response.status}`)
     }
 
     const data = await response.json()
@@ -41,7 +41,7 @@ export async function GET() {
 
     return new Response(JSON.stringify(imageData), { status: 200 })
   } catch (error: any) {
-    console.error('Error fetching Cloudinary images:', error)
-    return new Response('Error fetching images', { status: 500 })
+    console.error('Error fetching Cloudinary videos:', error)
+    return new Response('Error fetching videos', { status: 500 })
   }
 }

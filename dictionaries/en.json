@@ -48,6 +48,12 @@
             "btnOrder": "Send order",
             "btnOrdering": "Sending order..."
         },
+        "gallery": {
+            "title": "Gallery",
+            "noVideos": "No videos available!",
+            "btnDelete": "Delete video",
+            "btnDeletion": "Deleting video..."
+        },
         "about": {
             "title": "About us",
             "description": "We are a team of photographers who love sports. We are always there to capture the most beautiful moments of your favorite sports events.",

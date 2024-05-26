@@ -16,9 +16,9 @@ export async function POST(req: NextRequest) {
       invalidate: true
     })
 
-    return new NextResponse('Image deleted successfully', { status: 200 })
+    return new NextResponse('Video deleted successfully', { status: 200 })
   } catch (error: any) {
-    console.error('Error deleting image:', error)
-    return new NextResponse('Error deleting image:', { status: 500 })
+    console.error('Error deleting video:', error)
+    return new NextResponse('Error deleting dideo:', { status: 500 })
   }
 }
