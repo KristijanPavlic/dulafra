@@ -72,7 +72,7 @@ const Products: React.FC<ProductsProps> = ({
               width={300}
               height={300}
               style={{ width: '100%' }}
-              className='rounded-t-lg bg-transparent transition duration-300 ease-in-out group-hover:scale-105'
+              className='min-h-[235.48px] rounded-t-lg bg-transparent bg-center object-cover transition duration-300 ease-in-out group-hover:scale-105'
             />
             <h2 className='mt-5 pl-2 pr-2 text-lg font-bold uppercase text-[#001120]'>
               {photo.split(' ')[0]} - {photo.split(' ')[1]}
@@ -86,7 +86,7 @@ const Products: React.FC<ProductsProps> = ({
               width={300}
               height={500}
               style={{ width: '100%' }}
-              className='rounded-t-lg bg-transparent transition duration-300 ease-in-out group-hover:scale-105'
+              className='min-h-[235.48px] rounded-t-lg bg-transparent bg-center object-cover transition duration-300 ease-in-out group-hover:scale-105'
             />
             <h2 className='mt-5 pl-2 pr-2 text-lg font-bold uppercase text-[#001120]'>
               {mug.split(' ')[0]} - {mug.split(' ')[1]}
@@ -100,7 +100,7 @@ const Products: React.FC<ProductsProps> = ({
               width={300}
               height={300}
               style={{ width: '100%' }}
-              className='rounded-t-lg bg-transparent transition duration-300 ease-in-out group-hover:scale-105'
+              className='min-h-[235.48px] rounded-t-lg bg-transparent bg-center object-cover transition duration-300 ease-in-out group-hover:scale-105'
             />
             <h2 className='mt-5 pl-2 pr-2 text-lg font-bold uppercase text-[#001120]'>
               {poster.split(' ')[0]} - {poster.split(' ')[1]}
@@ -114,7 +114,7 @@ const Products: React.FC<ProductsProps> = ({
               width={300}
               height={300}
               style={{ width: '100%' }}
-              className='rounded-t-lg bg-transparent transition duration-300 ease-in-out group-hover:scale-105'
+              className='min-h-[235.48px] rounded-t-lg bg-transparent bg-center object-cover transition duration-300 ease-in-out group-hover:scale-105'
             />
             <h2 className='mt-5 pl-2 pr-2 text-lg font-bold uppercase text-[#001120]'>
               {fifaCard.split(' ')[0]} {fifaCard.split(' ')[1]} -{' '}
