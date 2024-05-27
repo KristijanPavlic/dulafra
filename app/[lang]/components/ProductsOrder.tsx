@@ -186,31 +186,55 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    // Check if all required selections are made
     if (
       event === chooseEvent ||
       date === chooseDate ||
       time === chooseTime ||
       field === chooseField ||
       team === chooseTeam ||
-      product === chooseProduct // Check if the product is selected
+      product === chooseProduct
     ) {
       setIsSearched(false)
       setInfoText(warning)
-    } else {
-      setIsSearched(true)
-      setInfoText('')
-
-      let selectedItem
-      if (product === mug.split(' ')[0]) {
-        selectedItem = `${labelProduct}: ${product}, ${labelEvent}: ${event}, ${labelDate}: ${date}, ${labelTime}: ${time}, ${labelField}: ${field}, ${labelTeam}: ${team}, ${labelImage} 1: ${image1}, ${labelImage} 2: ${image2}`
-      } else if (product === poster.split(' ')[0]) {
-        selectedItem = `${labelProduct}: ${product}, ${labelEvent}: ${event}, ${labelDate}: ${date}, ${labelTime}: ${time}, ${labelField}: ${field}, ${labelTeam}: ${team}, ${labelImage} 1: ${image1}, ${labelImage} 2: ${image2}, ${labelImage} 3: ${image3}, ${labelImage} 4: ${image4}`
-      } else {
-        selectedItem = `${labelProduct}: ${product}, ${labelEvent}: ${event}, ${labelDate}: ${date}, ${labelTime}: ${time}, ${labelField}: ${field}, ${labelTeam}: ${team}, ${labelImage} 1: ${image}`
-      }
-
-      setAddedItems([...addedItems, { item: selectedItem, quantity: 1 }])
+      return
     }
+
+    // Check if the product is mug or poster and validate image selections
+    if (product === mug.split(' ')[0]) {
+      if (image === chooseImage && image1 === chooseImage) {
+        setIsSearched(false)
+        setInfoText(infoText)
+        return
+      }
+    } else if (product === poster.split(' ')[0]) {
+      if (
+        image === chooseImage &&
+        image1 === chooseImage &&
+        image2 === chooseImage &&
+        image3 === chooseImage
+      ) {
+        setIsSearched(false)
+        setInfoText(infoText)
+        return
+      }
+    }
+
+    // If all validations pass, add the item to the list
+    setIsSearched(true)
+    setInfoText('')
+
+    let selectedItem
+    if (product === mug.split(' ')[0]) {
+      selectedItem = `${labelProduct}: ${product}, ${labelEvent}: ${event}, ${labelDate}: ${date}, ${labelTime}: ${time}, ${labelField}: ${field}, ${labelTeam}: ${team}, ${labelImage} 1: ${image1}, ${labelImage} 2: ${image2}`
+    } else if (product === poster.split(' ')[0]) {
+      selectedItem = `${labelProduct}: ${product}, ${labelEvent}: ${event}, ${labelDate}: ${date}, ${labelTime}: ${time}, ${labelField}: ${field}, ${labelTeam}: ${team}, ${labelImage} 1: ${image1}, ${labelImage} 2: ${image2}, ${labelImage} 3: ${image3}, ${labelImage} 4: ${image4}`
+    } else {
+      selectedItem = `${labelProduct}: ${product}, ${labelEvent}: ${event}, ${labelDate}: ${date}, ${labelTime}: ${time}, ${labelField}: ${field}, ${labelTeam}: ${team}, ${labelImage} 1: ${image}`
+    }
+
+    setAddedItems([...addedItems, { item: selectedItem, quantity: 1 }])
   }
 
   const handleQuantityChange = (index: number, delta: number) => {
