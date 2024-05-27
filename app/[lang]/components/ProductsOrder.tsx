@@ -82,7 +82,6 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
   const [image1, setImage1] = useState(chooseImage)
   const [image2, setImage2] = useState(chooseImage)
   const [image3, setImage3] = useState(chooseImage)
-  const [image4, setImage4] = useState(chooseImage)
   const [product, setProduct] = useState(chooseProduct)
   const [images, setImages] = useState<ImageData[]>([])
   const [dateOptions, setDateOptions] = useState<string[]>([])
@@ -227,9 +226,9 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
 
     let selectedItem
     if (product === mug.split(' ')[0]) {
-      selectedItem = `${labelProduct}: ${product}, ${labelEvent}: ${event}, ${labelDate}: ${date}, ${labelTime}: ${time}, ${labelField}: ${field}, ${labelTeam}: ${team}, ${labelImage} 1: ${image1}, ${labelImage} 2: ${image2}`
+      selectedItem = `${labelProduct}: ${product}, ${labelEvent}: ${event}, ${labelDate}: ${date}, ${labelTime}: ${time}, ${labelField}: ${field}, ${labelTeam}: ${team}, ${labelImage} 1: ${image}, ${labelImage} 2: ${image1}`
     } else if (product === poster.split(' ')[0]) {
-      selectedItem = `${labelProduct}: ${product}, ${labelEvent}: ${event}, ${labelDate}: ${date}, ${labelTime}: ${time}, ${labelField}: ${field}, ${labelTeam}: ${team}, ${labelImage} 1: ${image1}, ${labelImage} 2: ${image2}, ${labelImage} 3: ${image3}, ${labelImage} 4: ${image4}`
+      selectedItem = `${labelProduct}: ${product}, ${labelEvent}: ${event}, ${labelDate}: ${date}, ${labelTime}: ${time}, ${labelField}: ${field}, ${labelTeam}: ${team}, ${labelImage} 1: ${image}, ${labelImage} 2: ${image1}, ${labelImage} 3: ${image2}, ${labelImage} 4: ${image3}`
     } else {
       selectedItem = `${labelProduct}: ${product}, ${labelEvent}: ${event}, ${labelDate}: ${date}, ${labelTime}: ${time}, ${labelField}: ${field}, ${labelTeam}: ${team}, ${labelImage} 1: ${image}`
     }
