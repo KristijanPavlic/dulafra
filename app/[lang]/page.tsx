@@ -11,7 +11,7 @@ import Products from './components/Products'
 import UpcomingEvents from './components/UpcomingEvents'
 import ProductsOrder from './components/ProductsOrder'
 import Gallery from './components/Gallery'
-
+import BackToTopButton from './components/BackToTopButton'
 export default async function Page({
   params: { lang }
 }: {
@@ -33,9 +33,6 @@ export default async function Page({
 
   return (
     <main>
-      <div className='sticky top-0 z-50 bg-orange-400 p-1 text-center text-lg font-bold'>
-        <span>{page.infoMessage}</span>
-      </div>
       <LocaleSwitcher />
       <Hero
         title={page.hero.title}
@@ -144,6 +141,7 @@ export default async function Page({
         copyrigth={page.footer.copyrigth}
         rights={page.footer.rights}
       />
+      <BackToTopButton />
     </main>
   )
 }

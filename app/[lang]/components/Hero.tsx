@@ -1,12 +1,12 @@
-"use client";
+'use client'
 
-import React, { useRef, useEffect, useState } from "react";
-import { useWindowSize } from "../hooks/useWindowSize";
-import Image from "next/image";
-import heroImg from "@/public/hero_img.jpg";
-import heroMobImg from "@/public/hero_mobile_img.jpg";
-import Link from "next/link";
-import UpcomingEvents from "./UpcomingEvents";
+import React, { useRef, useEffect, useState } from 'react'
+import { useWindowSize } from '../hooks/useWindowSize'
+import Image from 'next/image'
+import heroImg from '@/public/hero_img.jpg'
+import heroMobImg from '@/public/hero_mobile_img.jpg'
+import Link from 'next/link'
+import UpcomingEvents from './UpcomingEvents'
 
 interface HeroProps {
   title: string
@@ -17,98 +17,105 @@ interface HeroProps {
   titleEvents: string
 }
 
-const Hero: React.FC<HeroProps> = ({title, description, btnSearch, btnProducts, btnContact, titleEvents}) => {
-  const size = useWindowSize();
-  const heroRef = useRef<HTMLDivElement>(null);
-  const [isAnimated, setIsAnimated] = useState(false);
+const Hero: React.FC<HeroProps> = ({
+  title,
+  description,
+  btnSearch,
+  btnProducts,
+  btnContact,
+  titleEvents
+}) => {
+  const size = useWindowSize()
+  const heroRef = useRef<HTMLDivElement>(null)
+  const [isAnimated, setIsAnimated] = useState(false)
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !isAnimated) {
-          setIsAnimated(true);
+          setIsAnimated(true)
         }
       },
       { threshold: 0 } // Adjust threshold as needed
-    );
+    )
 
     if (heroRef.current) {
-      observer.observe(heroRef.current);
+      observer.observe(heroRef.current)
     }
 
     return () => {
       if (heroRef.current) {
-        observer.unobserve(heroRef.current);
+        observer.unobserve(heroRef.current)
       }
-    };
-  }, [isAnimated]);
+    }
+  }, [isAnimated])
 
   return (
     <div
       ref={heroRef}
-      className={`relative min-h-max duration-1000 ${isAnimated ? "opacity-100" : "opacity-0"}`}
+      className={`relative min-h-max duration-1000 ${isAnimated ? 'opacity-100' : 'opacity-0'}`}
     >
       <div>
         {size.width >= 768 ? (
           <Image
             src={heroImg}
-            alt="Dulafra hero image"
-            style={{ width: "100%" }}
-            className="min-h-[100svh] object-cover bg-center transition-opacity"
+            alt='Dulafra hero image'
+            style={{ width: '100%' }}
+            className='min-h-[100svh] bg-center object-cover transition-opacity'
           />
         ) : (
           <Image
             src={heroMobImg}
-            alt="Dulafra hero mobile image"
-            style={{ width: "100%", height: "100svh" }}
-            className="object-cover bg-center transition-opacity"
+            alt='Dulafra hero mobile image'
+            style={{ width: '100%', height: '100svh' }}
+            className='bg-center object-cover transition-opacity'
           />
         )}
       </div>
       <div
-        className={`absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 max-w-[80%] xl:min-w-[50%]`}
+        className={`absolute left-1/2 top-1/2 min-w-[80%] -translate-x-1/2 -translate-y-1/2 xl:min-w-[50%]`}
       >
-        <div className="bg-[#00112060] rounded-xl pt-6 pb-6 pl-8 pr-8 md:pl-16 md:pr-16">
+        <div className='rounded-xl bg-[#00112060] pb-6 pl-8 pr-8 pt-6 md:pl-16 md:pr-16'>
           <div>
             <h1
-              className={`text-2xl md:text-5xl font-bold text-[#FFF6EE] text-center`}
+              className={`text-center text-2xl font-bold text-[#FFF6EE] md:text-5xl`}
             >
               {title}
             </h1>
           </div>
-          <div className="mt-7 lg:mt-14">
-            <h3 className="text-[#FFF6EE] text-base text-center md:text-lg">
+          <div className='mt-7 lg:mt-14'>
+            <h3 className='text-center text-base text-[#FFF6EE] md:text-lg'>
               {description}
             </h3>
           </div>
-          <div className="flex flex-col md:flex-row flex-wrap items-center justify-center gap-6 mt-10 w-full m-auto">
-            <div className="w-[200px]">
+          <div className='m-auto mt-10 flex w-full flex-col flex-wrap items-center justify-center gap-6 md:flex-row'>
+            <div className='w-[200px]'>
               <Link
-                className="bg-[#FFF6EE] text-[#333333] flex justify-center align-middle pt-2 pb-2 pl-4 pr-4 rounded-lg transition-all hover:bg-[#333333] hover:text-[#FFF6EE]"
-                href="#search"
+                className='flex justify-center rounded-lg bg-[#FFF6EE] pb-2 pl-4 pr-4 pt-2 align-middle text-[#333333] transition-all hover:bg-[#333333] hover:text-[#FFF6EE]'
+                href='#search'
               >
                 {btnSearch}
               </Link>
             </div>
-            <div className="w-[200px]">
+            <div className='w-[200px]'>
               <Link
-                className="bg-[#FFF6EE] text-[#333333] flex justify-center align-middle pt-2 pb-2 pl-4 pr-4 rounded-lg transition-all hover:bg-[#333333] hover:text-[#FFF6EE]"
-                href="#products"
+                className='flex justify-center rounded-lg bg-[#FFF6EE] pb-2 pl-4 pr-4 pt-2 align-middle text-[#333333] transition-all hover:bg-[#333333] hover:text-[#FFF6EE]'
+                href='#products'
               >
                 {btnProducts}
               </Link>
             </div>
-            <div className="w-[200px]">
+            <div className='w-[200px]'>
               <Link
-                className="bg-[#FFF6EE] text-[#333333] flex justify-center align-middle pt-2 pb-2 pl-4 pr-4 rounded-lg transition-all hover:bg-[#333333] hover:text-[#FFF6EE]"
-                href="#upcomingEvents"
+                className='flex justify-center rounded-lg bg-[#FFF6EE] pb-2 pl-4 pr-4 pt-2 align-middle text-[#333333] transition-all hover:bg-[#333333] hover:text-[#FFF6EE]'
+                href='#upcomingEvents'
               >
                 {titleEvents}
               </Link>
             </div>
-            <div className="w-[200px]">
+            <div className='w-[200px]'>
               <Link
-                className="bg-[#FFF6EE] text-[#333333] flex justify-center align-middle pt-2 pb-2 pl-4 pr-4 rounded-lg transition-all hover:bg-[#333333] hover:text-[#FFF6EE]"
-                href="#contact"
+                className='flex justify-center rounded-lg bg-[#FFF6EE] pb-2 pl-4 pr-4 pt-2 align-middle text-[#333333] transition-all hover:bg-[#333333] hover:text-[#FFF6EE]'
+                href='#contact'
               >
                 {btnContact}
               </Link>
@@ -117,7 +124,7 @@ const Hero: React.FC<HeroProps> = ({title, description, btnSearch, btnProducts, 
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export default Hero

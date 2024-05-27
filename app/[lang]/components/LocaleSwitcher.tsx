@@ -16,10 +16,10 @@ export default function LocaleSwitcher() {
   }
 
   return (
-    <div className='sticky top-0 z-50'>
-      <ul className='absolute right-0 p-3 rounded-bl-lg bg-white w-fit border-[#001120] border-l border-b'>
+    <div className='sticky top-0 z-40'>
+      <div className='absolute right-0 w-fit rounded-bl-lg border-b border-l border-[#001120] bg-white p-3'>
         {i18n.locales.map(locale => (
-          <li key={locale} className='transition-all hover:text-[#001120]'>
+          <div key={locale} className='transition-all hover:text-[#001120]'>
             {pathName.includes('/dashboard') || pathName.includes(locale) ? (
               ''
             ) : (
@@ -27,9 +27,9 @@ export default function LocaleSwitcher() {
                 {locale.toUpperCase()}
               </Link>
             )}
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   )
 }

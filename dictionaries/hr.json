@@ -1,6 +1,15 @@
 {
     "page": {
         "infoMessage": "Stranica je u izradi!",
+        "navigation": {
+            "home": "Početna",
+            "search": "Pretraživanje slika",
+            "products": "Proizvodi",
+            "events": "Nadolazeći događaji",
+            "gallery": "Galerija",
+            "about": "O nama",
+            "contact": "Kontakt"
+        },
         "hero": {
             "title": "Fotografiranje sportskih događaja",
             "description": "Naš tim fotografa pobrinuti će se da svaki Vama dragi sportski događaj ostane zabilježen",

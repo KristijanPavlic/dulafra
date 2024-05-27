@@ -1,6 +1,15 @@
 {
     "page": {
         "infoMessage": "The page is under development!",
+        "navigation": {
+            "home": "Home",
+            "search": "Image search",
+            "products": "Our products",
+            "events": "Upcoming events",
+            "gallery": "Gallery",
+            "about": "About us",
+            "contact": "Contact us"
+        },
         "hero": {
             "title": "Photography of sports events",
             "description": "Our team of photographers will make sure that every sporting event you love remains recorded",

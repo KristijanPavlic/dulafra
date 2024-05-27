@@ -240,7 +240,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
           className='grid grid-cols-2 gap-3 text-[#333333] md:grid-cols-3 md:gap-4 xl:grid-cols-6 xl:gap-6'
           onSubmit={handleSearch}
         >
-          <div className='flex flex-col gap-2'>
+          <div className='flex flex-col gap-1'>
             <label htmlFor='product' className='text-[#333333]'>
               {labelProduct}
             </label>
@@ -249,7 +249,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
               name='product'
               title={labelProduct}
               required
-              className='rounded-lg p-3 outline-[#001120]'
+              className='rounded-lg p-4 outline-[#001120]'
               value={product}
               onChange={e => setProduct(e.target.value)}
             >
@@ -265,7 +265,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
             </select>
           </div>
 
-          <div className='flex flex-col gap-2'>
+          <div className='flex flex-col gap-1'>
             <label htmlFor='event' className='text-[#333333]'>
               {labelEvent}
             </label>
@@ -274,7 +274,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
               name='event'
               title={labelEvent}
               required
-              className='rounded-lg p-3 outline-[#001120]'
+              className='rounded-lg p-4 outline-[#001120]'
               value={event}
               onChange={e => setEvent(e.target.value)}
             >
@@ -289,7 +289,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
             </select>
           </div>
 
-          <div className='flex flex-col gap-2'>
+          <div className='flex flex-col gap-1'>
             <label htmlFor='date' className='text-[#333333]'>
               {labelDate}
             </label>
@@ -298,7 +298,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
               name='date'
               title={labelDate}
               required
-              className='rounded-lg p-3 outline-[#001120]'
+              className='rounded-lg p-4 outline-[#001120]'
               value={date}
               onChange={e => setDate(e.target.value)}
             >
@@ -311,7 +311,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
             </select>
           </div>
 
-          <div className='flex flex-col gap-2'>
+          <div className='flex flex-col gap-1'>
             <label htmlFor='time' className='text-[#333333]'>
               {labelTime}
             </label>
@@ -320,7 +320,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
               name='time'
               title={labelTime}
               required
-              className='rounded-lg p-3 outline-[#001120]'
+              className='rounded-lg p-4 outline-[#001120]'
               value={time}
               onChange={e => setTime(e.target.value)}
             >
@@ -333,7 +333,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
             </select>
           </div>
 
-          <div className='flex flex-col gap-2'>
+          <div className='flex flex-col gap-1'>
             <label htmlFor='field' className='text-[#333333]'>
               {labelField}
             </label>
@@ -342,7 +342,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
               name='field'
               title={labelField}
               required
-              className='rounded-lg p-3 outline-[#001120]'
+              className='rounded-lg p-4 outline-[#001120]'
               value={field}
               onChange={e => setField(e.target.value)}
             >
@@ -355,7 +355,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
             </select>
           </div>
 
-          <div className='flex flex-col gap-2'>
+          <div className='flex flex-col gap-1'>
             <label htmlFor='team' className='text-[#333333]'>
               {labelTeam}
             </label>
@@ -364,7 +364,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
               name='team'
               title={labelTeam}
               required
-              className='rounded-lg p-3 outline-[#001120]'
+              className='rounded-lg p-4 outline-[#001120]'
               value={team}
               onChange={e => setTeam(e.target.value)}
             >
@@ -377,7 +377,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
             </select>
           </div>
 
-          <div className='flex flex-col gap-2'>
+          <div className='flex flex-col gap-1'>
             <label htmlFor='image' className='text-[#333333]'>
               {labelImage}
             </label>
@@ -386,7 +386,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
               name='image'
               title={labelImage}
               required
-              className='rounded-lg p-3 outline-[#001120]'
+              className='rounded-lg p-4 outline-[#001120]'
               value={image}
               onChange={e => setImage(e.target.value)}
             >
@@ -400,7 +400,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
           </div>
           {product === mug.split(' ')[0] && (
             <>
-              <div className='flex flex-col gap-2'>
+              <div className='flex flex-col gap-1'>
                 <label htmlFor='image1mug' className='text-[#333333]'>
                   {labelImage} 2
                 </label>
@@ -409,7 +409,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
                   name='image1'
                   title={`${labelImage} 1`}
                   required
-                  className='rounded-lg p-3 outline-[#001120]'
+                  className='rounded-lg p-4 outline-[#001120]'
                   value={image1}
                   onChange={e => setImage1(e.target.value)}
                 >
@@ -425,7 +425,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
           )}
           {product === poster.split(' ')[0] && (
             <>
-              <div className='flex flex-col gap-2'>
+              <div className='flex flex-col gap-1'>
                 <label htmlFor='image1' className='text-[#333333]'>
                   {labelImage} 2
                 </label>
@@ -434,7 +434,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
                   name='image1'
                   title={`${labelImage} 1`}
                   required
-                  className='rounded-lg p-3 outline-[#001120]'
+                  className='rounded-lg p-4 outline-[#001120]'
                   value={image1}
                   onChange={e => setImage1(e.target.value)}
                 >
@@ -447,7 +447,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
                 </select>
               </div>
 
-              <div className='flex flex-col gap-2'>
+              <div className='flex flex-col gap-1'>
                 <label htmlFor='image2' className='text-[#333333]'>
                   {labelImage} 3
                 </label>
@@ -456,7 +456,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
                   name='image2'
                   title={`${labelImage} 2`}
                   required
-                  className='rounded-lg p-3 outline-[#001120]'
+                  className='rounded-lg p-4 outline-[#001120]'
                   value={image2}
                   onChange={e => setImage2(e.target.value)}
                 >
@@ -469,7 +469,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
                 </select>
               </div>
 
-              <div className='flex flex-col gap-2'>
+              <div className='flex flex-col gap-1'>
                 <label htmlFor='image3' className='text-[#333333]'>
                   {labelImage} 4
                 </label>
@@ -478,7 +478,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
                   name='image3'
                   title={`${labelImage} 3`}
                   required
-                  className='rounded-lg p-3 outline-[#001120]'
+                  className='rounded-lg p-4 outline-[#001120]'
                   value={image3}
                   onChange={e => setImage3(e.target.value)}
                 >
@@ -494,7 +494,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
           )}
           <button
             type='submit'
-            className='mt-7 rounded-lg bg-[#333333] p-3 text-[#FFF6EE] transition-all hover:bg-[#001120] hover:text-[#FFF6EE]'
+            className='mt-7 rounded-lg bg-[#333333] p-4 text-[#FFF6EE] transition-all hover:bg-[#001120] hover:text-[#FFF6EE]'
           >
             {addProduct}
           </button>
@@ -510,7 +510,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
             {addedItems.map((item, index) => (
               <li
                 key={index}
-                className='mb-3 flex items-center justify-center gap-2'
+                className='mb-3 flex items-center justify-center gap-1'
               >
                 <span>{item.item}</span>
                 <button
