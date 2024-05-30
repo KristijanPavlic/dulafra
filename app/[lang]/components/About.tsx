@@ -58,7 +58,7 @@ const About: React.FC<AboutProps> = ({
       <div className='mt-10'>
         <div className='m-auto flex w-fit flex-col justify-center gap-8 rounded-lg border border-black p-4 md:flex-row'>
           <div className='min-w-[192px] text-center'>
-            <h2 className='text-lg font-semibold text-[#001120]'>12+</h2>
+            <h2 className='text-lg font-semibold text-[#001120]'>7+</h2>
             <span className='text-[#333333]'>{years}</span>
           </div>
           <div className='h-[1px] w-full bg-black md:h-[50px] md:w-[1px]'></div>
@@ -68,7 +68,7 @@ const About: React.FC<AboutProps> = ({
           </div>
           <div className='h-[1px] w-full bg-black md:h-[50px] md:w-[1px]'></div>
           <div className='min-w-[192px] text-center'>
-            <h2 className='text-lg font-semibold text-[#001120]'>40+</h2>
+            <h2 className='text-lg font-semibold text-[#001120]'>80+</h2>
             <span className='text-[#333333]'>{events}</span>
           </div>
         </div>

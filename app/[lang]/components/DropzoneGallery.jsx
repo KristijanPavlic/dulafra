@@ -34,7 +34,7 @@ const DropzoneGallery = ({ className }) => {
       'video/*': []
     },
     maxSize: 1024 * 1024 * 100, // 100MB
-    maxFiles: 10,
+    maxFiles: 100,
     onDrop
   })
 

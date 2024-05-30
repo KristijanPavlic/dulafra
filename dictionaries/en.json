@@ -19,7 +19,7 @@
         },
         "upcomingEvents": {
             "titleEvents": "Upcoming events",
-            "noEvents": "No upcoming events"
+            "noEvents": "No upcoming events!"
         },
         "search": {
             "title": "Image search",
@@ -67,7 +67,7 @@
             "title": "About us",
             "description": "We are a team of photographers who love sports. We are always there to capture the most beautiful moments of your favorite sports events.",
             "years": "years of experience",
-            "professional": "professional photographers",
+            "professional": "photographers",
             "events": "events recorded"
         },
         "contact": {

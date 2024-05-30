@@ -36,8 +36,8 @@ const DropzoneEvents = ({ className }) => {
     accept: {
       'image/*': []
     },
-    maxSize: 1024 * 1024 * 12, // 12MB
-    maxFiles: 100,
+    maxSize: 1024 * 1024 * 5, // 5MB
+    maxFiles: 500,
     onDrop
   })
 
