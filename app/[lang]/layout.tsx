@@ -12,7 +12,13 @@ const montserrat = Montserrat({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Dulafra foto corner',
   description: 'Dulafra foto corner',
-  authors: { name: 'Kristijan Pavlic Tumpa' }
+  authors: { name: 'Kristijan Pavlic Tumpa' },
+  icons: [
+    {
+      url: './icon.png',
+      href: './icon.png'
+    }
+  ]
 }
 
 export default function RootLayout({
