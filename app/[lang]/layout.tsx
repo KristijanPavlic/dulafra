@@ -14,11 +14,10 @@ export const metadata: Metadata = {
   description:
     'Fotografiranje sportskih događaja. Izrada fotografija, šalica, postera i Fifa kartica sa slikama igrača po vlastitom izboru',
   authors: { name: 'Kristijan Pavlic Tumpa' },
-  manifest: './manifest.json',
   icons: [
     {
-      url: './icon.png',
-      href: './icon.png'
+      url: './favicon.ico',
+      href: './favicon.ico'
     }
   ]
 }
