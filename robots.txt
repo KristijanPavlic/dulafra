@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /dashboard/
+Disallow: /sign-in/
+Disallow: /sign-up/
+
+# Allow all other pages
+Allow: /

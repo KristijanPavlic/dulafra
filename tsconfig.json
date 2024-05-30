@@ -29,6 +29,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/components/Dropzone.jsx"
-  ],
+, "app/[lang]/not-found.js"  ],
   "exclude": ["node_modules"]
 }

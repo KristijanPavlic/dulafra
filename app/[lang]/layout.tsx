@@ -11,8 +11,10 @@ const montserrat = Montserrat({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Dulafra foto corner',
-  description: 'Dulafra foto corner',
+  description:
+    'Fotografiranje sportskih događaja. Izrada fotografija, šalica, postera i Fifa kartica sa slikama igrača po vlastitom izboru',
   authors: { name: 'Kristijan Pavlic Tumpa' },
+  manifest: './manifest.json',
   icons: [
     {
       url: './icon.png',
