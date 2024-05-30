@@ -56,7 +56,7 @@ const Gallery: React.FC<GalleryProps> = ({
 
   const fetchMedia = async () => {
     try {
-      const response = await fetch(`/api/video?t=${Date.now()}`, {
+      const response = await fetch(`/api/video`, {
         cache: 'reload'
       })
       setIsLoading(true)

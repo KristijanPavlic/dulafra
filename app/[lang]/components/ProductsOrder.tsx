@@ -96,7 +96,7 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
   >([])
 
   const fetchImages = async () => {
-    const response = await fetch(`/api/cloudinary?t=${Date.now()}`, {
+    const response = await fetch(`/api/cloudinary`, {
       cache: 'reload'
     })
 

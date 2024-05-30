@@ -38,7 +38,7 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
 
   const fetchImages = async () => {
     try {
-      const response = await fetch(`/api/cloudinary?t=${Date.now()}`, {
+      const response = await fetch(`/api/cloudinary`, {
         cache: 'reload'
       })
       setIsLoading(true)

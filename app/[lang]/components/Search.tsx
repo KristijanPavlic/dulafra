@@ -82,7 +82,7 @@ const Search: React.FC<SearchProps> = ({
   }, [isAnimated])
 
   const fetchImages = async () => {
-    const response = await fetch(`/api/cloudinary?t=${Date.now()}`, {
+    const response = await fetch(`/api/cloudinary`, {
       cache: 'reload'
     })
 
