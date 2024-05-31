@@ -53,8 +53,6 @@ export default async function Page({
         chooseTime={page.search.chooseTime}
         labelField={page.search.labelField}
         chooseField={page.search.chooseField}
-        labelTeam={page.search.labelTeam}
-        chooseTeam={page.search.chooseTeam}
         btnSearchImages={page.search.btnSearchImages}
         btnDelete={page.search.btnDelete}
         btnDeletion={page.search.btnDeletion}
@@ -85,8 +83,6 @@ export default async function Page({
         chooseTime={page.search.chooseTime}
         labelField={page.search.labelField}
         chooseField={page.search.chooseField}
-        labelTeam={page.search.labelTeam}
-        chooseTeam={page.search.chooseTeam}
         warning={page.search.warning}
         photo={page.products.photo}
         poster={page.products.poster}

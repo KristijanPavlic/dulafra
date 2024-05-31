@@ -18,8 +18,7 @@ const Dropzone = ({ className }) => {
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
   const [field, setField] = useState('')
-  const [team, setTeam] = useState('')
-  let folderId = `${event}~${date}~${time}~${field}~${team}`
+  let folderId = `${event}~${date}~${time}~${field}`
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (acceptedFiles?.length) {
@@ -41,7 +40,7 @@ const Dropzone = ({ className }) => {
     accept: {
       'image/*': []
     },
-    maxSize: 1024 * 1024 * 1, // 1MB
+    maxSize: 1024 * 1024 * 10, // 1MB
     maxFiles: 500,
     onDrop
   })
@@ -115,9 +114,8 @@ const Dropzone = ({ className }) => {
     setDate('')
     setTime('')
     setField('')
-    setTeam('')
 
-    setFiles([]) // Clear the files array after successful uploads
+    setFiles([])
   }
 
   return (
@@ -156,7 +154,7 @@ const Dropzone = ({ className }) => {
             Kreirajte mapu za slike
           </h2>
           <div className='mb-10 mt-5'>
-            <div className='grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 xl:grid-cols-5 xl:gap-6'>
+            <div className='grid grid-cols-2 gap-3 md:grid-cols-2 md:gap-4 xl:grid-cols-4 xl:gap-6'>
               <div className='flex flex-col gap-2'>
                 <label htmlFor='event' className='text-[#333333]'>
                   Event
@@ -218,21 +216,6 @@ const Dropzone = ({ className }) => {
                   className='rounded-lg p-3 outline-[#001120]'
                 ></input>
               </div>
-              <div className='flex flex-col gap-2'>
-                <label htmlFor='team' className='text-[#333333]'>
-                  Ekipa
-                </label>
-                <input
-                  name='team'
-                  id='team'
-                  title='Odaberite ekipu'
-                  placeholder='nk Lokomotiva - nk Rudeš'
-                  required
-                  value={team}
-                  onChange={e => setTeam(e.target.value)}
-                  className='rounded-lg p-3 outline-[#001120]'
-                ></input>
-              </div>
             </div>
           </div>
         </div>
@@ -249,7 +232,7 @@ const Dropzone = ({ className }) => {
             type='submit'
             className='ml-auto mt-1 rounded-md border border-[#001120] px-3 text-[12px] font-bold uppercase tracking-wider text-[#333333] transition-colors hover:bg-[#001120] hover:text-white disabled:cursor-not-allowed disabled:bg-gray-400'
             /* disabled={addingImages} */
-            disabled={!date || !time || !field || !team}
+            disabled={!event || !date || !time || !field}
           >
             {addingImages ? 'Dodavanje slika...' : 'Dodaj slike'}
           </button>

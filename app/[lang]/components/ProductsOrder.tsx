@@ -26,8 +26,6 @@ interface ProductsOrderProps {
   chooseTime: string
   labelField: string
   chooseField: string
-  labelTeam: string
-  chooseTeam: string
   warning: string
   photo: string
   poster: string
@@ -59,8 +57,6 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
   chooseTime,
   labelField,
   chooseField,
-  labelTeam,
-  chooseTeam,
   warning,
   photo,
   mug,
@@ -77,7 +73,6 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
   const [date, setDate] = useState(chooseDate)
   const [time, setTime] = useState(chooseTime)
   const [field, setField] = useState(chooseField)
-  const [team, setTeam] = useState(chooseTeam)
   const [image, setImage] = useState(chooseImage)
   const [image1, setImage1] = useState(chooseImage)
   const [image2, setImage2] = useState(chooseImage)
@@ -87,7 +82,6 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
   const [dateOptions, setDateOptions] = useState<string[]>([])
   const [timeOptions, setTimeOptions] = useState<string[]>([])
   const [fieldOptions, setFieldOptions] = useState<string[]>([])
-  const [teamOptions, setTeamOptions] = useState<string[]>([])
   const [imageOptions, setImageOptions] = useState<string[]>([])
   const [isSearched, setIsSearched] = useState(false)
   const [infoText, setInfoText] = useState('')
@@ -147,25 +141,12 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
         .filter((option): option is string => option !== undefined)
       setFieldOptions(Array.from(new Set(fieldOptions)))
 
-      const teamOptions = filteredImages
-        .filter(
-          image =>
-            image.folder?.includes(event) &&
-            image.folder?.includes(date) &&
-            image.folder?.includes(time) &&
-            image.folder?.includes(field)
-        )
-        .map(image => image.folder?.split('~')[4])
-        .filter((option): option is string => option !== undefined)
-      setTeamOptions(Array.from(new Set(teamOptions)))
-
       const imageOptions = filteredImages
         .filter(
           image =>
             image.folder?.includes(event) &&
             image.folder?.includes(date) &&
-            image.folder?.includes(time) &&
-            image.folder?.includes(field)
+            image.folder?.includes(time)
         )
         .map(image => {
           const fileName = image.url.split('/').pop()
@@ -178,7 +159,6 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
       setDateOptions([])
       setTimeOptions([])
       setFieldOptions([])
-      setTeamOptions([])
       setImageOptions([])
     }
   }, [event, date, time, field, images, chooseEvent])
@@ -192,7 +172,6 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
       date === chooseDate ||
       time === chooseTime ||
       field === chooseField ||
-      team === chooseTeam ||
       product === chooseProduct
     ) {
       setIsSearched(false)
@@ -226,11 +205,11 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
 
     let selectedItem
     if (product === mug.split(' ')[0]) {
-      selectedItem = `${labelProduct}: ${product}, ${labelEvent}: ${event}, ${labelDate}: ${date}, ${labelTime}: ${time}, ${labelField}: ${field}, ${labelTeam}: ${team}, ${labelImage} 1: ${image}, ${labelImage} 2: ${image1}`
+      selectedItem = `${labelProduct}: ${product}, ${labelEvent}: ${event}, ${labelDate}: ${date}, ${labelTime}: ${time}, ${labelField}: ${field}, ${labelImage} 1: ${image}, ${labelImage} 2: ${image1}`
     } else if (product === poster.split(' ')[0]) {
-      selectedItem = `${labelProduct}: ${product}, ${labelEvent}: ${event}, ${labelDate}: ${date}, ${labelTime}: ${time}, ${labelField}: ${field}, ${labelTeam}: ${team}, ${labelImage} 1: ${image}, ${labelImage} 2: ${image1}, ${labelImage} 3: ${image2}, ${labelImage} 4: ${image3}`
+      selectedItem = `${labelProduct}: ${product}, ${labelEvent}: ${event}, ${labelDate}: ${date}, ${labelTime}: ${time}, ${labelField}: ${field}, ${labelImage} 1: ${image}, ${labelImage} 2: ${image1}, ${labelImage} 3: ${image2}, ${labelImage} 4: ${image3}`
     } else {
-      selectedItem = `${labelProduct}: ${product}, ${labelEvent}: ${event}, ${labelDate}: ${date}, ${labelTime}: ${time}, ${labelField}: ${field}, ${labelTeam}: ${team}, ${labelImage} 1: ${image}`
+      selectedItem = `${labelProduct}: ${product}, ${labelEvent}: ${event}, ${labelDate}: ${date}, ${labelTime}: ${time}, ${labelField}: ${field}, ${labelImage} 1: ${image}`
     }
 
     setAddedItems([...addedItems, { item: selectedItem, quantity: 1 }])
@@ -377,29 +356,6 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
               ))}
             </select>
           </div>
-
-          <div className='flex flex-col gap-1'>
-            <label htmlFor='team' className='text-[#333333]'>
-              {labelTeam}
-            </label>
-            <select
-              id='team'
-              name='team'
-              title={labelTeam}
-              required
-              className='rounded-lg p-4 outline-[#001120]'
-              value={team}
-              onChange={e => setTeam(e.target.value)}
-            >
-              <option value={chooseTeam}>{chooseTeam}</option>
-              {teamOptions.map(option => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </div>
-
           <div className='flex flex-col gap-1'>
             <label htmlFor='image' className='text-[#333333]'>
               {labelImage}

@@ -12,7 +12,6 @@ interface SearchedAlbumProps {
   date: string
   time: string
   field: string
-  team: string
   btnDelete: string
   btnDeletion: string
 }
@@ -22,16 +21,14 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
   date,
   time,
   field,
-  team,
   btnDelete,
   btnDeletion
 }) => {
   const { user } = useUser()
 
-  const searchId = `${event}~${date}~${time}~${field}~${team}`
+  const searchId = `${event}~${date}~${time}~${field}`
 
   const [deleteBtnText, setDeleteBtnText] = useState(false)
-  const [deleteAllBtnText, setDeleteAllBtnText] = useState(false)
   const [showDeleteAllBtn, setShowDeleteAllBtn] = useState(false)
   const [images, setImages] = useState<ImageData[]>([])
   const [isLoading, setIsLoading] = useState(true)

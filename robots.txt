@@ -1,7 +1,7 @@
 User-agent: *
-Disallow: /dashboard/
-Disallow: /sign-in/
-Disallow: /sign-up/
+Disallow: /hr/dashboard/
+Disallow: /hr/sign-in/
 
 # Allow all other pages
-Allow: /
+Allow: /hr/
+Allow: /en/

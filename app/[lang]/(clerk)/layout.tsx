@@ -2,12 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Dulafra foto corner',
-  description: 'Dulafra foto corner',
+  description:
+    'Fotografiranje sportskih događaja. Izrada fotografija, šalica, postera i Fifa kartica sa slikama igrača po vlastitom izboru',
   authors: { name: 'Kristijan Pavlic Tumpa' },
   icons: [
     {
-      url: './icon.png',
-      href: './icon.png'
+      url: './favicon.ico',
+      href: './favicon.ico'
     }
   ]
 }

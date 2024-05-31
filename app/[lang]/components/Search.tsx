@@ -19,8 +19,6 @@ interface SearchProps {
   chooseTime: string
   labelField: string
   chooseField: string
-  labelTeam: string
-  chooseTeam: string
   btnSearchImages: string
   btnDelete: string
   btnDeletion: string
@@ -38,8 +36,6 @@ const Search: React.FC<SearchProps> = ({
   chooseTime,
   labelField,
   chooseField,
-  labelTeam,
-  chooseTeam,
   btnSearchImages,
   warning,
   btnDelete,
@@ -49,11 +45,9 @@ const Search: React.FC<SearchProps> = ({
   const [date, setDate] = useState(chooseDate)
   const [time, setTime] = useState(chooseTime)
   const [field, setField] = useState(chooseField)
-  const [team, setTeam] = useState(chooseTeam)
   const [dateOptions, setDateOptions] = useState<string[]>([])
   const [timeOptions, setTimeOptions] = useState<string[]>([])
   const [fieldOptions, setFieldOptions] = useState<string[]>([])
-  const [teamOptions, setTeamOptions] = useState<string[]>([])
   const [isSearched, setIsSearched] = useState(false)
   const [infoText, setInfoText] = useState('')
   const [images, setImages] = useState<ImageData[]>([])
@@ -131,23 +125,10 @@ const Search: React.FC<SearchProps> = ({
         .map(image => image.folder?.split('~')[3])
         .filter((option): option is string => option !== undefined)
       setFieldOptions(Array.from(new Set(fieldOptions)))
-
-      const teamOptions = filteredImages
-        .filter(
-          image =>
-            image.folder?.includes(event) &&
-            image.folder?.includes(date) &&
-            image.folder?.includes(time) &&
-            image.folder?.includes(field)
-        )
-        .map(image => image.folder?.split('~')[4])
-        .filter((option): option is string => option !== undefined)
-      setTeamOptions(Array.from(new Set(teamOptions)))
     } else {
       setDateOptions([])
       setTimeOptions([])
       setFieldOptions([])
-      setTeamOptions([])
     }
   }, [event, date, time, field, images, chooseEvent])
 
@@ -157,8 +138,7 @@ const Search: React.FC<SearchProps> = ({
       event === chooseEvent ||
       date === chooseDate ||
       time === chooseTime ||
-      field === chooseField ||
-      team === chooseTeam
+      field === chooseField
     ) {
       setIsSearched(false)
       setInfoText(warning)
@@ -186,7 +166,7 @@ const Search: React.FC<SearchProps> = ({
       </div>
       <div className='flex justify-center'>
         <form
-          className='grid grid-cols-2 gap-3 text-[#333333] md:grid-cols-3 md:gap-4 xl:grid-cols-6 xl:gap-6'
+          className='grid grid-cols-2 gap-3 text-[#333333] md:grid-cols-3 md:gap-4 xl:grid-cols-5 xl:gap-6'
           onSubmit={handleSearch}
         >
           <div className='flex flex-col gap-1'>
@@ -204,7 +184,6 @@ const Search: React.FC<SearchProps> = ({
                 setDate(chooseDate)
                 setTime(chooseTime)
                 setField(chooseField)
-                setTeam(chooseTeam)
               }}
               value={event}
             >
@@ -232,7 +211,6 @@ const Search: React.FC<SearchProps> = ({
                 setDate(e.target.value)
                 setTime(chooseDate)
                 setField(chooseField)
-                setTeam(chooseTeam)
               }}
               value={date}
             >
@@ -286,27 +264,6 @@ const Search: React.FC<SearchProps> = ({
               ))}
             </select>
           </div>
-          <div className='flex flex-col gap-1'>
-            <label htmlFor='team' className='text-[#333333]'>
-              {labelTeam}
-            </label>
-            <select
-              name='team'
-              id='team'
-              title={chooseTeam}
-              required
-              className='rounded-lg p-4 outline-[#001120]'
-              onChange={e => setTeam(e.target.value)}
-              value={team}
-            >
-              <option>{chooseTeam}</option>
-              {teamOptions.map((option, index) => (
-                <option key={index} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </div>
           <button
             type='submit'
             className='mt-7 rounded-lg bg-[#333333] p-4 text-[#FFF6EE] transition-all hover:bg-[#001120] hover:text-[#FFF6EE]'
@@ -322,7 +279,6 @@ const Search: React.FC<SearchProps> = ({
             date={date}
             time={time}
             field={field}
-            team={team}
             btnDelete={btnDelete}
             btnDeletion={btnDeletion}
           />
