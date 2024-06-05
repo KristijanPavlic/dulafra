@@ -54,6 +54,14 @@ const Search: React.FC<SearchProps> = ({
   const searchRef = useRef<HTMLDivElement>(null)
   const [isAnimated, setIsAnimated] = useState(false)
 
+  // State variables to control the disabled status of dropdowns
+  const [isDateDisabled, setIsDateDisabled] = useState(true)
+  const [isTimeDisabled, setIsTimeDisabled] = useState(true)
+  const [isFieldDisabled, setIsFieldDisabled] = useState(true)
+
+  // State variable to track the loading status
+  const [isLoading, setIsLoading] = useState(true)
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -76,19 +84,26 @@ const Search: React.FC<SearchProps> = ({
   }, [isAnimated])
 
   const fetchImages = async () => {
-    const response = await fetch(`/api/cloudinary`, {
-      cache: 'reload'
-    })
+    setIsLoading(true)
+    try {
+      const response = await fetch(`/api/cloudinary`, {
+        cache: 'reload'
+      })
 
-    if (response.ok) {
-      const data = await response.json()
-      // Filter out images from the "upcoming_events" folder
-      const filteredData = data.filter(
-        (image: ImageData) => image.folder !== 'upcoming_events'
-      )
-      setImages(filteredData)
-    } else {
-      console.error('Error fetching images:', response.status)
+      if (response.ok) {
+        const data = await response.json()
+        // Filter out images from the "upcoming_events" folder
+        const filteredData = data.filter(
+          (image: ImageData) => image.folder !== 'upcoming_events'
+        )
+        setImages(filteredData)
+      } else {
+        console.error('Error fetching images:', response.status)
+      }
+    } catch (error) {
+      console.error('Error fetching images:', error)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -106,6 +121,7 @@ const Search: React.FC<SearchProps> = ({
         .map(image => image.folder?.split('~')[1])
         .filter((option): option is string => option !== undefined)
       setDateOptions(Array.from(new Set(dateOptions)))
+      setIsDateDisabled(false)
 
       const timeOptions = filteredImages
         .filter(
@@ -114,6 +130,7 @@ const Search: React.FC<SearchProps> = ({
         .map(image => image.folder?.split('~')[2])
         .filter((option): option is string => option !== undefined)
       setTimeOptions(Array.from(new Set(timeOptions)))
+      setIsTimeDisabled(date === chooseDate)
 
       const fieldOptions = filteredImages
         .filter(
@@ -125,10 +142,14 @@ const Search: React.FC<SearchProps> = ({
         .map(image => image.folder?.split('~')[3])
         .filter((option): option is string => option !== undefined)
       setFieldOptions(Array.from(new Set(fieldOptions)))
+      setIsFieldDisabled(time === chooseTime)
     } else {
       setDateOptions([])
       setTimeOptions([])
       setFieldOptions([])
+      setIsDateDisabled(true)
+      setIsTimeDisabled(true)
+      setIsFieldDisabled(true)
     }
   }, [event, date, time, field, images, chooseEvent])
 
@@ -178,16 +199,20 @@ const Search: React.FC<SearchProps> = ({
               name='event'
               title={chooseEvent}
               required
+              disabled={isLoading}
               className='rounded-lg p-4 outline-[#001120]'
               onChange={e => {
                 setEvent(e.target.value)
                 setDate(chooseDate)
                 setTime(chooseTime)
                 setField(chooseField)
+                setIsDateDisabled(e.target.value === chooseEvent)
+                setIsTimeDisabled(true)
+                setIsFieldDisabled(true)
               }}
               value={event}
             >
-              <option>{chooseEvent}</option>
+              <option>{isLoading ? 'Loading...' : chooseEvent}</option>
               {Array.from(
                 new Set(images.map(image => image.folder?.split('~')[0]))
               ).map((uniqueEvent, index) => (
@@ -206,15 +231,18 @@ const Search: React.FC<SearchProps> = ({
               name='date'
               title={chooseDate}
               required
+              disabled={isDateDisabled || isLoading}
               className='rounded-lg p-4 outline-[#001120]'
               onChange={e => {
                 setDate(e.target.value)
-                setTime(chooseDate)
+                setTime(chooseTime)
                 setField(chooseField)
+                setIsTimeDisabled(e.target.value === chooseDate)
+                setIsFieldDisabled(true)
               }}
               value={date}
             >
-              <option>{chooseDate}</option>
+              <option>{isLoading ? 'Loading...' : chooseDate}</option>
               {dateOptions.map((option, index) => (
                 <option key={index} value={option}>
                   {option}
@@ -231,11 +259,16 @@ const Search: React.FC<SearchProps> = ({
               name='time'
               title={chooseTime}
               required
+              disabled={isTimeDisabled || isLoading}
               className='rounded-lg p-4 outline-[#001120]'
-              onChange={e => setTime(e.target.value)}
+              onChange={e => {
+                setTime(e.target.value)
+                setField(chooseField)
+                setIsFieldDisabled(e.target.value === chooseTime)
+              }}
               value={time}
             >
-              <option>{chooseTime}</option>
+              <option>{isLoading ? 'Loading...' : chooseTime}</option>
               {timeOptions.map((option, index) => (
                 <option key={index} value={option}>
                   {option}
@@ -252,11 +285,12 @@ const Search: React.FC<SearchProps> = ({
               id='field'
               title={chooseField}
               required
+              disabled={isFieldDisabled || isLoading}
               className='rounded-lg p-4 outline-[#001120]'
               onChange={e => setField(e.target.value)}
               value={field}
             >
-              <option>{chooseField}</option>
+              <option>{isLoading ? 'Loading...' : chooseField}</option>
               {fieldOptions.map((option, index) => (
                 <option key={index} value={option}>
                   {option}
@@ -267,6 +301,7 @@ const Search: React.FC<SearchProps> = ({
           <button
             type='submit'
             className='mt-7 rounded-lg bg-[#333333] p-4 text-[#FFF6EE] transition-all hover:bg-[#001120] hover:text-[#FFF6EE]'
+            disabled={isLoading}
           >
             {btnSearchImages}
           </button>

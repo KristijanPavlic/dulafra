@@ -13,26 +13,37 @@ export async function GET() {
     const authString = btoa(`${apiKey}:${apiSecret}`)
     const url = `https://api.cloudinary.com/v1_1/${cloudName}/resources/image?max_results=500`
 
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Basic ${authString}`,
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        Pragma: 'no-cache'
-      },
-      next: {
-        revalidate: 3600 // 1h
+    let allResources: CloudinaryImageResource[] = []
+    let nextCursor: string | null = null
+
+    do {
+      const response: Response = await fetch(
+        nextCursor ? `${url}&next_cursor=${nextCursor}` : url,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Basic ${authString}`,
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            Pragma: 'no-cache'
+          },
+          next: {
+            revalidate: 3600 // 1h
+          }
+        }
+      )
+
+      if (!response.ok) {
+        throw new Error(`Error fetching images: ${response.status}`)
       }
-    })
 
-    if (!response.ok) {
-      throw new Error(`Error fetching images: ${response.status}`)
-    }
+      const data = await response.json()
+      allResources = allResources.concat(data.resources)
 
-    const data = await response.json()
+      nextCursor = data.next_cursor || null
+    } while (nextCursor)
 
-    const imageData = data.resources
+    const imageData = allResources
       .filter((resource: CloudinaryImageResource) => resource.folder)
       .map((resource: CloudinaryImageResource) => ({
         url: resource.secure_url,

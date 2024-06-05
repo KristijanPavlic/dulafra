@@ -29,7 +29,6 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
   const searchId = `${event}~${date}~${time}~${field}`
 
   const [deleteBtnText, setDeleteBtnText] = useState(false)
-  const [showDeleteAllBtn, setShowDeleteAllBtn] = useState(false)
   const [images, setImages] = useState<ImageData[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
@@ -62,13 +61,6 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
   }, [])
 
   const filteredImages = images.filter(image => image.folder === searchId)
-
-  useEffect(() => {
-    setShowDeleteAllBtn(
-      filteredImages.length > 0 &&
-        user?.id === process.env.NEXT_PUBLIC_ADMIN_KEY
-    )
-  }, [filteredImages, user])
 
   const deleteImage = async (url: string) => {
     setDeleteBtnText(true)
