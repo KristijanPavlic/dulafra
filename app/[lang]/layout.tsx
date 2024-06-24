@@ -10,7 +10,7 @@ import { ReactNode } from 'react'
 const montserrat = Montserrat({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Dulafra foto corner',
+  title: 'Foto corner',
   description:
     'Fotografiranje sportskih događaja. Izrada fotografija, šalica, postera i Fifa kartica sa slikama igrača po vlastitom izboru',
   authors: { name: 'Kristijan Pavlic Tumpa' },
