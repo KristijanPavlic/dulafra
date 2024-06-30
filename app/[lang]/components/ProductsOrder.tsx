@@ -168,11 +168,12 @@ const ProductsOrder: React.FC<ProductsOrderProps> = ({
 
     // Check if all required selections are made
     if (
+      product === chooseProduct ||
       event === chooseEvent ||
       date === chooseDate ||
       time === chooseTime ||
       field === chooseField ||
-      product === chooseProduct
+      image === chooseImage
     ) {
       setIsSearched(false)
       setInfoText(warning)
