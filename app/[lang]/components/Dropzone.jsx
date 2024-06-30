@@ -1,3 +1,4 @@
+// Dropzone.jsx
 'use client'
 
 import Image from 'next/image'
@@ -40,7 +41,7 @@ const Dropzone = ({ className }) => {
     accept: {
       'image/*': []
     },
-    maxSize: 1024 * 1024 * 10, // 1MB
+    maxSize: 1024 * 1024 * 10, // 10MB
     maxFiles: 500,
     onDrop
   })
@@ -69,7 +70,7 @@ const Dropzone = ({ className }) => {
 
     for (const file of files) {
       // get a signature using server action
-      const { timestamp, signature } = await getSignature(folderId)
+      const { timestamp, signature } = await getSignature(folderId, file.name)
 
       // upload to cloudinary using the signature
       const formData = new FormData()
@@ -79,6 +80,7 @@ const Dropzone = ({ className }) => {
       formData.append('signature', signature)
       formData.append('timestamp', timestamp)
       formData.append('folder', folderId)
+      formData.append('public_id', file.name)
 
       const endpoint = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL
 
