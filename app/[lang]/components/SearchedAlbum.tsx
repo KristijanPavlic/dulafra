@@ -110,8 +110,8 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
     }
   }
 
-  const isAdmin = user?.id === process.env.NEXT_PUBLIC_ADMIN_KEY
-  const isBranko = user?.id === process.env.NEXT_PUBLIC_BRANKO_KEY
+  const isAdmin = user?.id === process.env.NEXT_PRIVATE_ADMIN_KEY
+  const isBranko = user?.id === process.env.NEXT_PRIVATE_BRANKO_KEY
 
   return (
     <div className='duration-2000 container m-auto transform pl-5 pr-5 pt-10 transition-transform ease-in'>

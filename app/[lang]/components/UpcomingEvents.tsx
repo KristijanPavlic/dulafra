@@ -109,8 +109,8 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({
     }
   }
 
-  const isAdmin = user?.id === process.env.NEXT_PUBLIC_ADMIN_KEY
-  const isBranko = user?.id === process.env.NEXT_PUBLIC_BRANKO_KEY
+  const isAdmin = user?.id === process.env.NEXT_PRIVATE_ADMIN_KEY
+  const isBranko = user?.id === process.env.NEXT_PRIVATE_BRANKO_KEY
 
   return (
     <div
