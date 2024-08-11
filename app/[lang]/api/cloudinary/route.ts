@@ -11,6 +11,7 @@ export async function GET() {
     const apiSecret = process.env.CLOUDINARY_API_SECRET
 
     const authString = btoa(`${apiKey}:${apiSecret}`)
+
     const url = `https://api.cloudinary.com/v1_1/${cloudName}/resources/image?max_results=500`
 
     let allResources: CloudinaryImageResource[] = []
@@ -38,16 +39,23 @@ export async function GET() {
       }
 
       const data = await response.json()
-      allResources = allResources.concat(data.resources)
+
+      if (data.resources && Array.isArray(data.resources)) {
+        allResources = allResources.concat(data.resources)
+      } else {
+        console.warn('Unexpected response structure:', data)
+        throw new Error('Unexpected response structure')
+      }
 
       nextCursor = data.next_cursor || null
     } while (nextCursor)
 
+    // Update to use `asset_folder` instead of `folder`
     const imageData = allResources
-      .filter((resource: CloudinaryImageResource) => resource.folder)
-      .map((resource: CloudinaryImageResource) => ({
+      .filter((resource: any) => resource.asset_folder)
+      .map((resource: any) => ({
         url: resource.secure_url,
-        folder: resource.folder
+        folder: resource.asset_folder // Adjusted to use `asset_folder`
       }))
 
     return new Response(JSON.stringify(imageData), { status: 200 })

@@ -26,10 +26,8 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({
 
   const [images, setImages] = useState<ImageData[]>([])
   const [isLoading, setIsLoading] = useState(true)
-
   const [deleteBtnText, setDeleteBtnText] = useState(false)
-  const [noEventsText, setNoEventstext] = useState(false)
-
+  const [canDelete, setCanDelete] = useState(false)
   const upcomingEventsRef = useRef<HTMLDivElement>(null)
   const [isAnimated, setIsAnimated] = useState(false)
 
@@ -40,7 +38,7 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({
           setIsAnimated(true)
         }
       },
-      { threshold: 0.1 } // Adjust threshold as needed
+      { threshold: 0.1 }
     )
 
     if (upcomingEventsRef.current) {
@@ -77,7 +75,30 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({
 
   useEffect(() => {
     fetchImages()
-  }, [])
+
+    const checkPermissions = async () => {
+      if (user?.id) {
+        try {
+          const response = await fetch(`/api/check-permission`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ userId: user.id })
+          })
+          const data = await response.json()
+
+          if (data.canDelete) {
+            setCanDelete(true)
+          }
+        } catch (error) {
+          console.error('Error checking permissions:', error)
+        }
+      }
+    }
+
+    checkPermissions()
+  }, [user?.id])
 
   const filteredImages = images.filter(
     image => image.folder === 'upcoming_events'
@@ -108,9 +129,6 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({
       console.error('Error deleting image:', error)
     }
   }
-
-  const isAdmin = user?.id === process.env.NEXT_PRIVATE_ADMIN_KEY
-  const isBranko = user?.id === process.env.NEXT_PRIVATE_BRANKO_KEY
 
   return (
     <div
@@ -145,7 +163,7 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({
                 alt='There is a problem with loading this image'
                 className='mb-3 rounded-lg bg-cover shadow-[8px_8px_0px_-2px_rgba(0,17,32,1)] transition-all hover:shadow-none'
               />
-              {(isAdmin || isBranko) && (
+              {canDelete && (
                 <div
                   className='absolute left-0 top-0 flex h-full w-full items-center
                     justify-center rounded-lg bg-black/50 opacity-0 

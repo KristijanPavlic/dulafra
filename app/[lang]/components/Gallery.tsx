@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useRef, useEffect, useState } from 'react'
-import { CldVideoPlayer } from 'next-cloudinary'
 import { useUser } from '@clerk/nextjs'
 
 interface MediaData {
@@ -26,10 +25,8 @@ const Gallery: React.FC<GalleryProps> = ({
 
   const [media, setMedia] = useState<MediaData[]>([])
   const [isLoading, setIsLoading] = useState(true)
-
   const [deleteBtnText, setDeleteBtnText] = useState(false)
-  const [noVideosText, setNoVideosText] = useState(false)
-
+  const [canDelete, setCanDelete] = useState(false) // State to track permission
   const galleryRef = useRef<HTMLDivElement>(null)
   const [isAnimated, setIsAnimated] = useState(false)
 
@@ -63,7 +60,6 @@ const Gallery: React.FC<GalleryProps> = ({
 
       if (response.ok) {
         const data = await response.json()
-
         setMedia(data)
         setIsLoading(false)
       } else {
@@ -78,7 +74,30 @@ const Gallery: React.FC<GalleryProps> = ({
 
   useEffect(() => {
     fetchMedia()
-  }, [])
+
+    const checkPermissions = async () => {
+      if (user?.id) {
+        try {
+          const response = await fetch(`/api/check-permission`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ userId: user.id })
+          })
+          const data = await response.json()
+
+          if (data.canDelete) {
+            setCanDelete(true)
+          }
+        } catch (error) {
+          console.error('Error checking permissions:', error)
+        }
+      }
+    }
+
+    checkPermissions()
+  }, [user?.id])
 
   const filteredMedia = media.filter(item => item.folder === 'gallery')
 
@@ -110,9 +129,6 @@ const Gallery: React.FC<GalleryProps> = ({
     }
   }
 
-  const isAdmin = user?.id === process.env.NEXT_PRIVATE_ADMIN_KEY
-  const isBranko = user?.id === process.env.NEXT_PRIVATE_BRANKO_KEY
-
   return (
     <div
       ref={galleryRef}
@@ -143,7 +159,7 @@ const Gallery: React.FC<GalleryProps> = ({
                 loop
                 className='mb-3 rounded-lg bg-cover shadow-[8px_8px_0px_-2px_rgba(0,17,32,1)] transition-all hover:shadow-none'
               ></video>
-              {(isAdmin || isBranko) && (
+              {canDelete && (
                 <div className='mt-2'>
                   <button
                     onClick={() => deleteMedia(item.url)}
