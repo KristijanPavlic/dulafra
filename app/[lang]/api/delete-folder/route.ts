@@ -10,9 +10,8 @@ cloudinary.v2.config({
 
 export async function POST(req: NextRequest, res: NextResponse) {
   const { folder } = await req.json()
-  const cleanedFolder = folder.startsWith('/') ? folder.substring(1) : folder
 
-  console.log(`Deleting folder: ${cleanedFolder}`)
+  console.log(`Deleting folder: ${folder}`)
 
   try {
     const result = await cloudinary.v2.api.delete_folder(folder)

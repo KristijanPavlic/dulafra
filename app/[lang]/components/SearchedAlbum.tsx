@@ -31,7 +31,7 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
   const [deleteBtnText, setDeleteBtnText] = useState(false)
   const [images, setImages] = useState<ImageData[]>([])
   const [isLoading, setIsLoading] = useState(true)
-  const [canDelete, setCanDelete] = useState(false) // State to track permission
+  const [canDelete, setCanDelete] = useState(false)
 
   const fetchImages = async () => {
     try {
@@ -42,14 +42,7 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
 
       if (response.ok) {
         const data = await response.json()
-
-        const filteredData = data.filter(
-          (image: ImageData) => image.folder !== 'upcoming_events'
-        )
-
-        setImages(filteredData)
-        console.log(images)
-
+        setImages(data) // Set images directly as received from the API
         setIsLoading(false)
       } else {
         console.error('Error fetching images:', response.status)
@@ -65,100 +58,72 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
     const checkPermissions = async () => {
       if (user?.id) {
         try {
-          const response = await fetch(`/api/check-permission`, {
+          const response = await fetch('/api/check-permission', {
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ userId: user.id }) // Send userId in the request body
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userId: user.id })
           })
           const data = await response.json()
-
-          if (data.canDelete) {
-            setCanDelete(true)
-          }
+          setCanDelete(data.canDelete)
         } catch (error) {
           console.error('Error checking permissions:', error)
         }
-      } else {
-        console.error('User ID is not available.')
       }
     }
 
     checkPermissions()
-  }, [user?.id]) // Fetch images and check permissions when user ID is available
+  }, [user?.id])
 
   const filteredImages = images.filter(image => image.folder === searchId)
 
   const deleteImage = async (url: string) => {
+    setDeleteBtnText(true)
     try {
-      // Decode the URL to get the original filename with the extension
+      // Decode the URL to get the original file name
       const decodedUrl = decodeURIComponent(url)
-      const publicId = decodedUrl.split('/').pop()?.slice(0, -4)
+      const urlParts = decodedUrl.split('/')
+      const filenameWithExtension = urlParts[urlParts.length - 1] // Get the last part of the URL
+      const publicId = filenameWithExtension.replace(/\.[^/.]+$/, '') // Remove the file extension
+
       const folder = searchId
-
-      // Optimistically update the UI by removing the image
-      const updatedImages = images.filter(image => image.url !== url)
-      setImages(updatedImages)
-
-      const response = await fetch(`/api/delete-image`, {
+      const response = await fetch('/api/delete-image', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ publicId, folder }),
-        cache: 'no-store'
+        body: JSON.stringify({ publicId, folder })
       })
-
-      if (!response.ok) {
-        console.error('Error deleting image:', response.status)
-        // Optionally, you could revert the UI update if the deletion fails
-        setImages(images) // Revert the UI state
-      } else {
-        console.log(`Image deleted successfully: ${publicId}`)
-
-        // Check if the folder is empty and delete the folder if needed
-        const remainingImages = updatedImages.filter(
-          image => image.folder === searchId
-        )
-        if (remainingImages.length === 0) {
+      if (response.ok) {
+        // If deletion is successful, update the images array
+        const newImages = images.filter(image => image.url !== url)
+        setImages(newImages)
+        setDeleteBtnText(false)
+        if (newImages.filter(image => image.folder === searchId).length === 0) {
           await deleteFolder(folder)
         }
+      } else {
+        console.error('Error deleting image:', response.status)
       }
     } catch (error) {
       console.error('Error deleting image:', error)
-      // Optionally, you could revert the UI update if an error occurs
-      setImages(images) // Revert the UI state
-    } finally {
-      setDeleteBtnText(false)
     }
   }
 
   const deleteFolder = async (folder: string) => {
     try {
-      const response = await fetch(`/api/delete-folder`, {
+      const response = await fetch('/api/delete-folder', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ folder })
       })
-
-      if (response.ok) {
-        console.log('Folder deleted successfully')
-      } else {
+      if (!response.ok) {
         console.error('Error deleting folder:', response.status)
       }
     } catch (error) {
       console.error('Error deleting folder:', error)
     }
-  }
-
-  const fixImageUrl = (url: string) => {
-    // Decode the URL to correct any over-encoding
-    const decodedUrl = decodeURIComponent(url)
-    // Then encode it properly to make sure it's correctly formatted
-    return encodeURI(decodedUrl)
   }
 
   return (
@@ -170,12 +135,10 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
           </div>
         ) : (
           filteredImages?.map(image => {
-            const fixedUrl = fixImageUrl(image.url) // Fix the URL encoding
-
             return (
-              <div key={fixedUrl} className='relative'>
+              <div key={image.url} className='relative'>
                 <Image
-                  src={fixedUrl}
+                  src={image.url}
                   width='600'
                   height='450'
                   style={{ maxWidth: '100%', maxHeight: '100%' }}
@@ -193,16 +156,16 @@ const SearchedAlbum: React.FC<SearchedAlbumProps> = ({
                   }}
                 />
                 <h4 className='text-[#333333]'>
-                  {fixedUrl.split('/').pop()?.slice(0, -4)}
+                  {image.url.split('/').pop()?.split('.')[0]}
                 </h4>
                 {canDelete && (
                   <div
                     className='absolute left-0 top-0 flex h-full w-full items-center 
-                      justify-center rounded-lg bg-black/50 opacity-0 
-                      transition-opacity duration-300 ease-in-out hover:opacity-100'
+                    justify-center rounded-lg bg-black/50 opacity-0 
+                    transition-opacity duration-300 ease-in-out hover:opacity-100'
                   >
                     <button
-                      onClick={() => deleteImage(fixedUrl)}
+                      onClick={() => deleteImage(image.url)}
                       className='rounded bg-red-500 px-4 py-2 text-white'
                     >
                       {deleteBtnText ? btnDeletion : btnDelete}
