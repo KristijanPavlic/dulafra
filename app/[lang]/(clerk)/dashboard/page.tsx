@@ -29,19 +29,19 @@ export default async function Dashboard() {
         <section className='py-24'>
           <div className='container'>
             <h1 className='text-3xl font-bold'>Dodavanje slika</h1>
-            <Dropzone className='mt-10 rounded-lg border border-black p-16' />
+            {/* <Dropzone className='mt-10 rounded-lg border border-black p-16' /> */}
           </div>
           <div>
             <h1 className='mt-20 text-3xl font-bold'>
               Dodavanje nadolazećih događaja
             </h1>
-            <DropzoneEvents className='mt-10 rounded-lg border border-black p-16' />
+            {/* <DropzoneEvents className='mt-10 rounded-lg border border-black p-16' /> */}
           </div>
           <div>
             <h1 className='mt-20 text-3xl font-bold'>
               Dodavanje videa u galeriju
             </h1>
-            <DropzoneGallery className='mt-10 rounded-lg border border-black p-16' />
+            {/* <DropzoneGallery className='mt-10 rounded-lg border border-black p-16' /> */}
           </div>
         </section>
       </div>
