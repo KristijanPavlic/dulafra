@@ -86,7 +86,7 @@ const Search: React.FC<SearchProps> = ({
   const fetchImages = async () => {
     setIsLoading(true)
     try {
-      const response = await fetch(`/api/cloudinary`, {
+      const response = await fetch(`/`, {
         cache: 'reload'
       })
 
