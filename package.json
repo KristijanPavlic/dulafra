@@ -16,7 +16,7 @@
     "@vercel/speed-insights": "^1.0.11",
     "cloudinary": "^2.2.0",
     "negotiator": "^0.6.3",
-    "next": "^14.2.3",
+    "next": "14.2.35",
     "next-cloudinary": "^6.5.2",
     "react": "^18",
     "react-dom": "^18",
